@@ -10,7 +10,7 @@ const mySchema = Schema({
     name: { type: String },
     lastName: { type: String },
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true, select: false }, 
+    password: { type: String, required: true }, 
     email: { type: String, required: true, unique: true },
     emailVerified: { type: Boolean, default: false }, // It can be String
     cellPhone: { type: String, unique: true }, 
