@@ -29,6 +29,23 @@ on my mac
 
 
 
+Mongo permisos
+	https://www.youtube.com/watch?v=SY_9zwb29LA
+	https://docs.mongodb.com/manual/tutorial/enable-authentication/
+
+
+Mongo user store-test
+	myUserAdmin
+	Entrar
+
+Mongo user admin
+	root
+	TXEA2wd2PEDM
+
+
+
+
+
 
 
 
