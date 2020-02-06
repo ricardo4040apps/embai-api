@@ -31,7 +31,7 @@ mongoose.connection.on('connected', () => {
 });
 
 mongoose.connection.on('error', (err) => {
-    console.error(`Database error`, err)
+    console.error(`Database error`, err.message)
 });
 
 
