@@ -41,7 +41,7 @@ const CurrentModel = mongoose.model('User', mySchema);
 
 module.exports.getAll = function(params, callback) {
     if (!params.page) {
-        CurrentModel.find({}, callback);
+        CurrentModel.find(params, callback);
     } else {
         this.getAllPagginated(params, callback);
     }

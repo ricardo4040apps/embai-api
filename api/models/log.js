@@ -24,7 +24,7 @@ const CurrentModel = mongoose.model('Log', mySchema);
 
 
 module.exports.getAll = function(callback) {
-    CurrentModel.find({}, callback);
+    CurrentModel.find(params, callback);
 }
 
 
