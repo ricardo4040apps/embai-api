@@ -6,34 +6,29 @@ const queryHelper = require('../helpers/query');
 const Schema = mongoose.Schema
 
 const mySchema = Schema({
-    name: { type: String },
-    lastName: { type: String },
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true }, 
-    email: { type: String, required: true, unique: true },
-    emailVerified: { type: Boolean, default: false }, // It can be String
-    cellPhone: { type: String, unique: true }, 
-    cellPhoneVerified: { type: Boolean, default: false }, // It can be String
-
-    birthDate: { type: Date },
-    gender: { type: String }, 
-    
-    _roleId: Schema.Types.ObjectId, // : { type: Schema.Types.ObjectId, ref: 'User' },
-    
-
-    status: { type: String, default: 'new' }, // new, inactive, active, locked, banned,
-    deleted: { type: Boolean, default: false },
-    _deletedBy: Schema.Types.ObjectId,
+    owner: { type: String },
+    bussinesName: { type: String, required: true },
+    companyCode: { type: String },
+    taxAddress: { type: String }, 
+    rfc: { type: String },
+    societyType: { type: Boolean },
+    incorporationDate: { type: Date }, 
+    duration: { type: String },
+        /// Capital social actual           ????
+    description: { type: String },
+    enabled: {type: Boolean},
 
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
+    deleted: { type: Boolean, default: false },
+    _deletedBy: Schema.Types.ObjectId,
 })
 
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('User', mySchema);
+const CurrentModel = mongoose.model('Company', mySchema);
 
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
@@ -60,10 +55,6 @@ module.exports.getAllPagginated = function(params, callback) {
     let query = processQuery(filters, q)
     CurrentModel.paginate(query, options, callback);
 }
-// http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt
-// http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=per
-// http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=tru
-    
 
 
 module.exports.getById = function(id, callback) {
@@ -72,19 +63,8 @@ module.exports.getById = function(id, callback) {
 
 
 module.exports.add = function(data, callback) {
-    
     let newUser = new CurrentModel(data)
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(newUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            newUser.password = hash;
-            newUser.save(callback)
-            //data.password = hash;
-            //User.create(data, callback)
-
-            //let opt = { upsert: true, new: true, setDefaultsOnInsert: true, select:'-password' }
-        })
-    })
+    newUser.save(callback)
 }
 
 module.exports.update = function(id, dataUser, callback) {
@@ -95,12 +75,7 @@ module.exports.update = function(id, dataUser, callback) {
         return
     }
 
-    bcrypt.genSalt(10, (err, salt) => {
-        bcrypt.hash(dataUser.password, salt, (err, hash) => {
-            if (err) throw err;
-            CurrentModel.findOneAndUpdate(id , dataUser, opt, callback);
-        })
-    })
+    CurrentModel.findOneAndUpdate(id , dataUser, opt, callback);
 
 }
 
@@ -130,20 +105,6 @@ module.exports.hasErrors = function(data) {
     return user.validateSync();
 }
 
-
-module.exports.getByUsername = function(username, callback) {
-    const query = { username: username }
-    CurrentModel.findOne(query, callback);
-}
-
-
-module.exports.comparePassword = function(candidatePassword, hash, callback) {
-    bcrypt.compare(candidatePassword, hash, (err, isMatch) => {
-        if (err) throw err;
-        callback(null, isMatch)
-    })
-}
-
 /*  - - - - - - - - - - - -     E N D  C U S T O M S     - - - - - - - - - - - - */
 
 
@@ -152,16 +113,6 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 /*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
 
 let processQuery = function(filters, strQ = '') {
-    // date
-    //'birthDate', 'updatedAt', 'createdAt',
-    // ObjectId
-    //'_roleId', '_deletedBy',
-    // boolean
-    //'emailVerified', 'cellPhoneVerified', 'deleted'
-
-    // var booleanValue = (strQ == 'true')? true: (strQ == 'false')? false: null; OK
-    // { deleted: booleanValue}
-    
     let exp = new RegExp(strQ.toLowerCase(), 'i');
 
     return { 
@@ -171,22 +122,20 @@ let processQuery = function(filters, strQ = '') {
             { $or:
                 [
                     // strings
-                    { name: exp },
-                    { lastName: exp },
-                    { username: exp },
-                    { email: exp },
-                    { cellPhone: exp },
-                    { gender: exp },
-                    { status: exp },
-                    { status: exp },
+                    { owner: exp },
+                    { bussinesName: exp },
+                    { companyCode: exp },
+                    { taxAddress: exp },
+                    { rfc: exp },
+                    { societyType: exp },
+                    { incorporationDate: exp },
+                    { duration: exp },
+                    { description: exp },
                 ]
             }
         ]
     }
 }
-
-//http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=tru
-
 
 /*  - - - - - - - - - - - -     E N D  P R I V A T E     - - - - - - - - - - - - */
 

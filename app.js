@@ -15,7 +15,8 @@ const config = require('./api/config/database');
 var authRouter = require('./api/routes/auth');
 var indexRouter = require('./api/routes/index');
 var usersRouter = require('./api/routes/users');
-
+var corporationsRouter = require('./api/routes/corporations');
+var companiesRouter = require('./api/routes/companies');
 
 
 
@@ -60,6 +61,12 @@ require('./api/config/passport')(passport);
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/users', usersRouter);
+app.use('/corporations', corporationsRouter);
+app.use('/companies', companiesRouter);
 
 module.exports = app;
 
+
+
+/************** precent close terminal **************/
+setInterval(function() { console.log("Tick! Tock!"); }, 60000)

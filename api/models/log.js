@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const mongoosePaginate = require('mongoose-paginate-v2');
-const config = require('../config/database');
 const queryHelper = require('../helpers/query');
 
 const Schema = mongoose.Schema
