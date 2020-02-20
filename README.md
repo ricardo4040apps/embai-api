@@ -1,3 +1,20 @@
+Configuracion por defecto
+
+    Puerto de escucha
+        3000    puede ser sustituido poniendolo en la variable de entorno de npm PORT
+
+    Base de datos
+        "mongodb://localhost/store-test" puede ser sustituida poniendola en la variable de entorno de npm DATABASE
+
+
+
+--------
+    
+
+
+
+
+
 Generador
     https://expressjs.com/es/starter/generator.html
 

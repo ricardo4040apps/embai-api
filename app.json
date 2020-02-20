@@ -7,10 +7,12 @@
         "persistent": true,
         "ignoreInitial": true
       },
-      "script": "./app.js",
+      "script": "./bin/www",
       "name": "alta-direccion",
       "env": {
-        "PROD_ENV": true
+          "PROD_ENV": true,
+        "PORT": 3000,
+        "DATABASE": "mongodb://myTester:Entrar@localhost:27017/store-test"
       }
     }]
   }
