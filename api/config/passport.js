@@ -8,10 +8,11 @@ module.exports = (passport) => {
     //opts.jwtFromRequest = ExtractJwt.fromAuthHeader();
     opts.jwtFromRequest = ExtractJwt.fromAuthHeaderWithScheme("jwt");
     //opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+
+
     opts.secretOrKey = config.database.secret;
     //opts.issuer = 'accounts.examplesoft.com';
     //opts.audience = 'yoursite.net';
-
     passport.use(new JwtStrategy(opts, (jwt_payload, done) => {
         User.getById(jwt_payload._id, (err, user) => {
             if (err) {

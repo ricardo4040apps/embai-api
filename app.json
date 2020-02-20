@@ -1,0 +1,16 @@
+{
+    "apps": [
+    {
+      "watch": ["api", "bin", "app.js"],
+      "ignore_watch" : ["store"],
+      "watch_options": {
+        "persistent": true,
+        "ignoreInitial": true
+      },
+      "script": "./app.js",
+      "name": "alta-direccion",
+      "env": {
+        "PROD_ENV": true
+      }
+    }]
+  }

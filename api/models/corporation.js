@@ -15,8 +15,8 @@ const mySchema = Schema({
     createdAt: { type: Date, default: Date.now },
 })
 
-mongoose.set('useFindAndModify', false);
 
+mongoose.set('useFindAndModify', false);
 mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model('Corporation', mySchema);

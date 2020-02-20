@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const jwt = require('jsonwebtoken')
 const User = require('../models/user');
-const config = require('../config/database');
+const config = require('../config/app');
 
 
 /* GET users listing. */
@@ -21,7 +21,7 @@ router.post('/', function(req, res, next) {
         User.comparePassword(password, user.password, (err, isMatch) => {
             if (err) throw err;
             if (isMatch) {
-                const token = jwt.sign(user.toJSON(), config.secret, {
+                const token = jwt.sign(user.toJSON(), config.database.secret, {
                     expiresIn: 24 * 60 * 60
                 })
 
