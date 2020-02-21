@@ -1,13 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const passport = require('passport')
 const User = require('../models/user');
 const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET users listing. */
 
-router.get('/', function(req, res, next) {
+router.get('/', passportMiddleware, function(req, res, next) {
     User.getAll(req.query, (err, data) => {
       if (err) {
         console.error("route users get:", err)
@@ -18,7 +17,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', passportMiddleware, function(req, res, next) {
   User.getById(req.params.id, (err, data) => {
     if (err) {
       console.error("route users get:", err)
@@ -29,7 +28,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', passportMiddleware, function(req, res, next) {
   let errors =  User.hasErrors(req.body);
   console.log(errors)
   if (errors) return res.status(400).json(errors.message)
@@ -45,7 +44,7 @@ router.post('/', function(req, res, next) {
 });
 
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', passportMiddleware, function(req, res, next) {
   User.update(req.params.id, req.body, (err, data) => {
     if (err) {
       console.error("route users put:", err)
@@ -56,7 +55,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', passportMiddleware, function(req, res, next) {
   User.deleteById(req.params.id, (err, data) => {
     if (err) {
       console.error("route users delete:", err)
@@ -89,7 +88,6 @@ router.get('/is-cellphone-bussy/:value', function(req, res, next) {
   });
 });
 
-
 router.get('/is-username-bussy/:value', function(req, res, next) {
   let query =  {username: req.params.value}
   User.getAll(query, (err, data) => {
@@ -102,6 +100,9 @@ router.get('/is-username-bussy/:value', function(req, res, next) {
 });
 
 
+
+
+////----- for test
 
 // example protected wrong url
 router.delete('/protected/example', passportMiddleware,  function(req, res, next) {

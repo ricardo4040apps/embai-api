@@ -1,11 +1,12 @@
 var express = require('express');
 var router = express.Router();
 const Corporation = require('../models/corporation');
+const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET users listing. */
 
-router.get('/', function(req, res, next) {
+router.get('/', passportMiddleware, function(req, res, next) {
     Corporation.get((err, data) => {
       if (err) {
         console.error("route corporations get:", err)
@@ -16,7 +17,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-router.put('/', function(req, res, next) {
+router.put('/', passportMiddleware, function(req, res, next) {
   Corporation.update(req.body, (err, data) => {
     if (err) {
       console.error("route corporations put:", err)

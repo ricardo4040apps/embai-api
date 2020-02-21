@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const passport = require('passport')
 const Company = require('../models/company');
+const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET users listing. */
 
-router.get('/', function(req, res, next) {
+router.get('/', passportMiddleware, function(req, res, next) {
     Company.getAll(req.query, (err, data) => {
       if (err) {
         console.error("route companies get:", err)
@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
 
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', passportMiddleware, function(req, res, next) {
   Company.getById(req.params.id, (err, data) => {
     if (err) {
       console.error("route companies get:", err)
@@ -28,7 +28,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', passportMiddleware, function(req, res, next) {
   let errors =  Company.hasErrors(req.body);
   console.log(errors)
   if (errors) return res.status(400).json(errors.message)
@@ -44,7 +44,7 @@ router.post('/', function(req, res, next) {
 });
 
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', passportMiddleware, function(req, res, next) {
   Company.update(req.params.id, req.body, (err, user) => {
     if (err) {
       console.error("route companies put:", err)
@@ -55,7 +55,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', passportMiddleware, function(req, res, next) {
   Company.deleteById(req.params.id, (err, data) => {
     if (err) {
       console.error("route companies delete:", err)
@@ -66,15 +66,6 @@ router.delete('/:id', function(req, res, next) {
 });
 
 
-
-
-
-
-
-// example protected wrong url
-router.delete('/protected/example', passport.authenticate('jwt', { session: false }),  function(req, res, next) {
-  res.status(200).send('Protected');
-});
 
 
 

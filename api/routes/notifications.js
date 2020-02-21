@@ -1,12 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const passport = require('passport')
 const Notification = require('../models/notification');
+const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET users listing. */
 
-router.get('/', function(req, res, next) {
+router.get('/', passportMiddleware, function(req, res, next) {
     Notification.getAll(req.query, (err, data) => {
       if (err) {
         console.error("route notifications get:", err)
@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/:id', function(req, res, next) {
+router.get('/:id', passportMiddleware, function(req, res, next) {
     Notification.getById(req.params.id, (err, data) => {
     if (err) {
       console.error("route notifications get:", err)
@@ -27,7 +27,7 @@ router.get('/:id', function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', passportMiddleware, function(req, res, next) {
   let errors =  Notification.hasErrors(req.body);
   console.log(errors)
   if (errors) return res.status(400).json(errors.message)
@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
 });
 
 
-router.put('/:id', function(req, res, next) {
+router.put('/:id', passportMiddleware, function(req, res, next) {
     Notification.update(req.params.id, req.body, (err, user) => {
     if (err) {
       console.error("route notifications put:", err)
@@ -54,7 +54,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 
-router.delete('/:id', function(req, res, next) {
+router.delete('/:id', passportMiddleware, function(req, res, next) {
     Notification.deleteById(req.params.id, (err, data) => {
     if (err) {
       console.error("route notifications delete:", err)
@@ -62,17 +62,6 @@ router.delete('/:id', function(req, res, next) {
     }
     res.status(204).json(data)
   });
-});
-
-
-
-
-
-
-
-// example protected wrong url
-router.delete('/protected/example', passport.authenticate('jwt', { session: false }),  function(req, res, next) {
-  res.status(200).send('Protected');
 });
 
 
