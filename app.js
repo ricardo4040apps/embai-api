@@ -52,7 +52,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(passport.initialize());
 app.use(passport.session());
 
-require('./api/config/passport')(passport);
+/////require('./api/middlewares/passport')(passport);
 
 
 

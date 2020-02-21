@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const passport = require('passport')
 const User = require('../models/user');
+const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET users listing. */
@@ -103,13 +104,23 @@ router.get('/is-username-bussy/:value', function(req, res, next) {
 
 
 // example protected wrong url
-router.delete('/protected/example', passport.authenticate('jwt', { session: false }),  function(req, res, next) {
-  res.status(200).send('Protected');
+router.delete('/protected/example', passportMiddleware,  function(req, res, next) {
+  res.status(200).send('you are inside1');
 });
 
 
 
+router.delete('/protected/example2', passportMiddleware, function(req, res, next) {
+  res.status(200).send('you are inside2');
+});
+
+
+
+
 module.exports = router;
+
+
+
 
 
 
