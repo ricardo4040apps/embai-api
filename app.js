@@ -23,7 +23,7 @@ var usersRouter = require('./api/routes/users');
 
 console.log("Connecting to mongoDb ...")
 mongoose.set('useCreateIndex', true);
-mongoose.connect(config.database.database, {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASE || config.database.database, {useNewUrlParser: true, useUnifiedTopology: true });
 
 
 mongoose.connection.on('connected', () => {
