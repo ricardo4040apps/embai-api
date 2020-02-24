@@ -91,14 +91,14 @@ module.exports.update = function(id, dataUser, callback) {
     let opt = { new: true }
     
     if (!dataUser.password) {
-        CurrentModel.findOneAndUpdate(id , dataUser, opt, callback);
+        CurrentModel.findOneAndUpdate({_id: id}, dataUser, opt, callback);
         return
     }
 
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(dataUser.password, salt, (err, hash) => {
             if (err) throw err;
-            CurrentModel.findOneAndUpdate(id , dataUser, opt, callback);
+            CurrentModel.findOneAndUpdate({_id: id}, dataUser, opt, callback);
         })
     })
 

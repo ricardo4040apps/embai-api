@@ -69,7 +69,7 @@ module.exports.add = function(data, callback) {
 
 module.exports.update = function(id, data, callback) {
     let opt = { new: true }
-    CurrentModel.findOneAndUpdate(id , data, opt, callback);
+    CurrentModel.findOneAndUpdate({_id: id}, data, opt, callback);
 }
 
 module.exports.absoluteDeleteById = function(id, callback) {
