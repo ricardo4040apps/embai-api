@@ -28,7 +28,7 @@ router.get('/:id', passportMiddleware, function(req, res, next) {
 });
 
 
-router.post('/', passportMiddleware, function(req, res, next) {
+router.post('/', function(req, res, next) {
   let errors =  User.hasErrors(req.body);
   console.log(errors)
   if (errors) return res.status(400).json(errors.message)
