@@ -11,6 +11,12 @@ module.exports = function(req, res, next) {
     opts.secretOrKey = config.database.secret;
     //opts.issuer = 'accounts.examplesoft.com';
     //opts.audience = 'yoursite.net';
+
+    if (!eval(process.env.PROD_ENV)) { // don't required token on tester
+        return next();
+    }
+
+
     passport.authenticate(
         new JwtStrategy(opts, (jwt_payload, done) => {
             User.getById(jwt_payload._id, (err, user) => {

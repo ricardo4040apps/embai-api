@@ -7,6 +7,7 @@ const passportMiddleware = require('../middlewares/passport');
 /* GET users listing. */
 
 router.get('/', passportMiddleware, function(req, res, next) {
+  
     Company.getAll(req.query, (err, data) => {
       if (err) {
         console.error("route companies get:", err)

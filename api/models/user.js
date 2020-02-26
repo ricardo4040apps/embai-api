@@ -79,10 +79,6 @@ module.exports.add = function(data, callback) {
             if (err) throw err;
             newUser.password = hash;
             newUser.save(callback)
-            //data.password = hash;
-            //User.create(data, callback)
-
-            //let opt = { upsert: true, new: true, setDefaultsOnInsert: true, select:'-password' }
         })
     })
 }
@@ -98,6 +94,7 @@ module.exports.update = function(id, dataUser, callback) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(dataUser.password, salt, (err, hash) => {
             if (err) throw err;
+            dataUser.password = hash;
             CurrentModel.findOneAndUpdate({_id: id}, dataUser, opt, callback);
         })
     })
@@ -152,6 +149,7 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 /*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
 
 let processQuery = function(filters, strQ = '') {
+    if (!strQ) return null;
     // date
     //'birthDate', 'updatedAt', 'createdAt',
     // ObjectId

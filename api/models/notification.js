@@ -106,6 +106,7 @@ module.exports.hasErrors = function(data) {
 /*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
 
 let processQuery = function(filters, strQ = '') {
+    if (!strQ) return null;
     let exp = new RegExp(strQ.toLowerCase(), 'i');
 
     return { 

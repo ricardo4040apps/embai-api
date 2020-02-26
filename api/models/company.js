@@ -11,7 +11,7 @@ const mySchema = Schema({
     companyCode: { type: String },
     taxAddress: { type: String }, 
     rfc: { type: String },
-    societyType: { type: Boolean },
+    societyType: { type: String },
     incorporationDate: { type: Date }, 
     duration: { type: String },
         /// Capital social actual           ????
@@ -53,6 +53,7 @@ module.exports.getAllPagginated = function(params, callback) {
     };
 
     let query = processQuery(filters, q)
+
     CurrentModel.paginate(query, options, callback);
 }
 
@@ -113,6 +114,7 @@ module.exports.hasErrors = function(data) {
 /*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
 
 let processQuery = function(filters, strQ = '') {
+    if (!strQ) return null;
     let exp = new RegExp(strQ.toLowerCase(), 'i');
 
     return { 
@@ -128,7 +130,6 @@ let processQuery = function(filters, strQ = '') {
                     { taxAddress: exp },
                     { rfc: exp },
                     { societyType: exp },
-                    { incorporationDate: exp },
                     { duration: exp },
                     { description: exp },
                 ]
