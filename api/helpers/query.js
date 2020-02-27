@@ -1,3 +1,6 @@
+/// Not used. Planing making global filter
+
+
 const Schema = require('mongoose').Schema;
 
 module.exports.processQ = function(mySchema, filters, strQ) {
