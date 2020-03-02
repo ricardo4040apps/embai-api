@@ -18,7 +18,7 @@ const mySchema = Schema({
     birthDate: { type: Date },
     gender: { type: String }, 
     
-    _roleId: Schema.Types.ObjectId, // : { type: Schema.Types.ObjectId, ref: 'User' },
+    roleId: { type: Schema.Types.ObjectId, ref: 'Role' },
     
 
     status: { type: String, default: 'new' }, // new, inactive, active, locked, banned,
