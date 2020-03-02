@@ -15,6 +15,8 @@ var authRouter = require('./api/routes/auth');
 var companiesRouter = require('./api/routes/companies');
 var corporationsRouter = require('./api/routes/corporations');
 var notificationsRouter = require('./api/routes/notifications');
+var permissionsRouter = require('./api/routes/permissions');
+var rolesRouter = require('./api/routes/roles');
 var usersRouter = require('./api/routes/users');
 
 
@@ -63,6 +65,8 @@ app.use('/auth', authRouter);
 app.use('/companies', companiesRouter);
 app.use('/corporations', corporationsRouter);
 app.use('/notifications', notificationsRouter);
+app.use('/permissions', permissionsRouter);
+app.use('/roles', rolesRouter);
 app.use('/users', usersRouter);
 
 module.exports = app;
