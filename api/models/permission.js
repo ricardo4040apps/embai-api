@@ -8,7 +8,7 @@ const Schema = mongoose.Schema
 const mySchema = Schema({
     tagName: { type: String, unique: true, required: true },
     name: { type: String, required: true },
-    value: { type: String, required: true },
+    value: String,
     
 
     deleted: { type: Boolean, default: false },
