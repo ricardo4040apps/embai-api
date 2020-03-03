@@ -4,7 +4,9 @@ const Company = require('../models/permission');
 const passportMiddleware = require('../middlewares/passport');
 
 
-/* GET users listing. */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                C R U D
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 router.get('/', passportMiddleware, function(req, res, next) {
   
@@ -68,6 +70,20 @@ router.delete('/:id', passportMiddleware, function(req, res, next) {
 
 
 
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                C U S T O M S
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+router.put('/:id', passportMiddleware, function(req, res, next) {
+  Company.update(req.params.id, req.body, (err, user) => {
+    if (err) {
+      console.error("route permissions put:", err)
+      return res.status(500).json('Failed to update permission')
+    }
+    res.status(200).json(user)
+  });
+});
 
 
 module.exports = router;
