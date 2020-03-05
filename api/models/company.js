@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
     owner: { type: String },
-    bussinesName: { type: String, required: true },
+    businessName: { type: String, required: true },
     companyCode: { type: String },
     taxAddress: { type: String },
     rfc: { type: String },
@@ -109,7 +109,7 @@ let processQuery = function(filters, strQ = "") {
         $or: [
             // strings
             { owner: exp },
-            { bussinesName: exp },
+            { businessName: exp },
             { companyCode: exp },
             { taxAddress: exp },
             { rfc: exp },
