@@ -68,9 +68,9 @@ router.delete("/:id", passportMiddleware, function(req, res, next) {
 
 router.put("/:id/permissions", function(req, res, next) {
     console.log(req.body);
-  let query = {
-    permissions: req.body
-  }
+    let query = {
+        permissions: req.body
+    };
     Role.update(req.params.id, query, (err, resp) => {
         if (err) {
             console.error("route roles put:", err);
@@ -80,6 +80,15 @@ router.put("/:id/permissions", function(req, res, next) {
     });
 });
 
-
+router.get("/:id/permissions", function(req, res, next) {
+    console.log(req.params.id)
+    Role.getPermissions(req.params.id, (err, resp) => {
+        if (err) {
+            console.error("route roles permissions get:", err);
+            return res.status(500).json("Failed to get role permissions");
+        }
+        res.status(200).json(resp);
+    });
+});
 
 module.exports = router;

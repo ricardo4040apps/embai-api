@@ -30,15 +30,18 @@ const CurrentModel = mongoose.model("Company", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
-module.exports.getAll = function(params, callback) {
+module.exports.getAll = function(params, callback, absolute = false) {
+    if (!absolute) params.deleted = false;
     if (!params.page) {
         CurrentModel.find(params, callback);
     } else {
-        this.getAllPagginated(params, callback);
+        this.getAllPagginated(params, callback, absolute);
     }
 };
 
-module.exports.getAllPagginated = function(params, callback) {
+module.exports.getAllPagginated = function(params, callback, absolute = false) {
+    //if (!absolute) params.deleted = false;
+
     const { page, limit, sort, q, ...filters } = params;
     const options = {
         page: page || 1,
@@ -51,7 +54,7 @@ module.exports.getAllPagginated = function(params, callback) {
     CurrentModel.paginate(query, options, callback);
 };
 
-module.exports.getById = function(id, callback) {
+module.exports.getById = function(id, callback, absolute = false) {
     CurrentModel.findById(id, callback);
 };
 
@@ -140,7 +143,6 @@ mySchema
 // mySchema.post()
 
 /*
-
 pre('remove') or post('remove')
 */
 

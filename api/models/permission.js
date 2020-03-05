@@ -22,6 +22,7 @@ mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model('Permission', mySchema);
 
+module.exports.model = CurrentModel;
 
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
@@ -90,6 +91,7 @@ module.exports.hasErrors = function(data) {
     var newModel = new CurrentModel(data);
     return newModel.validateSync();
 }
+
 
 /*  - - - - - - - - - - - -     E N D  C U S T O M S     - - - - - - - - - - - - */
 
