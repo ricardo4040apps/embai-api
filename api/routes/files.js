@@ -84,7 +84,7 @@ var deleteFile = function (src) {
 
 var getAvailableName = function (src) {
   const ext = path.extname(src);
-  var fileName = src + uuid.v4() + ext;
+  var fileName = uuid.v4() + ext;
   if (fs.existsSync(fileName)) {
     getAvailableName(src)
   }

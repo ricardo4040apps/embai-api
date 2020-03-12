@@ -14,6 +14,7 @@ const mySchema = Schema({
     emailVerified: { type: Boolean, default: false }, // It can be String
     cellPhone: { type: String, unique: true }, 
     cellPhoneVerified: { type: Boolean, default: false }, // It can be String
+    picture: String, // It can be String
 
     birthDate: { type: Date },
     gender: { type: String }, 
