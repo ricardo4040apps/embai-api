@@ -2,93 +2,44 @@ var express = require("express");
 var router = express.Router();
 const Role = require("../models/role");
 const passportMiddleware = require("../middlewares/passport");
+const roleCtrl = require('../controllers/role');
+
+
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
                                 C R U D
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-router.get("/", passportMiddleware, function(req, res, next) {
-    Role.getAll(req.query, (err, data) => {
-        if (err) {
-            console.error("route roles get:", err);
-            return res.status(500).json("Failed to get role");
-        }
-        res.status(200).json(data);
-    });
+router.get("/", passportMiddleware, function (req, res, next) {
+    roleCtrl.get(req, res, next);
 });
 
-router.get("/:id", passportMiddleware, function(req, res, next) {
-    Role.getById(req.params.id, (err, data) => {
-        if (err) {
-            console.error("route roles get:", err);
-            return res.status(500).json("Failed to get role");
-        }
-        res.status(200).json(data);
-    });
+router.get("/:id", passportMiddleware, function (req, res, next) {
+    roleCtrl.getById(req, res, next);
 });
 
-router.post("/", passportMiddleware, function(req, res, next) {
-    let errors = Role.hasErrors(req.body);
-    console.log(errors);
-    if (errors) return res.status(400).json(errors.message);
-
-    Role.add(req.body, (err, data) => {
-        if (err) {
-            console.error("route roles post:", err);
-            return res.status(500).json("Failed to register new role");
-        }
-        res.status(201).json(data);
-        //res.status(201).json('User registered')
-    });
+router.post("/", passportMiddleware, function (req, res, next) {
+    roleCtrl.create(req, res, next);
 });
 
-router.put("/:id", passportMiddleware, function(req, res, next) {
-    Role.update(req.params.id, req.body, (err, resp) => {
-        if (err) {
-            console.error("route roles put:", err);
-            return res.status(500).json("Failed to update role");
-        }
-        res.status(200).json(resp);
-    });
+router.put("/:id", passportMiddleware, function (req, res, next) {
+    roleCtrl.update(req, res, next);
 });
 
-router.delete("/:id", passportMiddleware, function(req, res, next) {
-    Role.deleteById(req.params.id, (err, data) => {
-        if (err) {
-            console.error("route roles delete:", err);
-            return res.status(500).json("Failed to delete role");
-        }
-        res.status(204).json(data);
-    });
+router.delete("/:id", passportMiddleware, function (req, res, next) {
+    roleCtrl.deleteById(req, res, next);
 });
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
                                 C U S T O M S
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-router.put("/:id/permissions", function(req, res, next) {
-    console.log(req.body);
-    let query = {
-        permissions: req.body
-    };
-    Role.update(req.params.id, query, (err, resp) => {
-        if (err) {
-            console.error("route roles put:", err);
-            return res.status(500).json("Failed to update role");
-        }
-        res.status(200).json(resp);
-    });
+router.put("/:id/permissions", passportMiddleware, function (req, res, next) {
+    roleCtrl.updatePermissions(req, res, next);
 });
 
-router.get("/:id/permissions", function(req, res, next) {
-    console.log(req.params.id)
-    Role.getPermissions(req.params.id, (err, resp) => {
-        if (err) {
-            console.error("route roles permissions get:", err);
-            return res.status(500).json("Failed to get role permissions");
-        }
-        res.status(200).json(resp);
-    });
+router.get("/:id/permissions", passportMiddleware, function (req, res, next) {
+    roleCtrl.getPermissions(req, res, next);
 });
 
 module.exports = router;

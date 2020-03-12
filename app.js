@@ -18,6 +18,7 @@ var notificationsRouter = require('./api/routes/notifications');
 var permissionsRouter = require('./api/routes/permissions');
 var rolesRouter = require('./api/routes/roles');
 var usersRouter = require('./api/routes/users');
+var filesRouter = require('./api/routes/files');
 
 
 
@@ -56,8 +57,9 @@ app.use(passport.session());
 
 /////require('./api/middlewares/passport')(passport);
 
-
-
+//app.use(upload.array());
+//app.use(express.static('public'));
+//app.use('/files', express.static('files'));
 
 
 app.use('/', indexRouter);
@@ -68,6 +70,7 @@ app.use('/notifications', notificationsRouter);
 app.use('/permissions', permissionsRouter);
 app.use('/roles', rolesRouter);
 app.use('/users', usersRouter);
+app.use('/files', filesRouter);
 
 module.exports = app;
 

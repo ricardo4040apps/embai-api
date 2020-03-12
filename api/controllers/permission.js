@@ -1,26 +1,30 @@
 var express = require('express');
 var router = express.Router();
-const Company = require('../models/company');
+const Company = require('../models/permission');
 const passportMiddleware = require('../middlewares/passport');
 
 
-/* GET users listing. */
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                C R U D
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 module.exports.get = function(req, res, next) {
+  
     Company.getAll(req.query, (err, data) => {
       if (err) {
-        console.error("route companies get:", err)
-        return res.status(500).json('Failed to get company')
+        console.error("route permissions get:", err)
+        return res.status(500).json('Failed to get permission')
       }
       res.status(200).json(data)
     });
+
 }
 
 module.exports.getById = function(req, res, next) {
   Company.getById(req.params.id, (err, data) => {
     if (err) {
-      console.error("route companies get:", err)
-      return res.status(500).json('Failed to get company')
+      console.error("route permissions get:", err)
+      return res.status(500).json('Failed to get permission')
     }
     res.status(200).json(data)
   });
@@ -34,8 +38,8 @@ module.exports.create = function(req, res, next) {
 
   Company.add(req.body, (err, data) => {
     if (err) {
-      console.error("route companies post:", err)
-      return res.status(500).json('Failed to register new company')
+      console.error("route permissions post:", err)
+      return res.status(500).json('Failed to register new permission')
     }
     res.status(201).json(data)
     //res.status(201).json('User registered')
@@ -46,8 +50,8 @@ module.exports.create = function(req, res, next) {
 module.exports.update = function(req, res, next) {
   Company.update(req.params.id, req.body, (err, user) => {
     if (err) {
-      console.error("route companies put:", err)
-      return res.status(500).json('Failed to update company')
+      console.error("route permissions put:", err)
+      return res.status(500).json('Failed to update permission')
     }
     res.status(200).json(user)
   });
@@ -57,12 +61,17 @@ module.exports.update = function(req, res, next) {
 module.exports.deleteById = function(req, res, next) {
   Company.deleteById(req.params.id, (err, data) => {
     if (err) {
-      console.error("route companies delete:", err)
-      return res.status(500).json('Failed to delete company')
+      console.error("route permissions delete:", err)
+      return res.status(500).json('Failed to delete permission')
     }
     res.status(204).json(data)
   });
 }
 
 
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                C U S T O M S
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 

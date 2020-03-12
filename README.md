@@ -11,7 +11,7 @@ Configuracion por defecto
 --------
 # Run enviroment
     pm2 start app.json                          for production
-    pm2 start bin/www --watching                for local tester
+    pm2 start bin/www --watch                   for local tester
 
 
 
