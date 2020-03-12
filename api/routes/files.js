@@ -19,20 +19,24 @@ var path = require('path')
 
 
 router.get("/:name", function (req, res, next) {
-  //console.log('tu mama')
+  console.log('tu mama')
   // req.params.fileName ='undefined';
-  var src = './store/pictures/' + req.params.fileName + '.png'
+  var src = './store/pictures/' + req.params.name
 
   fs.readFile(src, "binary", function (err, data) {
     if (err) {
-      console.error('invalid map file')
-      res.send(500, err)
+      console.error(err)
+      res.status(404).send('invalid map file');
       return
     }
 
+/*
     res.writeHead(200, {
       "Content-Type": 'image/png'
     });
+    */
+   res.writeHead(200);
+
     res.write(data, 'binary');
     res.end();
   });
@@ -44,6 +48,7 @@ router.get("/:name", function (req, res, next) {
 
 router.post('/', type, function (req, res) {
   const tmp_path = req.file.path;
+  console.log('tu mama')
   const hashName = getAvailableName(req.file.originalname);
 
   var target_path = './store/pictures/' + hashName;
@@ -78,9 +83,7 @@ var deleteFile = function (src) {
 
 
 var getAvailableName = function (src) {
-  console.log(1, src)
   const ext = path.extname(src);
-  console.log(2, ext)
   var fileName = src + uuid.v4() + ext;
   if (fs.existsSync(fileName)) {
     getAvailableName(src)
