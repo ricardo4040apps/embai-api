@@ -19,10 +19,9 @@ var permissionsRouter = require('./api/routes/permissions');
 var rolesRouter = require('./api/routes/roles');
 var usersRouter = require('./api/routes/users');
 var filesRouter = require('./api/routes/files');
-
 var adsRouter = require('./api/routes/ads');
-
 var infoEmpRouter = require('./api/routes/informacion-empresarial');
+var microPrestRouter = require('./api/routes/micro-prestamo');
 
 
 
@@ -76,10 +75,10 @@ app.use('/permissions', permissionsRouter);
 app.use('/roles', rolesRouter);
 app.use('/users', usersRouter);
 app.use('/files', filesRouter);
-
 app.use('/ads', adsRouter);
-
 app.use('/informacion-empresarial', infoEmpRouter);
+app.use('/micro-prestamo', microPrestRouter);
+
 
 
 module.exports = app;

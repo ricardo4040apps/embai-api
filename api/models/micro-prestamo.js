@@ -9,7 +9,12 @@ const mySchema = Schema({
     cantidad: { type: String },
     tiempo: { type: String },
     periodo: { type: String },
-    esquema: { type: String }
+    esquema: { type: String },
+
+    updatedAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
+    deleted: { type: Boolean, default: false },
+    _deletedBy: Schema.Types.ObjectId
 })
 
 mySchema.plugin(mongoosePaginate);
