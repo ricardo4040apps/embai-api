@@ -19,6 +19,7 @@ var permissionsRouter = require('./api/routes/permissions');
 var rolesRouter = require('./api/routes/roles');
 var usersRouter = require('./api/routes/users');
 var filesRouter = require('./api/routes/files');
+var adsRouter = require('./api/routes/ads');
 
 
 
@@ -26,12 +27,12 @@ var filesRouter = require('./api/routes/files');
 
 console.log("Connecting to mongoDb ...")
 mongoose.set('useCreateIndex', true);
-mongoose.connect(process.env.DATABASE || config.database.database, {useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.DATABASE || config.database.database, { useNewUrlParser: true, useUnifiedTopology: true });
 
 
 mongoose.connection.on('connected', () => {
     console.log(`Connected to mongo database!!!`)
-    //console.log(`Connected to mongo database ${config.database.database}`)
+        //console.log(`Connected to mongo database ${config.database.database}`)
 });
 
 mongoose.connection.on('error', (err) => {
@@ -71,6 +72,7 @@ app.use('/permissions', permissionsRouter);
 app.use('/roles', rolesRouter);
 app.use('/users', usersRouter);
 app.use('/files', filesRouter);
+app.use('/ads', adsRouter);
 
 module.exports = app;
 
