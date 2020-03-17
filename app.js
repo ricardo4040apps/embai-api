@@ -22,6 +22,10 @@ var filesRouter = require('./api/routes/files');
 var adsRouter = require('./api/routes/ads');
 var preguntasRouter = require('./api/routes/preguntas-frecuentes');
 var solicitudRouter = require('./api/routes/solicitud-prestamo');
+var infoEmpRouter = require('./api/routes/informacion-empresarial');
+var microPrestRouter = require('./api/routes/micro-prestamo');
+var presJoyRouter = require('./api/routes/prestamo-joyeria');
+
 
 
 
@@ -77,6 +81,11 @@ app.use('/files', filesRouter);
 app.use('/ads', adsRouter);
 app.use('/preguntas', preguntasRouter);
 app.use('/solicitud', solicitudRouter);
+app.use('/informacion-empresarial', infoEmpRouter);
+app.use('/micro-prestamo', microPrestRouter);
+app.use('/micro-prestamo', microPrestRouter);
+app.use('/prestamo-joyeria', presJoyRouter);
+
 
 module.exports = app;
 

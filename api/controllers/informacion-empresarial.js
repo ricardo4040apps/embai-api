@@ -1,5 +1,5 @@
 var express = require('express');
-var router = express.Router();
+var infoEmpRouter = express.Router();
 const InfoEmp = require('../models/informacion-empresarial');
 const passportMiddleware = require('../middlewares/passport');
 

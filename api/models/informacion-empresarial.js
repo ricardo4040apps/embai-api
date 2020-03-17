@@ -12,7 +12,12 @@ const mySchema = Schema({
     telefono: { type: String },
     mision: { type: String },
     vision: { type: String },
-    valores: { type: String }
+    valores: { type: String },
+
+    updatedAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
+    deleted: { type: Boolean, default: false },
+    _deletedBy: Schema.Types.ObjectId
 })
 
 mySchema.plugin(mongoosePaginate);
