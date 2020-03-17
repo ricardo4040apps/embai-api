@@ -22,6 +22,7 @@ var filesRouter = require('./api/routes/files');
 var adsRouter = require('./api/routes/ads');
 var infoEmpRouter = require('./api/routes/informacion-empresarial');
 var microPrestRouter = require('./api/routes/micro-prestamo');
+var presJoyRouter = require('./api/routes/prestamo-joyeria');
 
 
 
@@ -78,6 +79,10 @@ app.use('/files', filesRouter);
 app.use('/ads', adsRouter);
 app.use('/informacion-empresarial', infoEmpRouter);
 app.use('/micro-prestamo', microPrestRouter);
+app.use('/micro-prestamo', microPrestRouter);
+app.use('/prestamo-joyeria', presJoyRouter);
+
+
 
 
 
