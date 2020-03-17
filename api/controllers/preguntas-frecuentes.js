@@ -1,133 +1,65 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const mongoosePaginate = require('mongoose-paginate-v2');
-const queryHelper = require('../helpers/query');
-
-const Schema = mongoose.Schema
-
-const mySchema = Schema({
-    titulo: { type: String },
-    descripcion: { type: String },
-    orden: { type: String },
-    principal: { type: String }
-})
-
-mySchema.plugin(mongoosePaginate);
-
-const CurrentModel = mongoose.model("preguntas-frecuentes", mySchema);
-
-/*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
-
-module.exports.getAll = function(params, callback, absolute = false) {
-    if (!absolute) params.deleted = false;
-    if (!params.page) {
-        CurrentModel.find(params, callback);
-    } else {
-        this.getAllPagginated(params, callback, absolute);
-    }
-};
-
-module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
-
-    const { page, limit, sort, q, ...filters } = params;
-    const options = {
-        page: page || 1,
-        limit: limit || 10,
-        sort: sort
-    };
-
-    let query = processQuery(filters, q);
-
-    CurrentModel.paginate(query, options, callback);
-};
-
-module.exports.getById = function(id, callback, absolute = false) {
-    CurrentModel.findById(id, callback);
-};
-
-module.exports.add = function(data, callback) {
-    let newUser = new CurrentModel(data);
-    newUser.save(callback);
-};
-
-module.exports.update = function(id, dataUser, callback) {
-    let opt = { new: true };
-
-    if (!dataUser.password) {
-        CurrentModel.findOneAndUpdate({ _id: id }, dataUser, opt, callback);
-        return;
-    }
-
-    CurrentModel.findOneAndUpdate({ _id: id }, dataUser, opt, callback);
-};
-
-module.exports.absoluteDeleteById = function(id, callback) {
-    CurrentModel.findByIdAndRemove(id, callback);
-};
-
-module.exports.deleteById = function(id, callback) {
-    let query = { _id: id };
-    let options = {};
-    let data = { deleted: true };
-
-    CurrentModel.update(query, data, options, callback);
-};
-
-/*  - - - - - - - - - - - -     E N D  C R U D     - - - - - - - - - - - - */
-
-/*  - - - - - - - - - - - -     C U S T O M S     - - - - - - - - - - - - */
-
-module.exports.hasErrors = function(data) {
-    var user = new CurrentModel(data);
-    return user.validateSync();
-};
-
-/*  - - - - - - - - - - - -     E N D  C U S T O M S     - - - - - - - - - - - - */
-
-/*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
-
-let processQuery = function(filters, strQ = "") {
-    let query = { $and: [filters] };
-
-    if (!strQ) return query;
-    let exp = new RegExp(strQ.toLowerCase(), "i");
-
-    let searchQuery = {
-        $or: [
-            // informacion preguntas-frecuentes
-            { titulo: exp },
-            { descripcion: exp },
-            { orden: exp },
-            { principal: exp }
-        ]
-    };
-    query.$and.push(searchQuery);
-    // console.log('query', require('util').inspect(query, {depth:null}))
-
-    return query;
-};
+var express = require('express');
+var router = express.Router();
+const Preguntas = require('../models/preguntas-frecuentes');
+const passportMiddleware = require('../middlewares/passport');
 
 
+/* GET users listing. */
 
-/*  - - - - - - - - - - - -     E N D  P R I V A T E     - - - - - - - - - - - - */
+module.exports.get = function(req, res, next) {
+    Preguntas.getAll(req.query, (err, data) => {
+        if (err) {
+            console.error("route Preguntas get:", err)
+            return res.status(500).json('Failed to get Preguntas')
+        }
+        res.status(200).json(data)
+    });
+}
 
-var updateDate = function(next, done) {
-    this.update({}, { $set: { updatedAt: moment() } });
-    next();
-};
+module.exports.getById = function(req, res, next) {
+    Preguntas.getById(req.params.id, (err, data) => {
+        if (err) {
+            console.error("route Preguntas get:", err)
+            return res.status(500).json('Failed to get Preguntas')
+        }
+        res.status(200).json(data)
+    });
+}
 
-mySchema
-    .pre("save", updateDate) // ??? it works
-    .pre("update", updateDate) // ??? it works
-    .pre("findOneAndUpdate", updateDate) // ok
-    .pre("findByIdAndUpdate", updateDate) // ok
-    .pre("aggregate", updateDate); // ??? it works
 
-// mySchema.post()
+module.exports.create = function(req, res, next) {
+    let errors = Preguntas.hasErrors(req.body);
+    console.log(errors)
+    if (errors) return res.status(400).json(errors.message)
 
-/*
-pre('remove') or post('remove')
-*/
+    Preguntas.add(req.body, (err, data) => {
+        if (err) {
+            console.error("route Preguntas post:", err)
+            return res.status(500).json('Failed to register new Preguntas')
+        }
+        res.status(201).json(data)
+            //res.status(201).json('User registered')
+    });
+}
 
-// https://mongoosejs.com/docs/schematypes.html
+
+module.exports.update = function(req, res, next) {
+    Preguntas.update(req.params.id, req.body, (err, user) => {
+        if (err) {
+            console.error("route Preguntas put:", err)
+            return res.status(500).json('Failed to update Preguntas')
+        }
+        res.status(200).json(user)
+    });
+}
+
+
+module.exports.deleteById = function(req, res, next) {
+    Preguntas.deleteById(req.params.id, (err, data) => {
+        if (err) {
+            console.error("route Preguntas delete:", err)
+            return res.status(500).json('Failed to delete Preguntas')
+        }
+        res.status(204).json(data)
+    });
+}

@@ -1,32 +1,32 @@
 var express = require('express');
 var router = express.Router();
-const Company = require('../models/company');
+const Solicitud = require('../models/solicitud-prestamo');
 const passportMiddleware = require('../middlewares/passport');
-const companyCtrl = require('../controllers/company');
+const solicitudCtrl = require('../controllers/solicitud-prestamo');
 
 /* GET users listing. */
 
 router.get('/', passportMiddleware, function(req, res, next) {
-    companyCtrl.get(req, res, next);
+    solicitudCtrl.get(req, res, next);
 });
 
 router.get('/:id', passportMiddleware, function(req, res, next) {
-    companyCtrl.getById(req, res, next);
+    solicitudCtrl.getById(req, res, next);
 });
 
 
 router.post('/', passportMiddleware, function(req, res, next) {
-    companyCtrl.create(req, res, next);
+    solicitudCtrl.create(req, res, next);
 });
 
 
 router.put('/:id', passportMiddleware, function(req, res, next) {
-    companyCtrl.update(req, res, next);
+    solicitudCtrl.update(req, res, next);
 });
 
 
 router.delete('/:id', passportMiddleware, function(req, res, next) {
-    companyCtrl.deleteById(req, res, next);
+    solicitudCtrl.deleteById(req, res, next);
 });
 
 

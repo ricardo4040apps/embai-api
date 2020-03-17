@@ -20,6 +20,8 @@ var rolesRouter = require('./api/routes/roles');
 var usersRouter = require('./api/routes/users');
 var filesRouter = require('./api/routes/files');
 var adsRouter = require('./api/routes/ads');
+var preguntasRouter = require('./api/routes/preguntas-frecuentes');
+var solicitudRouter = require('./api/routes/solicitud-prestamo');
 
 
 
@@ -73,6 +75,8 @@ app.use('/roles', rolesRouter);
 app.use('/users', usersRouter);
 app.use('/files', filesRouter);
 app.use('/ads', adsRouter);
+app.use('/preguntas', preguntasRouter);
+app.use('/solicitud', solicitudRouter);
 
 module.exports = app;
 

@@ -1,153 +1,65 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcryptjs");
-const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
-
-const Schema = mongoose.Schema;
-
-const mySchema = Schema({
-
-    type: { type: String },
-    name: { type: String },
-    lastName: { type: String },
-    email: { type: String },
-    card: { type: String },
-    appointmentDate: { type: Date },
-    bank: { type: String },
-    RefExt: { type: String },
-    CLABE: { type: String },
-    authorization: { type: String },
+var express = require('express');
+var router = express.Router();
+const Solicitud = require('../models/solicitud-prestamo');
+const passportMiddleware = require('../middlewares/passport');
 
 
+/* GET users listing. */
 
-    updatedAt: { type: Date, default: Date.now },
-    createdAt: { type: Date, default: Date.now },
-    deleted: { type: Boolean, default: false },
-    _deletedBy: Schema.Types.ObjectId
-});
+module.exports.get = function(req, res, next) {
+    Solicitud.getAll(req.query, (err, data) => {
+        if (err) {
+            console.error("route Solicitud get:", err)
+            return res.status(500).json('Failed to get Solicitud')
+        }
+        res.status(200).json(data)
+    });
+}
 
-mySchema.plugin(mongoosePaginate);
-
-const CurrentModel = mongoose.model("Company", mySchema);
-
-/*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
-
-module.exports.getAll = function(params, callback, absolute = false) {
-    if (!absolute) params.deleted = false;
-    if (!params.page) {
-        CurrentModel.find(params, callback);
-    } else {
-        this.getAllPagginated(params, callback, absolute);
-    }
-};
-
-module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
-
-    const { page, limit, sort, q, ...filters } = params;
-    const options = {
-        page: page || 1,
-        limit: limit || 10,
-        sort: sort
-    };
-
-    let query = processQuery(filters, q);
-
-    CurrentModel.paginate(query, options, callback);
-};
-
-module.exports.getById = function(id, callback, absolute = false) {
-    CurrentModel.findById(id, callback);
-};
-
-module.exports.add = function(data, callback) {
-    let newUser = new CurrentModel(data);
-    newUser.save(callback);
-};
-
-module.exports.update = function(id, dataUser, callback) {
-    let opt = { new: true };
-
-    if (!dataUser.password) {
-        CurrentModel.findOneAndUpdate({ _id: id }, dataUser, opt, callback);
-        return;
-    }
-
-    CurrentModel.findOneAndUpdate({ _id: id }, dataUser, opt, callback);
-};
-
-module.exports.absoluteDeleteById = function(id, callback) {
-    CurrentModel.findByIdAndRemove(id, callback);
-};
-
-module.exports.deleteById = function(id, callback) {
-    let query = { _id: id };
-    let options = {};
-    let data = { deleted: true };
-
-    CurrentModel.update(query, data, options, callback);
-};
-
-/*  - - - - - - - - - - - -     E N D  C R U D     - - - - - - - - - - - - */
-
-/*  - - - - - - - - - - - -     C U S T O M S     - - - - - - - - - - - - */
-
-module.exports.hasErrors = function(data) {
-    var user = new CurrentModel(data);
-    return user.validateSync();
-};
-
-/*  - - - - - - - - - - - -     E N D  C U S T O M S     - - - - - - - - - - - - */
-
-/*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
-
-let processQuery = function(filters, strQ = "") {
-    let query = { $and: [filters] };
-
-    if (!strQ) return query;
-    let exp = new RegExp(strQ.toLowerCase(), "i");
-
-    let searchQuery = {
-        $or: [
-            // strings
-            { type: exp },
-            { name: exp },
-            { LastName: exp },
-            { email: exp },
-            { card: exp },
-            { appointmentDate: exp },
-            { bank: exp },
-            { RefExt: exp },
-            { CLABE: exp },
-            { authorization: exp },
-        ]
-    };
-    query.$and.push(searchQuery);
-    // console.log('query', require('util').inspect(query, {depth:null}))
-
-    return query;
-};
+module.exports.getById = function(req, res, next) {
+    Solicitud.getById(req.params.id, (err, data) => {
+        if (err) {
+            console.error("route Solicitud get:", err)
+            return res.status(500).json('Failed to get Solicitud')
+        }
+        res.status(200).json(data)
+    });
+}
 
 
+module.exports.create = function(req, res, next) {
+    let errors = Solicitud.hasErrors(req.body);
+    console.log(errors)
+    if (errors) return res.status(400).json(errors.message)
 
-/*  - - - - - - - - - - - -     E N D  P R I V A T E     - - - - - - - - - - - - */
+    Solicitud.add(req.body, (err, data) => {
+        if (err) {
+            console.error("route Solicitud post:", err)
+            return res.status(500).json('Failed to register new Solicitud')
+        }
+        res.status(201).json(data)
+            //res.status(201).json('User registered')
+    });
+}
 
-var updateDate = function(next, done) {
-    this.update({}, { $set: { updatedAt: moment() } });
-    next();
-};
 
-mySchema
-    .pre("save", updateDate) // ??? it works
-    .pre("update", updateDate) // ??? it works
-    .pre("findOneAndUpdate", updateDate) // ok
-    .pre("findByIdAndUpdate", updateDate) // ok
-    .pre("aggregate", updateDate); // ??? it works
+module.exports.update = function(req, res, next) {
+    Solicitud.update(req.params.id, req.body, (err, user) => {
+        if (err) {
+            console.error("route Solicitud put:", err)
+            return res.status(500).json('Failed to update Solicitud')
+        }
+        res.status(200).json(user)
+    });
+}
 
-// mySchema.post()
 
-/*
-pre('remove') or post('remove')
-*/
-
-// https://mongoosejs.com/docs/schematypes.html
+module.exports.deleteById = function(req, res, next) {
+    Solicitud.deleteById(req.params.id, (err, data) => {
+        if (err) {
+            console.error("route Solicitud delete:", err)
+            return res.status(500).json('Failed to delete Solicitud')
+        }
+        res.status(204).json(data)
+    });
+}

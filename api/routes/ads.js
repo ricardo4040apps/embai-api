@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-const Company = require('../models/company');
+const Ads = require('../models/ads');
 const passportMiddleware = require('../middlewares/passport');
 const adsCtrl = require('../controllers/ads');
 

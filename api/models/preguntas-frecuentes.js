@@ -6,15 +6,20 @@ const queryHelper = require('../helpers/query');
 const Schema = mongoose.Schema
 
 const mySchema = Schema({
-    titulo: { type: String },
-    descripcion: { type: String },
-    orden: { type: String },
-    principal: { type: String }
+    title: { type: String },
+    description: { type: String },
+    order: { type: Number },
+    main: { type: Boolean },
+
+    updatedAt: { type: Date, default: Date.now },
+    createdAt: { type: Date, default: Date.now },
+    deleted: { type: Boolean, default: false },
+    _deletedBy: Schema.Types.ObjectId
 })
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("preguntas-frecuentes", mySchema);
+const CurrentModel = mongoose.model("preguntas", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

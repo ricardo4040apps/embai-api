@@ -14,8 +14,8 @@ const mySchema = Schema({
     card: { type: String },
     appointmentDate: { type: Date },
     bank: { type: String },
-    RefExt: { type: String },
-    CLABE: { type: String },
+    refExt: { type: String },
+    clabe: { type: String },
     authorization: { type: String },
 
 
@@ -28,7 +28,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("Company", mySchema);
+const CurrentModel = mongoose.model("solicitud", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -117,8 +117,8 @@ let processQuery = function(filters, strQ = "") {
             { card: exp },
             { appointmentDate: exp },
             { bank: exp },
-            { RefExt: exp },
-            { CLABE: exp },
+            { refExt: exp },
+            { clabe: exp },
             { authorization: exp },
         ]
     };
