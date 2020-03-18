@@ -11,7 +11,8 @@ const mySchema = Schema({
     title: { type: String },
     description: { type: String },
     status: { type: Boolean },
-    validity: { type: Date },
+    initDate: { type: Date },
+    finalDate: { type: Date },
     style: { type: String },
 
 

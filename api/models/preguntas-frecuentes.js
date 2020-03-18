@@ -7,9 +7,11 @@ const Schema = mongoose.Schema
 
 const mySchema = Schema({
     title: { type: String },
-    description: { type: String },
+    descriptionMin: { type: String },
+    descriptionMax: { type: String },
     order: { type: Number },
     main: { type: Boolean },
+    extInfo: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
