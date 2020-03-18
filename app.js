@@ -25,6 +25,7 @@ var solicitudRouter = require('./api/routes/solicitud-prestamo');
 var infoEmpRouter = require('./api/routes/informacion-empresarial');
 var microPrestRouter = require('./api/routes/micro-prestamo');
 var presJoyRouter = require('./api/routes/prestamo-joyeria');
+var prendasRouter = require('./api/routes/prendas');
 
 
 
@@ -85,6 +86,7 @@ app.use('/informacion-empresarial', infoEmpRouter);
 app.use('/micro-prestamo', microPrestRouter);
 app.use('/micro-prestamo', microPrestRouter);
 app.use('/prestamo-joyeria', presJoyRouter);
+app.use('/prendas', prendasRouter);
 
 
 module.exports = app;
