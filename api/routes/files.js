@@ -21,8 +21,6 @@ const User = require('../models/user');
 
 
 router.get("/:name", function (req, res, next) {
-  console.log('tu mama')
-  // req.params.fileName ='undefined';
   var src = './store/pictures/' + req.params.name
 
   fs.readFile(src, "binary", function (err, data) {
@@ -32,25 +30,15 @@ router.get("/:name", function (req, res, next) {
       return
     }
 
-    /*
-      res.writeHead(200, {
-        "Content-Type": 'image/png'
-      });
-      */
     res.writeHead(200);
-
     res.write(data, 'binary');
     res.end();
   });
 });
 
 
-
-
-
 router.post('/', type, function (req, res) {
   const tmp_path = req.file.path;
-  console.log('tu mama')
   const hashName = getAvailableName(req.file.originalname);
 
   var target_path = './store/pictures/' + hashName;
@@ -81,10 +69,6 @@ router.delete("/:name", function (req, res, next) {
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 router.get("/picture-profile/:name", function (req, res, next) {
-  //console.log(req)
-  // req.params.fileName ='undefined';
-  // console.log(req.header('userId'))
-
   var src = './store/pictures/' + req.params.name
 
   fs.readFile(src, "binary", function (err, data) {
@@ -94,20 +78,11 @@ router.get("/picture-profile/:name", function (req, res, next) {
       return
     }
 
-    /*
-        res.writeHead(200, {
-          "Content-Type": 'image/png'
-        });
-        */
     res.writeHead(200);
-
     res.write(data, 'binary');
     res.end();
   });
 });
-
-
-
 
 
 router.post('/picture-profile', type, function (req, res) {
@@ -130,9 +105,64 @@ router.post('/picture-profile', type, function (req, res) {
 });
 
 
+
+
+
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                PROFILE PICTURES
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+router.get("/ads-pictures/:name", function (req, res, next) {
+  var src = './store/ads-pictures/' + req.params.name
+
+  fs.readFile(src, "binary", function (err, data) {
+    if (err) {
+      console.error(err)
+      res.status(404).send('invalid map file');
+      return
+    }
+
+    res.writeHead(200);
+    res.write(data, 'binary');
+    res.end();
+  });
+});
+
+
+router.post('/ads-pictures', type, function (req, res) {
+  const tmp_path = req.file.path;
+  console.log(req.header('userId'))
+  const hashName = getAvailableName(req.file.originalname);
+
+  var target_path = './store/ads-pictures/' + hashName;
+
+  var src = fs.createReadStream(tmp_path);
+  var dest = fs.createWriteStream(target_path);
+  src.pipe(dest);
+
+  src.on('end', function () {
+    deleteFile(tmp_path);
+    updateUserPicture(req.header('userId'), hashName);
+    res.status(200).send(hashName)
+  });
+  src.on('error', function (err) { res.status(500).send(err) });
+});
+
+
+
+
+
 router.delete("/:name", function (req, res, next) {
   //fileCtrl.deleteById(req, res, next);
 });
+
+
+
+
+
 
 
 
@@ -146,6 +176,12 @@ var deleteFile = function (src) {
   });
 }
 
+
+
+
+
+
+// ???? is correct
 
 var getAvailableName = function (src) {
   const ext = path.extname(src);
