@@ -112,7 +112,7 @@ router.post('/picture-profile', type, function (req, res) {
 
 
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-                                PROFILE PICTURES
+                                ADS PICTURES
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 router.get("/ads-pictures/:name", function (req, res, next) {
@@ -145,7 +145,7 @@ router.post('/ads-pictures', type, function (req, res) {
 
   src.on('end', function () {
     deleteFile(tmp_path);
-    updateUserPicture(req.header('userId'), hashName);
+    //updateUserPicture(req.header('userId'), hashName);
     res.status(200).send(hashName)
   });
   src.on('error', function (err) { res.status(500).send(err) });
