@@ -25,7 +25,7 @@ router.put('/:id', passportMiddleware, function(req, res, next) {
 
 
 router.delete('/:id', passportMiddleware, function(req, res, next) {
-    prendasCtrl.deleteById(req, res, next);
+    pesoCtrl.deleteById(req, res, next);
 });
 
 
