@@ -64,12 +64,12 @@ module.exports.deleteById = function(req, res, next) {
     });
 }
 module.exports.isMainQuestion = function(req, res, next) {
-    let query = { main: req.params.value }
-    Preguntas.getAll(query, (err, data) => {
+    let query = { main: req.params.value } //este se refiere al atributo que buscas en los params
+    Preguntas.getAll(query, (err, data) => { //traes todos los registros con el metodo get all
         if (err) {
             console.error("route Preguntas get:", err)
             return res.status(500).json('Failed to get Preguntas')
-        }
+        } // no se si se pueda poner algo tipo data.main==true (something like that, you know)
         res.status(200).json(data)
     });
 }
