@@ -55,11 +55,21 @@ module.exports.update = function(req, res, next) {
 
 
 module.exports.deleteById = function(req, res, next) {
-    ADS.deleteById(req.params.id, (err, data) => {
-        if (err) {
-            console.error("route ADS delete:", err)
-            return res.status(500).json('Failed to delete ADS')
-        }
-        res.status(204).json(data)
-    });
-}
+        ADS.deleteById(req.params.id, (err, data) => {
+            if (err) {
+                console.error("route ADS delete:", err)
+                return res.status(500).json('Failed to delete ADS')
+            }
+            res.status(204).json(data)
+        });
+    }
+    // module.exports.isUsernameBussy = function(req, res, next) {
+    //     let query =  {ads: req.params.value}
+    //     User.getAll(query, (err, data) => {
+    //       if (err) {
+    //         console.error("route users get:", err)
+    //         return res.status(500).json('Failed to get users')
+    //       }
+    //       res.status(200).json(data.length > 0)
+    //     });
+    //   }

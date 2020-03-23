@@ -29,6 +29,9 @@ router.delete('/:id', passportMiddleware, function(req, res, next) {
     preguntasCtrl.deleteById(req, res, next);
 });
 
+router.get('/isMainQuestion', function(req, res, next) {
+    preguntasCtrl.isMainQuestion(req, res, next);
+});
 
 
 
