@@ -28,8 +28,11 @@ const CurrentModel = mongoose.model("preguntas", mySchema);
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;
     if (!params.page) {
+        console.log('find')
         CurrentModel.find(params, callback);
     } else {
+        console.log('PAGINATED')
+
         this.getAllPagginated(params, callback, absolute);
     }
 };
