@@ -14,8 +14,7 @@ const mySchema = Schema({
     initDate: { type: Date },
     finalDate: { type: Date },
     style: { type: String },
-
-
+    valid: { type: Boolean },
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },

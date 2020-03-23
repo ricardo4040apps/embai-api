@@ -4,7 +4,12 @@ const Ads = require('../models/ads');
 const passportMiddleware = require('../middlewares/passport');
 const adsCtrl = require('../controllers/ads');
 
-/* GET users listing. */
+/* GET ads listing. */
+router.get('/validAds', function(req, res, next) {
+    console.log('RUTAS')
+    adsCtrl.isValidAds(req, res, next);
+});
+
 
 router.get('/', passportMiddleware, function(req, res, next) {
     adsCtrl.get(req, res, next);
