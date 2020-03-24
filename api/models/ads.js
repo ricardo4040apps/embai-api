@@ -13,7 +13,8 @@ const mySchema = Schema({
     status: { type: Boolean },
     initDate: { type: Date },
     finalDate: { type: Date },
-    style: { type: String },
+    styleBack: { type: String },
+    styleFont: { type: String },
 
 
     updatedAt: { type: Date, default: Date.now },
