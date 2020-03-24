@@ -2,9 +2,11 @@ var express = require('express');
 var router = express.Router();
 const ADS = require('../models/ads');
 const passportMiddleware = require('../middlewares/passport');
+var moment = require('moment');
 
 
 /* GET users listing. */
+
 
 module.exports.get = function(req, res, next) {
     ADS.getAll(req.query, (err, data) => {
@@ -55,21 +57,48 @@ module.exports.update = function(req, res, next) {
 
 
 module.exports.deleteById = function(req, res, next) {
-        ADS.deleteById(req.params.id, (err, data) => {
-            if (err) {
-                console.error("route ADS delete:", err)
-                return res.status(500).json('Failed to delete ADS')
+    ADS.deleteById(req.params.id, (err, data) => {
+        if (err) {
+            console.error("route ADS delete:", err)
+            return res.status(500).json('Failed to delete ADS')
+        }
+        res.status(204).json(data)
+    });
+}
+
+module.exports.isValidAds = function(req, res, next) {
+    // let fechaInicial = { initDate: Date },
+    //     fechaFinal = { finalDate: Date }
+    // let fechaActual = new Date();
+    // if (fechaActual => fechaInicial && fechaActual <= fechaFinal) {
+    //     console.log("fecha Actual", fechaActual);
+    //     console.log("Fecha inicial", fechaInicial);
+    //     console.log("Fecha final", fechaFinal);
+    console.log('controller ads')
+        // let query = { valid: true }
+    ADS.getAll(req.query, (err, data) => {
+        let fechaActual = new Date();
+        if (err) {
+            console.error("route ADS get:", err)
+            return res.status(500).json('Failed to get ADS')
+        }
+        for (let i in data) {
+            // console.log("Imprimiendo inicio", data[i].initDate);
+            // console.log("Imprimiendo final", data[i].finalDate);
+
+            console.log("FECHA ACTUAL", fechaActual)
+
+            if (moment().isBetween(moment(data[i].initDate), moment(data[i].finalDate))) {
+                console.log('la fecha de hoy esta en el rango')
+            } else {
+                console.log('la fecha actual no esta en el rango')
             }
-            res.status(204).json(data)
-        });
-    }
-    // module.exports.isUsernameBussy = function(req, res, next) {
-    //     let query =  {ads: req.params.value}
-    //     User.getAll(query, (err, data) => {
-    //       if (err) {
-    //         console.error("route users get:", err)
-    //         return res.status(500).json('Failed to get users')
-    //       }
-    //       res.status(200).json(data.length > 0)
-    //     });
-    //   }
+            // if (fechaActual => initDate && fechaActual <= finalDate) {
+            //     console.log("DENTRO DEL RANGO")
+            // } else {
+            //     console.log("DESADENTRO DEL RANGO");
+            // }
+        }
+        //  res.status(200).json(data)
+    });
+}

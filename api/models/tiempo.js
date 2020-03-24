@@ -7,16 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    picture: { type: String },
-    title: { type: String },
-    description: { type: String },
-    status: { type: Boolean },
-    initDate: { type: Date },
-    finalDate: { type: Date },
-    styleBack: { type: String },
-    styleFont: { type: String },
-    valid: { type: Boolean },
-
+    valor: { type: String },
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
@@ -25,7 +16,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('ads', mySchema);
+const CurrentModel = mongoose.model('tiempo', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -58,8 +49,8 @@ module.exports.getById = function(id, callback, absolute = false) {
 };
 
 module.exports.add = function(data, callback) {
-    let newUser = new CurrentModel(data);
-    newUser.save(callback);
+    let newTiempo = new CurrentModel(data);
+    newTiempo.save(callback);
 };
 
 module.exports.update = function(id, dataUser, callback) {
@@ -107,12 +98,8 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { picture: exp },
-            { title: exp },
-            { description: exp },
-            { status: exp },
-            { validity: exp },
-            { style: exp },
+            { name: exp },
+
         ]
     };
     query.$and.push(searchQuery);
