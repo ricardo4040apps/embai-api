@@ -135,7 +135,7 @@ router.get("/ads-pictures/:name", function(req, res, next) {
 
 router.post('/ads-pictures', type, function(req, res) {
     const tmp_path = req.file.path;
-    console.log(req.header('userId'))
+    console.log(req.header('ADS_ID'))
     const hashName = getAvailableName(req.file.originalname);
 
     var target_path = './store/ads-pictures/' + hashName;
@@ -147,7 +147,8 @@ router.post('/ads-pictures', type, function(req, res) {
     src.on('end', function() {
         deleteFile(tmp_path);
         //updateUserPicture(req.header('userId'), hashName);
-        updateADSPicture(req.header('userId'), hashName);
+        updateADSPicture(req.header('ADS_ID'), hashName);
+        console.log(hashName)
         res.status(200).send(hashName)
     });
     src.on('error', function(err) { res.status(500).send(err) });
@@ -207,10 +208,10 @@ var updateUserPicture = function(iserId = null, pictureName) {
         });
     }
 }
-var updateADSPicture = function(iserId = null, pictureName) {
-    const data = { "picture": pictureName };
-    if (iserId) {
-        ADS.update(iserId, data, (err, data) => {
+var updateADSPicture = function(ADSId = null, ADSName) {
+    const data = { "picture": ADSName };
+    if (ADSId) {
+        ADS.update(ADSId, data, (err, data) => {
             if (err) {
                 console.error("route ADS put:", err)
                 return;

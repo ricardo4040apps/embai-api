@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    picture: { type: String },
+    picture: String,
     title: { type: String },
     description: { type: String },
     status: { type: Boolean },
