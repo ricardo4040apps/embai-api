@@ -28,7 +28,9 @@ var presJoyRouter = require('./api/routes/prestamo-joyeria');
 var prendasRouter = require('./api/routes/prendas');
 var pesoRouter = require('./api/routes/peso');
 var materialRouter = require('./api/routes/material');
-var materialRouter = require('./api/routes/tiempo');
+var tiempoRouter = require('./api/routes/tiempo');
+var frequencyRouter = require('./api/routes/frequency');
+var plansRouter = require('./api/routes/plans');
 
 
 
@@ -91,7 +93,10 @@ app.use('/prestamo-joyeria', presJoyRouter);
 app.use('/prendas', prendasRouter);
 app.use('/peso', pesoRouter);
 app.use('/material', materialRouter);
-app.use('/tiempo', materialRouter);
+app.use('/tiempo', tiempoRouter);
+app.use('/plans', plansRouter);
+app.use('/frequency', frequencyRouter);
+
 module.exports = app;
 
 
