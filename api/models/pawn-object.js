@@ -10,7 +10,6 @@ const mySchema = Schema({
     name: { type: String },
 
 
-
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
@@ -19,7 +18,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('prenda', mySchema);
+const CurrentModel = mongoose.model('PawnObject', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
