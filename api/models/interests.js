@@ -6,16 +6,9 @@ const queryHelper = require("../helpers/query");
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-
-    picture: String,
-    title: { type: String },
-    description: { type: String },
-    status: { type: Boolean },
-    initDate: { type: Date },
-    finalDate: { type: Date },
-    styleBack: { type: String },
-    styleFont: { type: String },
-    valid: { type: Boolean },
+    moratorium: { type: String },
+    certification: { type: String },
+    homeAppraisal: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -25,7 +18,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('ads', mySchema);
+const CurrentModel = mongoose.model("interests", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -107,12 +100,9 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { picture: exp },
-            { title: exp },
-            { description: exp },
-            { status: exp },
-            { validity: exp },
-            { style: exp },
+            { moratorium: exp },
+            { certification: exp },
+            { homeAppraisal: exp },
         ]
     };
     query.$and.push(searchQuery);
