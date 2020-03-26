@@ -29,6 +29,8 @@ var prendasRouter = require('./api/routes/prendas');
 var pesoRouter = require('./api/routes/peso');
 var materialRouter = require('./api/routes/material');
 var materialRouter = require('./api/routes/tiempo');
+var contactRouter = require('./api/routes/contact');
+var interestsRouter = require('./api/routes/interests');
 
 
 
@@ -92,6 +94,8 @@ app.use('/prendas', prendasRouter);
 app.use('/peso', pesoRouter);
 app.use('/material', materialRouter);
 app.use('/tiempo', materialRouter);
+app.use('/contact', contactRouter);
+app.use('/interests', interestsRouter);
 module.exports = app;
 
 
