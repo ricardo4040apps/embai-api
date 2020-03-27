@@ -7,30 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    type: { type: String },
-    // object
-    pawnObjectTypeId: Schema.Types.ObjectId,
-    pawnObjectPurityId: Schema.Types.ObjectId,
-    pawnObjectWeight: Schema.Types.ObjectId,
-    metal: Schema.Types.ObjectId,
-    periodo: Schema.Types.ObjectId,
-    esquema: Schema.Types.ObjectId,
-    refrendo: Schema.Types.ObjectId,
-
-    // user info
-    name: { type: String },
-    lastName: { type: String },
-    email: { type: String },
-    card: { type: String },
-    appointmentDate: { type: Date },
-    bank: { type: String },
-    refExt: { type: String },
-    clabe: { type: String },
-    authorization: { type: String },
-    userId: Schema.Types.ObjectId,
-    paymentFrecuenty: Schema.Types.ObjectId,
-    
-
+    value: { type: Number },    // grams
 
 
     updatedAt: { type: Date, default: Date.now },
@@ -41,7 +18,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("solicitud", mySchema);
+const CurrentModel = mongoose.model('weight', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -123,16 +100,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { type: exp },
-            { name: exp },
-            { LastName: exp },
-            { email: exp },
-            { card: exp },
-            { appointmentDate: exp },
-            { bank: exp },
-            { refExt: exp },
-            { clabe: exp },
-            { authorization: exp },
+            // { name: exp },
         ]
     };
     query.$and.push(searchQuery);

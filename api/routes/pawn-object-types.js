@@ -1,31 +1,31 @@
 var express = require('express');
 var router = express.Router();
 const passportMiddleware = require('../middlewares/passport');
-const pesoCtrl = require('../controllers/peso');
+const pawnObjectTypesCtrl = require('../controllers/pawn-object-types');
 
-/* GET PESO. */
+/* GET users listing. */
 
 router.get('/', passportMiddleware, function(req, res, next) {
-    pesoCtrl.get(req, res, next);
+    pawnObjectTypesCtrl.get(req, res, next);
 });
 
 router.get('/:id', passportMiddleware, function(req, res, next) {
-    pesoCtrl.getById(req, res, next);
+    pawnObjectTypesCtrl.getById(req, res, next);
 });
 
 
 router.post('/', passportMiddleware, function(req, res, next) {
-    pesoCtrl.create(req, res, next);
+    pawnObjectTypesCtrl.create(req, res, next);
 });
 
 
 router.put('/:id', passportMiddleware, function(req, res, next) {
-    pesoCtrl.update(req, res, next);
+    pawnObjectTypesCtrl.update(req, res, next);
 });
 
 
 router.delete('/:id', passportMiddleware, function(req, res, next) {
-    pesoCtrl.deleteById(req, res, next);
+    pawnObjectTypesCtrl.deleteById(req, res, next);
 });
 
 

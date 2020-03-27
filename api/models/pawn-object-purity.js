@@ -19,7 +19,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('prenda', mySchema);
+const CurrentModel = mongoose.model('pawn-object-purity', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

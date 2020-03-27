@@ -11,13 +11,17 @@ const mySchema = Schema({
     username: { type: String, required: true, unique: true },
     password: { type: String, required: true }, 
     email: { type: String, required: true, unique: true },
-    emailVerified: { type: Boolean, default: false }, // It can be String
+    emailVerified: { type: Boolean, default: false },
     cellPhone: { type: String, unique: true }, 
-    cellPhoneVerified: { type: Boolean, default: false }, // It can be String
-    picture: String, // It can be String
+    cellPhoneVerified: { type: Boolean, default: false },
+
+    picture: String,
 
     birthDate: { type: Date },
     gender: { type: String }, 
+    cityOfBirth: { type: String},
+    stateOfBirth: { type: String},
+
     
     roleId: { type: Schema.Types.ObjectId, ref: 'Role' },
     

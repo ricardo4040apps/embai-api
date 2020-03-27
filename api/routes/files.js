@@ -86,10 +86,10 @@ router.get("/picture-profile/:name", function(req, res, next) {
 });
 
 
-router.post('/picture-profile', type, function(req, res) {
-    const tmp_path = req.file.path;
-    console.log(req.header('userId'))
-    const hashName = getAvailableName(req.file.originalname);
+router.post('/picture-profile', type, function (req, res) {
+  const tmp_path = req.file.path;
+  const hashName = getAvailableName(req.file.originalname);
+
 
     var target_path = './store/pictures/' + hashName;
 
@@ -133,10 +133,10 @@ router.get("/ads-pictures/:name", function(req, res, next) {
 });
 
 
-router.post('/ads-pictures', type, function(req, res) {
-    const tmp_path = req.file.path;
-    console.log(req.header('ADS_ID'))
-    const hashName = getAvailableName(req.file.originalname);
+router.post('/ads-pictures', type, function (req, res) {
+  const tmp_path = req.file.path;
+  const hashName = getAvailableName(req.file.originalname);
+
 
     var target_path = './store/ads-pictures/' + hashName;
 
