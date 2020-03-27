@@ -98,12 +98,6 @@ app.use('/informacion-empresarial', infoEmpRouter);
 app.use('/micro-prestamo', microPrestRouter);
 app.use('/micro-prestamo', microPrestRouter);
 app.use('/prestamo-joyeria', presJoyRouter);
-
-<<<<<<< HEAD
-// app.use('/prendas', prendasRouter);
-// app.use('/peso', pesoRouter);
-=======
->>>>>>> 6cb458ba920d70ea98c1313ff1ebeaf25b95d8d1
 app.use('/material', materialRouter)
 app.use('/tiempo', tiempoRouter);
 app.use('/plans', plansRouter);
