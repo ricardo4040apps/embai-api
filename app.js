@@ -100,8 +100,6 @@ app.use('/micro-prestamo', microPrestRouter);
 app.use('/micro-prestamo', microPrestRouter);
 app.use('/prestamo-joyeria', presJoyRouter);
 
-app.use('/prendas', prendasRouter);
-app.use('/peso', pesoRouter);
 app.use('/material', materialRouter)
 app.use('/tiempo', tiempoRouter);
 app.use('/plans', plansRouter);
