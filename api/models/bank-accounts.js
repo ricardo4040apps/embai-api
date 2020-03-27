@@ -104,8 +104,8 @@ let processQuery = function(filters, strQ = "") {
         $or: [
             // strings
             { option: exp },
-            { type: exp },
             { beneficiary: exp },
+            { type: exp },
             { bank: exp },
             { alias: exp },
 
