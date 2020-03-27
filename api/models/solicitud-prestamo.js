@@ -8,6 +8,16 @@ const Schema = mongoose.Schema;
 const mySchema = Schema({
 
     type: { type: String },
+    // object
+    pawnObjectTypeId: Schema.Types.ObjectId,
+    pawnObjectPurityId: Schema.Types.ObjectId,
+    pawnObjectWeight: Schema.Types.ObjectId,
+    metal: Schema.Types.ObjectId,
+    periodo: Schema.Types.ObjectId,
+    esquema: Schema.Types.ObjectId,
+    refrendo: Schema.Types.ObjectId,
+
+    // user info
     name: { type: String },
     lastName: { type: String },
     email: { type: String },
@@ -20,6 +30,8 @@ const mySchema = Schema({
     userId: Schema.Types.ObjectId,
     paymentFrecuenty: Schema.Types.ObjectId,
     
+
+
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
