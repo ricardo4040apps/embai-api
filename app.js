@@ -33,7 +33,6 @@ var tiempoRouter = require('./api/routes/tiempo');
 var frequencyRouter = require('./api/routes/frequency');
 var plansRouter = require('./api/routes/plans');
 
-var materialRouter = require('./api/routes/tiempo');
 var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
 
@@ -108,9 +107,7 @@ app.use('/frequency', frequencyRouter);
 app.use('/pawn-object-types', pawnObjectTypesRouter);
 app.use('/pawn-object-purity', pawnObjectPurityRouter);
 app.use('/weight', weightRouter);
-app.use('/material', materialRouter);
 
-app.use('/tiempo', materialRouter);
 app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
 
