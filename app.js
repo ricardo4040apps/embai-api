@@ -29,9 +29,17 @@ var pawnObjectTypesRouter = require('./api/routes/pawn-object-types');
 var pawnObjectPurityRouter = require('./api/routes/pawn-object-purity');
 var weightRouter = require('./api/routes/weights');
 var materialRouter = require('./api/routes/material');
+var tiempoRouter = require('./api/routes/tiempo');
+var frequencyRouter = require('./api/routes/frequency');
+var plansRouter = require('./api/routes/plans');
+
 var materialRouter = require('./api/routes/tiempo');
 var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
+
+var bankAccountsRouter = require('./api/routes/bank-accounts');
+
+
 
 
 
@@ -91,13 +99,26 @@ app.use('/informacion-empresarial', infoEmpRouter);
 app.use('/micro-prestamo', microPrestRouter);
 app.use('/micro-prestamo', microPrestRouter);
 app.use('/prestamo-joyeria', presJoyRouter);
+
+app.use('/prendas', prendasRouter);
+app.use('/peso', pesoRouter);
+app.use('/material', materialRouter)
+app.use('/tiempo', tiempoRouter);
+app.use('/plans', plansRouter);
+app.use('/frequency', frequencyRouter);
+
 app.use('/pawn-object-types', pawnObjectTypesRouter);
 app.use('/pawn-object-purity', pawnObjectPurityRouter);
 app.use('/weight', weightRouter);
 app.use('/material', materialRouter);
+
 app.use('/tiempo', materialRouter);
 app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
+
+app.use('/bank-accounts', bankAccountsRouter);
+
+
 module.exports = app;
 
 
