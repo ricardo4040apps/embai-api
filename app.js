@@ -37,6 +37,9 @@ var materialRouter = require('./api/routes/tiempo');
 var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
 
+var bankAccountsRouter = require('./api/routes/bank-accounts');
+
+
 
 
 
@@ -112,6 +115,9 @@ app.use('/material', materialRouter);
 app.use('/tiempo', materialRouter);
 app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
+
+app.use('/bank-accounts', bankAccountsRouter);
+
 
 module.exports = app;
 
