@@ -32,6 +32,11 @@ var tiempoRouter = require('./api/routes/tiempo');
 var frequencyRouter = require('./api/routes/frequency');
 var plansRouter = require('./api/routes/plans');
 
+var materialRouter = require('./api/routes/tiempo');
+var contactRouter = require('./api/routes/contact');
+var interestsRouter = require('./api/routes/interests');
+
+
 
 
 
@@ -92,10 +97,13 @@ app.use('/micro-prestamo', microPrestRouter);
 app.use('/prestamo-joyeria', presJoyRouter);
 app.use('/prendas', prendasRouter);
 app.use('/peso', pesoRouter);
-app.use('/material', materialRouter);
+app.use('/material', materialRouter)
 app.use('/tiempo', tiempoRouter);
 app.use('/plans', plansRouter);
 app.use('/frequency', frequencyRouter);
+app.use('/tiempo', materialRouter);
+app.use('/contact', contactRouter);
+app.use('/interests', interestsRouter);
 
 module.exports = app;
 
