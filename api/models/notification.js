@@ -20,6 +20,8 @@ const mySchema = Schema({
     deadLine: Date,
 
 
+    deleted: { type: Boolean, default: false },
+    _deletedBy: Schema.Types.ObjectId,
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
 })

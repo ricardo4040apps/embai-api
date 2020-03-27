@@ -12,10 +12,10 @@ const mySchema = Schema({
     pawnObjectTypeId: Schema.Types.ObjectId,
     pawnObjectPurityId: Schema.Types.ObjectId,
     pawnObjectWeight: Schema.Types.ObjectId,
-    metal: Schema.Types.ObjectId,
-    periodo: Schema.Types.ObjectId,
-    esquema: Schema.Types.ObjectId,
-    refrendo: Schema.Types.ObjectId,
+            metal: Schema.Types.ObjectId,
+            periodo: Schema.Types.ObjectId,
+            esquema: Schema.Types.ObjectId,
+            refrendo: Schema.Types.ObjectId,
 
     // user info
     name: { type: String },
