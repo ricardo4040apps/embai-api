@@ -37,6 +37,7 @@ var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
 
 var bankAccountsRouter = require('./api/routes/bank-accounts');
+var valuationRouter = require('./api/routes/valuation');
 
 
 
@@ -111,6 +112,7 @@ app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
 
 app.use('/bank-accounts', bankAccountsRouter);
+app.use('/valuation', valuationRouter);
 
 
 module.exports = app;

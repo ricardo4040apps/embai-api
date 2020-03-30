@@ -6,10 +6,9 @@ const queryHelper = require('../helpers/query');
 const Schema = mongoose.Schema
 
 const mySchema = Schema({
-    user: { type: String },
-    cutOffDate: { type: Date },
-    esquema: { type: String },
-    valued: { type: String },
+    item: { type: String },
+    value: { type: String },
+    loanDate: { type: Date },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -20,7 +19,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("prestamo-joyeria", mySchema);
+const CurrentModel = mongoose.model("valuation", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -102,10 +101,9 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // informacion prestamo joyeria
-            { user: exp },
-            { cutOffDate: exp },
-            { schema: exp },
-            { valued: exp },
+            { item: exp },
+            { value: exp },
+            { loanDate: exp },
 
         ]
     };
