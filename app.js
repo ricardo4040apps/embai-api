@@ -32,11 +32,10 @@ var materialRouter = require('./api/routes/material');
 var tiempoRouter = require('./api/routes/tiempo');
 var frequencyRouter = require('./api/routes/frequency');
 var plansRouter = require('./api/routes/plans');
-
 var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
-
 var bankAccountsRouter = require('./api/routes/bank-accounts');
+var personalRouter = require('./api/routes/personal-information');
 
 
 
@@ -109,8 +108,8 @@ app.use('/weight', weightRouter);
 
 app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
-
 app.use('/bank-accounts', bankAccountsRouter);
+app.use('/personal-information', personalRouter);
 
 
 module.exports = app;
