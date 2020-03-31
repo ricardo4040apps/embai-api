@@ -1,7 +1,5 @@
 var express = require('express');
-var router = express.Router();
 const Personal = require('../models/personal-information');
-const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET PERSONAL INFORMATION listing. */

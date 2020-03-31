@@ -30,7 +30,4 @@ router.delete('/:id', passportMiddleware, function(req, res, next) {
 });
 
 
-
-
-
 module.exports = router;

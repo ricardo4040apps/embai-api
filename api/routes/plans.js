@@ -28,8 +28,4 @@ router.delete('/:id', passportMiddleware, function(req, res, next) {
     PlansCtrl.deleteById(req, res, next);
 });
 
-
-
-
-
 module.exports = router;
