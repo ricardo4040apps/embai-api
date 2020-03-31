@@ -9,22 +9,36 @@ const mySchema = Schema({
     name: { type: String },
     lastName: { type: String },
     username: { type: String, required: true, unique: true },
-    password: { type: String, required: true }, 
+    password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
+    CURP: { type: String },
+    RFC: { type: String },
     emailVerified: { type: Boolean, default: false },
-    cellPhone: { type: String, unique: true }, 
+    cellPhone: { type: String, unique: true },
     cellPhoneVerified: { type: Boolean, default: false },
 
     picture: String,
 
     birthDate: { type: Date },
-    gender: { type: String }, 
-    cityOfBirth: { type: String},
-    stateOfBirth: { type: String},
+    gender: { type: String },
+    cityOfBirth: { type: String },
+    stateOfBirth: { type: String },
 
-    
+    street: { type: String },
+    number: { type: String },
+    state: { type: String },
+    colony: { type: String },
+    postalCode: { type: String },
+    yearsAtHome: { type: String },
+    working: { type: String },
+    sourceOfIncome: { type: String },
+    companyName: { type: String },
+    monthlySalary: { type: String },
+    familySalay: { type: String },
+    numberOfDependents: { type: String },
+
     roleId: { type: Schema.Types.ObjectId, ref: 'Role' },
-    
+
 
     status: { type: String, default: 'new' }, // new, inactive, active, locked, banned,
     deleted: { type: Boolean, default: false },
@@ -55,20 +69,20 @@ module.exports.getAll = function(params, callback) {
 
 
 module.exports.getAllPagginated = function(params, callback) {
-    const {page, limit, sort, q, ...filters} = params
-    const options = {
-        page: page || 1,
-        limit: limit || 10,
-        sort: sort,
-    };
+        const { page, limit, sort, q, ...filters } = params
+        const options = {
+            page: page || 1,
+            limit: limit || 10,
+            sort: sort,
+        };
 
-    let query = processQuery(filters, q)
-    CurrentModel.paginate(query, options, callback);
-}
-// http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt
-// http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=per
-// http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=tru
-    
+        let query = processQuery(filters, q)
+        CurrentModel.paginate(query, options, callback);
+    }
+    // http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt
+    // http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=per
+    // http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=tru
+
 
 
 module.exports.getById = function(id, callback) {
@@ -77,7 +91,7 @@ module.exports.getById = function(id, callback) {
 
 
 module.exports.add = function(data, callback) {
-    
+
     let newUser = new CurrentModel(data)
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
@@ -90,9 +104,9 @@ module.exports.add = function(data, callback) {
 
 module.exports.update = function(id, dataUser, callback) {
     let opt = { new: true }
-    
+
     if (!dataUser.password) {
-        CurrentModel.findOneAndUpdate({_id: id}, dataUser, opt, callback);
+        CurrentModel.findOneAndUpdate({ _id: id }, dataUser, opt, callback);
         return
     }
 
@@ -100,7 +114,7 @@ module.exports.update = function(id, dataUser, callback) {
         bcrypt.hash(dataUser.password, salt, (err, hash) => {
             if (err) throw err;
             dataUser.password = hash;
-            CurrentModel.findOneAndUpdate({_id: id}, dataUser, opt, callback);
+            CurrentModel.findOneAndUpdate({ _id: id }, dataUser, opt, callback);
         })
     })
 
@@ -164,21 +178,21 @@ let processQuery = function(filters, strQ = '') {
 
     // var booleanValue = (strQ == 'true')? true: (strQ == 'false')? false: null; OK
     // { deleted: booleanValue}
-    
+
     let exp = new RegExp(strQ.toLowerCase(), 'i');
 
-    return { 
-        $and:
-        [ 
+    return {
+        $and: [
             filters,
-            { $or:
-                [
+            {
+                $or: [
                     // strings
                     { name: exp },
                     { lastName: exp },
                     { username: exp },
                     { email: exp },
                     { cellPhone: exp },
+
                     { gender: exp },
                     { status: exp },
                     { status: exp },
@@ -194,16 +208,16 @@ let processQuery = function(filters, strQ = '') {
 /*  - - - - - - - - - - - -     E N D  P R I V A T E     - - - - - - - - - - - - */
 
 
-var updateDate = function(next, done){
-    this.update({},{ $set: { updatedAt: moment() } });
-   next()
-  };
+var updateDate = function(next, done) {
+    this.update({}, { $set: { updatedAt: moment() } });
+    next()
+};
 
-mySchema.pre('save', updateDate)  // ??? it works
-    .pre('update', updateDate)  // ??? it works
-    .pre('findOneAndUpdate', updateDate)  // ok
+mySchema.pre('save', updateDate) // ??? it works
+    .pre('update', updateDate) // ??? it works
+    .pre('findOneAndUpdate', updateDate) // ok
     .pre('findByIdAndUpdate', updateDate) // ok
-    .pre('aggregate', updateDate);  // ??? it works
+    .pre('aggregate', updateDate); // ??? it works
 
 // mySchema.post()
 
@@ -216,10 +230,3 @@ pre('remove') or post('remove')
 
 
 // https://mongoosejs.com/docs/schematypes.html
-
-
-
-
-
-
-

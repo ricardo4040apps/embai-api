@@ -35,11 +35,11 @@ var plansRouter = require('./api/routes/plans');
 var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
 var bankAccountsRouter = require('./api/routes/bank-accounts');
+
 var personalInformationRouter = require('./api/routes/personal-information');
 
-
-
-
+var valuationRouter = require('./api/routes/valuation');
+// var personalRouter = require('./api/routes/personal-information');
 
 
 
@@ -56,9 +56,6 @@ mongoose.connection.on('connected', () => {
 mongoose.connection.on('error', (err) => {
     console.error(`Database error`, err.message)
 });
-
-
-
 
 var app = express();
 
@@ -109,7 +106,13 @@ app.use('/weight', weightRouter);
 app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
 app.use('/bank-accounts', bankAccountsRouter);
+
 app.use('/personal-information', personalInformationRouter);
+
+
+app.use('/valuation', valuationRouter);
+
+
 
 
 module.exports = app;
