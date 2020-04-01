@@ -38,7 +38,8 @@ var bankAccountsRouter = require('./api/routes/bank-accounts');
 var valuationRouter = require('./api/routes/valuation');
 var bankInformationRouter = require('./api/routes/bank-information');
 var creditInformationRouter = require('./api/routes/credit-information');
-
+var termsRouter = require('./api/routes/terms-conditions');
+var noticeRouter = require('./api/routes/notice-privacy');
 
 
 console.log("Connecting to mongoDb ...")
@@ -105,10 +106,12 @@ app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
 app.use('/bank-accounts', bankAccountsRouter);
 
-
 app.use('/valuation', valuationRouter);
 app.use('/bank-information', bankInformationRouter);
 app.use('/credit-information', creditInformationRouter);
+
+app.use('/notice-privacy', noticeRouter);
+app.use('/terms-conditions', termsRouter);
 
 
 module.exports = app;

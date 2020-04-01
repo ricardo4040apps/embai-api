@@ -26,7 +26,7 @@ module.exports = function(req, res, next) {
                 }
                 if (user) {
                     //if (Forbidden) res.status(401).send("Forbidden");
-                    if (req.route.path != '/protected/example2'){
+                    if (req.route.path != '/protected/example2') {
                         next();
                     } else {
                         res.status(403).send("Forbidden");
