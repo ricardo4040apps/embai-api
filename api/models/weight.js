@@ -6,8 +6,8 @@ const queryHelper = require("../helpers/query");
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-
-    value: { type: Number },    // grams
+    material: { type: String },
+    value: { type: Number }, // grams
 
 
     updatedAt: { type: Date, default: Date.now },
