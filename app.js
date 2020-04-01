@@ -36,7 +36,6 @@ var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
 var bankAccountsRouter = require('./api/routes/bank-accounts');
 
-var personalInformationRouter = require('./api/routes/personal-information');
 
 var valuationRouter = require('./api/routes/valuation');
 // var personalRouter = require('./api/routes/personal-information');
@@ -106,8 +105,6 @@ app.use('/weight', weightRouter);
 app.use('/contact', contactRouter);
 app.use('/interests', interestsRouter);
 app.use('/bank-accounts', bankAccountsRouter);
-
-app.use('/personal-information', personalInformationRouter);
 
 
 app.use('/valuation', valuationRouter);
