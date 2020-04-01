@@ -1,31 +1,31 @@
 var express = require('express');
 var router = express.Router();
 const passportMiddleware = require('../middlewares/passport');
-const PersonalCtrl = require('../controllers/personal-information');
+const CreditCtrl = require('../controllers/credit-information');
 
 /* GET users listing. */
 
 router.get('/', passportMiddleware, function(req, res, next) {
-    PersonalCtrl.get(req, res, next);
+    CreditCtrl.get(req, res, next);
 });
 
 router.get('/:id', passportMiddleware, function(req, res, next) {
-    PersonalCtrl.getById(req, res, next);
+    CreditCtrl.getById(req, res, next);
 });
 
 
 router.post('/', passportMiddleware, function(req, res, next) {
-    PersonalCtrl.create(req, res, next);
+    CreditCtrl.create(req, res, next);
 });
 
 
 router.put('/:id', passportMiddleware, function(req, res, next) {
-    PersonalCtrl.update(req, res, next);
+    CreditCtrl.update(req, res, next);
 });
 
 
 router.delete('/:id', passportMiddleware, function(req, res, next) {
-    PersonalCtrl.deleteById(req, res, next);
+    CreditCtrl.deleteById(req, res, next);
 });
 
 module.exports = router;

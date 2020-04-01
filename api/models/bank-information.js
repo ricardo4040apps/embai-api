@@ -1,16 +1,15 @@
-const mongoose = require("mongoose");
-const mongoosePaginate = require("mongoose-paginate-v2");
+const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
-const Schema = mongoose.Schema;
+const Schema = mongoose.Schema
 
 const mySchema = Schema({
+    cardNumber: { type: String },
+    CLABE: { type: String },
+    nameHolder: { type: String },
+    bank: { type: String },
+    time: { type: String },
 
-    name: { type: String },
-    lastname: { type: String },
-    gender: { type: String },
-    stateOfBirth: { type: String },
-    CURP: { type: String },
-    RFC: { type: String },
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
@@ -19,7 +18,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('personal-information', mySchema);
+const CurrentModel = mongoose.model('bank-information', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -101,12 +100,11 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { name: exp },
-            { lastname: exp },
-            { gender: exp },
-            { stateOfBirth: exp },
-            { CURP: exp },
-            { RFC: exp },
+            { cardNumber: exp },
+            { CLABE: exp },
+            { nameHolder: exp },
+            { time: exp }
+
         ]
     };
     query.$and.push(searchQuery);
