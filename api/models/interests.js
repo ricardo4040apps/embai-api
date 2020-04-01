@@ -6,9 +6,8 @@ const queryHelper = require("../helpers/query");
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-    moratorium: { type: String },
-    certification: { type: String },
-    homeAppraisal: { type: String },
+    value: { type: String },
+
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
