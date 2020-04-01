@@ -35,10 +35,9 @@ var plansRouter = require('./api/routes/plans');
 var contactRouter = require('./api/routes/contact');
 var interestsRouter = require('./api/routes/interests');
 var bankAccountsRouter = require('./api/routes/bank-accounts');
-
-
 var valuationRouter = require('./api/routes/valuation');
-// var personalRouter = require('./api/routes/personal-information');
+var bankInformationRouter = require('./api/routes/bank-information');
+var creditInformationRouter = require('./api/routes/credit-information');
 
 
 
@@ -108,14 +107,11 @@ app.use('/bank-accounts', bankAccountsRouter);
 
 
 app.use('/valuation', valuationRouter);
-
-
+app.use('/bank-information', bankInformationRouter);
+app.use('/credit-information', creditInformationRouter);
 
 
 module.exports = app;
-
-
-
 
 /************** precent close terminal **************/
 setInterval(function() { console.log("Tick! Tock!"); }, 60000)
