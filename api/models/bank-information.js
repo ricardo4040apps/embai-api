@@ -4,6 +4,7 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema
 
 const mySchema = Schema({
+    clientId: { type: String },
     cardNumber: { type: String },
     CLABE: { type: String },
     nameHolder: { type: String },
@@ -100,6 +101,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
+            { clientId: exp },
             { cardNumber: exp },
             { CLABE: exp },
             { nameHolder: exp },

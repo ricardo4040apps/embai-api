@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const Credit = require('../models/credit-information');
+const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET users listing. */
@@ -8,8 +9,8 @@ const Credit = require('../models/credit-information');
 module.exports.get = function(req, res, next) {
     Credit.getAll(req.query, (err, data) => {
         if (err) {
-            console.error("route Credit Information get:", err)
-            return res.status(500).json('Failed to get Credit Information')
+            console.error("route Credit get:", err)
+            return res.status(500).json('Failed to get Credit')
         }
         res.status(200).json(data)
     });
@@ -18,8 +19,8 @@ module.exports.get = function(req, res, next) {
 module.exports.getById = function(req, res, next) {
     Credit.getById(req.params.id, (err, data) => {
         if (err) {
-            console.error("route Credit Information get:", err)
-            return res.status(500).json('Failed to get Credit Information')
+            console.error("route Credit get:", err)
+            return res.status(500).json('Failed to get Credit')
         }
         res.status(200).json(data)
     });
@@ -33,8 +34,8 @@ module.exports.create = function(req, res, next) {
 
     Credit.add(req.body, (err, data) => {
         if (err) {
-            console.error("route Credit Information post:", err)
-            return res.status(500).json('Failed to register new Credit Information')
+            console.error("route Credit post:", err)
+            return res.status(500).json('Failed to register new Credit')
         }
         res.status(201).json(data)
             //res.status(201).json('User registered')
@@ -45,8 +46,8 @@ module.exports.create = function(req, res, next) {
 module.exports.update = function(req, res, next) {
     Credit.update(req.params.id, req.body, (err, user) => {
         if (err) {
-            console.error("route Credit Information put:", err)
-            return res.status(500).json('Failed to update Credit Information')
+            console.error("route Credit put:", err)
+            return res.status(500).json('Failed to update Credit')
         }
         res.status(200).json(user)
     });
@@ -56,8 +57,8 @@ module.exports.update = function(req, res, next) {
 module.exports.deleteById = function(req, res, next) {
     Credit.deleteById(req.params.id, (err, data) => {
         if (err) {
-            console.error("route Material delete:", err)
-            return res.status(500).json('Failed to delete Material')
+            console.error("route Credit delete:", err)
+            return res.status(500).json('Failed to delete Credit')
         }
         res.status(204).json(data)
     });

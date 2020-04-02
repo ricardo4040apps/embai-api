@@ -9,8 +9,6 @@ const mySchema = Schema({
 
     name: { type: String },
 
-
-
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },

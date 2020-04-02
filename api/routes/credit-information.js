@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const Credit = require('../models/credit-information');
 const passportMiddleware = require('../middlewares/passport');
 const CreditCtrl = require('../controllers/credit-information');
 
@@ -22,7 +23,6 @@ router.post('/', passportMiddleware, function(req, res, next) {
 router.put('/:id', passportMiddleware, function(req, res, next) {
     CreditCtrl.update(req, res, next);
 });
-
 
 router.delete('/:id', passportMiddleware, function(req, res, next) {
     CreditCtrl.deleteById(req, res, next);

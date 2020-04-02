@@ -1,9 +1,12 @@
-const mongoose = require('mongoose');
-const mongoosePaginate = require('mongoose-paginate-v2');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const mongoosePaginate = require("mongoose-paginate-v2");
+const queryHelper = require("../helpers/query");
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const mySchema = Schema({
+    clientId: { type: String },
     card: { type: String },
     digits: { type: String },
     automotiveCredit: { type: String },
@@ -99,10 +102,11 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
+            { clientId: exp },
             { card: exp },
             { digits: exp },
             { automotiveCredit: exp },
-            { creditHistory: exp },
+            { creditHistory: exp }
 
         ]
     };

@@ -32,10 +32,10 @@ const mySchema = Schema({
     yearsAtHome: { type: String },
     working: { type: String },
     sourceOfIncome: { type: String },
-    position: { type: String },
     companyName: { type: String },
+    position: { type: String },
     monthlySalary: { type: String },
-    familySalay: { type: String },
+    familySalary: { type: String },
     numberOfDependents: { type: String },
 
     roleId: { type: Schema.Types.ObjectId, ref: 'Role' },
