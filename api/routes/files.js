@@ -13,6 +13,7 @@ var path = require('path')
 
 const User = require('../models/user');
 const ADS = require('../models/ads');
+const Document = require('../models/documentation');
 
 
 
@@ -86,9 +87,9 @@ router.get("/picture-profile/:name", function(req, res, next) {
 });
 
 
-router.post('/picture-profile', type, function (req, res) {
-  const tmp_path = req.file.path;
-  const hashName = getAvailableName(req.file.originalname);
+router.post('/picture-profile', type, function(req, res) {
+    const tmp_path = req.file.path;
+    const hashName = getAvailableName(req.file.originalname);
 
 
     var target_path = './store/pictures/' + hashName;
@@ -133,9 +134,9 @@ router.get("/ads-pictures/:name", function(req, res, next) {
 });
 
 
-router.post('/ads-pictures', type, function (req, res) {
-  const tmp_path = req.file.path;
-  const hashName = getAvailableName(req.file.originalname);
+router.post('/ads-pictures', type, function(req, res) {
+    const tmp_path = req.file.path;
+    const hashName = getAvailableName(req.file.originalname);
 
 
     var target_path = './store/ads-pictures/' + hashName;
@@ -148,6 +149,48 @@ router.post('/ads-pictures', type, function (req, res) {
         deleteFile(tmp_path);
         //updateUserPicture(req.header('userId'), hashName);
         updateADSPicture(req.header('ADS_ID'), hashName);
+        console.log(hashName)
+        res.status(200).send(hashName)
+    });
+    src.on('error', function(err) { res.status(500).send(err) });
+});
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                DOCUMENTS
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+router.get("/document/:name", function(req, res, next) {
+    var src = './store/document/' + req.params.name
+
+    fs.readFile(src, "binary", function(err, data) {
+        if (err) {
+            console.error(err)
+            res.status(404).send('invalid map file');
+            return
+        }
+
+        res.writeHead(200);
+        res.write(data, 'binary');
+        res.end();
+    });
+});
+
+
+router.post('/document', type, function(req, res) {
+    const tmp_path = req.file.path;
+    const hashName = getAvailableName(req.file.originalname);
+
+
+    var target_path = './store/document/' + hashName;
+
+    var src = fs.createReadStream(tmp_path);
+    var dest = fs.createWriteStream(target_path);
+    src.pipe(dest);
+
+    src.on('end', function() {
+        deleteFile(tmp_path);
+        //updateUserPicture(req.header('userId'), hashName);
+        updateDocument(req.header('Document_ID'), hashName);
         console.log(hashName)
         res.status(200).send(hashName)
     });
@@ -217,6 +260,18 @@ var updateADSPicture = function(ADSId = null, ADSName) {
                 return;
             }
             console.log("Picture Updated!")
+        });
+    }
+}
+var updateDocument = function(DocumentId = null, DocumentName) {
+    const data = { "document": DocumentName };
+    if (DocumentId) {
+        Document.update(DocumentId, data, (err, data) => {
+            if (err) {
+                console.error("route Document put:", err)
+                return;
+            }
+            console.log("Document Updated!")
         });
     }
 }
