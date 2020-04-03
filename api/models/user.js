@@ -39,6 +39,7 @@ const mySchema = Schema({
     numberOfDependents: { type: String },
 
     roleId: { type: Schema.Types.ObjectId, ref: 'Role' },
+    creditId: { type: String },
 
 
     status: { type: String, default: 'new' }, // new, inactive, active, locked, banned,
