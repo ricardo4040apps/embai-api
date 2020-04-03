@@ -11,6 +11,9 @@ const mySchema = Schema({
     weight: { type: String },
     value: { type: String },
     loanDate: { type: Date },
+    recommendedLoan: { type: String },
+    condition: { type: String },
+    description: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
