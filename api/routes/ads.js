@@ -5,8 +5,7 @@ const passportMiddleware = require('../middlewares/passport');
 const adsCtrl = require('../controllers/ads');
 
 /* GET ads listing. */
-router.get('/validAds', function(req, res, next) {
-    console.log('RUTAS')
+router.get('/actives', function(req, res, next) {
     adsCtrl.isValidAds(req, res, next);
 });
 
