@@ -6,7 +6,7 @@ const uuid = require('node-uuid');
 //const q = require('q')
 const multer = require('multer');
 const upload = multer({
-    dest: './store/pictures/' // this saves your file into a directory called "uploads"
+    dest: './store/pictures/profile/' // this saves your file into a directory called "uploads"
 });
 var type = upload.single('file');
 var path = require('path')
@@ -21,7 +21,7 @@ const Document = require('../models/documentation');
                                 ALL FILES
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-
+// is this used???
 router.get("/:name", function(req, res, next) {
     var src = './store/pictures/' + req.params.name
 
@@ -38,7 +38,7 @@ router.get("/:name", function(req, res, next) {
     });
 });
 
-
+// is this used???
 router.post('/', type, function(req, res) {
     const tmp_path = req.file.path;
     const hashName = getAvailableName(req.file.originalname);
@@ -56,7 +56,7 @@ router.post('/', type, function(req, res) {
     src.on('error', function(err) { res.status(500).send(err) });
 });
 
-
+// is this used ???
 router.delete("/:name", function(req, res, next) {
     //fileCtrl.deleteById(req, res, next);
 });
@@ -69,9 +69,14 @@ router.delete("/:name", function(req, res, next) {
 /* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
                                 PROFILE PICTURES
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+const uploadPictureProfile = multer({
+    dest: './store/pictures/profile/' // this saves your file into a directory called "uploads"
+});
+var typePictureProfile = uploadPictureProfile.single('file');
+
 
 router.get("/picture-profile/:name", function(req, res, next) {
-    var src = './store/pictures/' + req.params.name
+    var src = './store/pictures/profile/' + req.params.name
 
     fs.readFile(src, "binary", function(err, data) {
         if (err) {
@@ -87,12 +92,11 @@ router.get("/picture-profile/:name", function(req, res, next) {
 });
 
 
-router.post('/picture-profile', type, function(req, res) {
+router.post('/picture-profile', typePictureProfile, function(req, res) {
     const tmp_path = req.file.path;
     const hashName = getAvailableName(req.file.originalname);
-
-
-    var target_path = './store/pictures/' + hashName;
+console.log(1)
+    var target_path = './store/pictures/profile/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
     var dest = fs.createWriteStream(target_path);
@@ -118,8 +122,8 @@ router.post('/picture-profile', type, function(req, res) {
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 router.get("/ads-pictures/:name", function(req, res, next) {
-    var src = './store/ads-pictures/' + req.params.name
-
+    var src = './store/pictures/ads/' + req.params.name
+console.log(111, src)
     fs.readFile(src, "binary", function(err, data) {
         if (err) {
             console.error(err)
@@ -139,7 +143,7 @@ router.post('/ads-pictures', type, function(req, res) {
     const hashName = getAvailableName(req.file.originalname);
 
 
-    var target_path = './store/ads-pictures/' + hashName;
+    var target_path = './store/pictures/ads/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
     var dest = fs.createWriteStream(target_path);
@@ -160,7 +164,7 @@ router.post('/ads-pictures', type, function(req, res) {
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 router.get("/document/:name", function(req, res, next) {
-    var src = './store/document/' + req.params.name
+    var src = './store/documents/' + req.params.name
 
     fs.readFile(src, "binary", function(err, data) {
         if (err) {
@@ -181,7 +185,7 @@ router.post('/document', type, function(req, res) {
     const hashName = getAvailableName(req.file.originalname);
 
 
-    var target_path = './store/document/' + hashName;
+    var target_path = './store/documents/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
     var dest = fs.createWriteStream(target_path);

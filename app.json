@@ -10,10 +10,15 @@
       "script": "./bin/www",
       "name": "alta-direccion",
       "env": {
-          "PROD_ENV": true,
+        "PROD_ENV": true,
         "PORT": 3000,
         "DATABASE": "mongodb://localhost:27017/store-test",
         "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test"
+      },
+      "env_local": {
+        "PROD_ENV": true,
+        "PORT": 3000,
+        "DATABASE": "mongodb://localhost:27017/store-test"
       }
     }]
   }

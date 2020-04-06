@@ -15,7 +15,7 @@ const mySchema = Schema({
     finalDate: { type: Date },
     styleBack: { type: String },
     styleFont: { type: String },
-    valid: { type: Boolean },
+    valid: { type: Boolean, default: true },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -32,6 +32,8 @@ const CurrentModel = mongoose.model('ads', mySchema);
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;
     if (!params.page) {
+        console.log(1)
+
         CurrentModel.find(params, callback);
     } else {
         this.getAllPagginated(params, callback, absolute);

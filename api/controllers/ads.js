@@ -66,7 +66,7 @@ module.exports.deleteById = function(req, res, next) {
     });
 }
 
-module.exports.isValidAds = function(req, res, next) {
+module.exports.getValids = function(req, res, next) {
     // let fechaInicial = { initDate: Date },
     //     fechaFinal = { finalDate: Date }
     // let fechaActual = new Date();
@@ -75,8 +75,20 @@ module.exports.isValidAds = function(req, res, next) {
     //     console.log("Fecha inicial", fechaInicial);
     //     console.log("Fecha final", fechaFinal);
     console.log('controller ads')
-        // let query = { valid: true }
-    ADS.getAll(req.query, (err, data) => {
+    let query = {
+        valid: true
+    }
+console.log(query)
+    ADS.getAll(query, (err, data) => {
+
+
+        if (err) {
+            console.error("route ADS get:", err)
+            return res.status(500).json('Failed to get ADS')
+        }
+        res.status(200).json(data)
+
+        return;
         let fechaActual = new Date();
         if (err) {
             console.error("route ADS get:", err)

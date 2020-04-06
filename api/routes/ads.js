@@ -6,7 +6,7 @@ const adsCtrl = require('../controllers/ads');
 
 /* GET ads listing. */
 router.get('/actives', function(req, res, next) {
-    adsCtrl.isValidAds(req, res, next);
+    adsCtrl.getValids(req, res, next);
 });
 
 
