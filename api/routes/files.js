@@ -123,7 +123,7 @@ router.post('/picture-profile', typePictureProfile, function(req, res) {
 
 router.get("/ads-pictures/:name", function(req, res, next) {
     var src = './store/pictures/ads/' + req.params.name
-console.log(111, src)
+    console.log(111, src)
     fs.readFile(src, "binary", function(err, data) {
         if (err) {
             console.error(err)
@@ -154,7 +154,7 @@ router.post('/ads-pictures', type, function(req, res) {
         //updateUserPicture(req.header('userId'), hashName);
         updateADSPicture(req.header('ADS_ID'), hashName);
         console.log(hashName)
-        res.status(200).send({fileName: hashName})
+        res.status(200).send({ fileName: hashName })
     });
     src.on('error', function(err) { res.status(500).send(err) });
 });
@@ -196,7 +196,7 @@ router.post('/document', type, function(req, res) {
         //updateUserPicture(req.header('userId'), hashName);
         updateDocument(req.header('Document_ID'), hashName);
         console.log(hashName)
-        res.status(200).send(hashName)
+        res.status(200).send({ fileName: hashName })
     });
     src.on('error', function(err) { res.status(500).send(err) });
 });
