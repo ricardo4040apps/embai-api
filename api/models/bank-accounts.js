@@ -7,6 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
+    idUserSelect: { type: String },
     option: { type: String },
     beneficiary: { type: String },
     type: { type: String },
@@ -103,6 +104,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
+            { idUserSelect: exp },
             { option: exp },
             { beneficiary: exp },
             { type: exp },
