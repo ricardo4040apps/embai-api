@@ -95,7 +95,7 @@ router.get("/picture-profile/:name", function(req, res, next) {
 router.post('/picture-profile', typePictureProfile, function(req, res) {
     const tmp_path = req.file.path;
     const hashName = getAvailableName(req.file.originalname);
-console.log(1)
+
     var target_path = './store/pictures/profile/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
@@ -154,7 +154,7 @@ router.post('/ads-pictures', type, function(req, res) {
         //updateUserPicture(req.header('userId'), hashName);
         updateADSPicture(req.header('ADS_ID'), hashName);
         console.log(hashName)
-        res.status(200).send(hashName)
+        res.status(200).send({fileName: hashName})
     });
     src.on('error', function(err) { res.status(500).send(err) });
 });
