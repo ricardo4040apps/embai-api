@@ -95,7 +95,7 @@ router.get("/picture-profile/:name", function(req, res, next) {
 router.post('/picture-profile', typePictureProfile, function(req, res) {
     const tmp_path = req.file.path;
     const hashName = getAvailableName(req.file.originalname);
-console.log(1)
+    console.log(1)
     var target_path = './store/pictures/profile/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
@@ -123,7 +123,7 @@ console.log(1)
 
 router.get("/ads-pictures/:name", function(req, res, next) {
     var src = './store/pictures/ads/' + req.params.name
-console.log(111, src)
+    console.log(111, src)
     fs.readFile(src, "binary", function(err, data) {
         if (err) {
             console.error(err)
@@ -202,21 +202,9 @@ router.post('/document', type, function(req, res) {
 });
 
 
-
-
-
 router.delete("/:name", function(req, res, next) {
     //fileCtrl.deleteById(req, res, next);
 });
-
-
-
-
-
-
-
-
-
 
 
 var deleteFile = function(src) {
@@ -225,10 +213,6 @@ var deleteFile = function(src) {
         // console.log('File deleted!');
     });
 }
-
-
-
-
 
 
 // ???? is correct
