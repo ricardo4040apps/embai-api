@@ -8,13 +8,13 @@ module.exports = (formulario) => {
         }
     });
     const mailOptions = {
-        from: `"${formulario.nombre}" <${formulario.email}>`,
-        to: 'siruizro@ittepic.edu.mx', // Cambia esta parte por el destinatario
-        subject: formulario.asunto,
+        from: `"Gerencia" <embai@gmail.com>`,
+        to: `${formulario.email}`, // Cambia esta parte por el destinatario
+        subject: formulario.subject,
         html: `
- <strong>Nombre:</strong> ${formulario.nombre} <br/>
+ <strong>Nombre:</strong> ${formulario.users} <br/>
  <strong>E-mail:</strong> ${formulario.email} <br/>
- <strong>Mensaje:</strong> ${formulario.mensaje}
+ <strong>Mensaje:</strong> ${formulario.message}
  `
     };
     transporter.sendMail(mailOptions, function(err, info) {
