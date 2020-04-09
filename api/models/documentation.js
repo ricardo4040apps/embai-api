@@ -6,6 +6,7 @@ const queryHelper = require('../helpers/query');
 const Schema = mongoose.Schema
 
 const mySchema = Schema({
+    idUserSelect: { type: String },
     type: { type: String },
     description: String,
     document: { type: String },
