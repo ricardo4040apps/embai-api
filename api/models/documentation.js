@@ -105,6 +105,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // informacion prestamo joyeria
+            { idUserSelect: exp },
             { item: exp },
             { value: exp },
             { loanDate: exp },

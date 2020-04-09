@@ -95,7 +95,11 @@ router.get("/picture-profile/:name", function(req, res, next) {
 router.post('/picture-profile', typePictureProfile, function(req, res) {
     const tmp_path = req.file.path;
     const hashName = getAvailableName(req.file.originalname);
+<<<<<<< HEAD
+    console.log(1)
+=======
 
+>>>>>>> 45d565f4a526ff80359e4d778c52875433cb2821
     var target_path = './store/pictures/profile/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
@@ -202,21 +206,9 @@ router.post('/document', type, function(req, res) {
 });
 
 
-
-
-
 router.delete("/:name", function(req, res, next) {
     //fileCtrl.deleteById(req, res, next);
 });
-
-
-
-
-
-
-
-
-
 
 
 var deleteFile = function(src) {
@@ -225,10 +217,6 @@ var deleteFile = function(src) {
         // console.log('File deleted!');
     });
 }
-
-
-
-
 
 
 // ???? is correct
