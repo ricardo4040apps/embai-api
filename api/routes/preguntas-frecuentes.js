@@ -6,11 +6,7 @@ const preguntasCtrl = require('../controllers/preguntas-frecuentes');
 
 /* GET users listing. */
 
-router.get('/favorites', function(req, res, next) {
-    console.log('RUTAS')
-    preguntasCtrl.isMainQuestion(req, res, next);
-});
-router.get('/', passportMiddleware, function(req, res, next) {
+router.get('/', function(req, res, next) {
     preguntasCtrl.get(req, res, next);
 });
 
