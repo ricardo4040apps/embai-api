@@ -95,12 +95,7 @@ router.get("/picture-profile/:name", function(req, res, next) {
 router.post('/picture-profile', typePictureProfile, function(req, res) {
     const tmp_path = req.file.path;
     const hashName = getAvailableName(req.file.originalname);
-<<<<<<< HEAD
-=======
 
-    console.log(1)
-
->>>>>>> 1dc1a21c6791938e959082afbf276133b1e54285
     var target_path = './store/pictures/profile/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
