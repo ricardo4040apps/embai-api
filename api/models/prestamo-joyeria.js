@@ -57,9 +57,7 @@ module.exports.getById = function(id, callback, absolute = false) {
     CurrentModel.findById(id, callback);
 };
 
-module.exports.getByIdUser = function(user, callback, absolute = false) {
-    CurrentModel.findByIdUser(user, callback);
-};
+
 
 module.exports.add = function(data, callback) {
     let newUser = new CurrentModel(data);
