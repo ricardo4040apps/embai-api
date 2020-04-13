@@ -63,26 +63,3 @@ module.exports.deleteById = function(req, res, next) {
         res.status(204).json(data)
     });
 }
-
-// module.exports.isMainQuestion = function(req, res, next) {
-//     let query = { main: req.params.value }
-//     Preguntas.getAll(query, (err, data) => {
-//         if (err) {
-//             console.error("route Preguntas get:", err)
-//             return res.status(500).json('Failed to get Preguntas lool')
-//         }
-
-//         res.status(200).json(data)
-//     });
-// }
-module.exports.isMainQuestion = function(req, res, next) {
-    let query = { main: true }
-    console.log('controller')
-    Preguntas.getAll(query, (err, data) => {
-        if (err) {
-            console.error("route PREGUNTAS get:", err)
-            return res.status(500).json('Failed to get PERGUNTAS')
-        }
-        res.status(200).json(data)
-    });
-}

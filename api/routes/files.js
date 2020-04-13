@@ -96,8 +96,6 @@ router.post('/picture-profile', typePictureProfile, function(req, res) {
     const tmp_path = req.file.path;
     const hashName = getAvailableName(req.file.originalname);
 
-    console.log(1)
-
     var target_path = './store/pictures/profile/' + hashName;
 
     var src = fs.createReadStream(tmp_path);
@@ -165,7 +163,7 @@ router.post('/ads-pictures', type, function(req, res) {
                                 DOCUMENTS
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-router.get("/document/:name", function(req, res, next) {
+router.get("/document-profile/:name", function(req, res, next) {
     var src = './store/documents/' + req.params.name
 
     fs.readFile(src, "binary", function(err, data) {
@@ -180,6 +178,8 @@ router.get("/document/:name", function(req, res, next) {
         res.end();
     });
 });
+
+
 
 
 router.post('/document', type, function(req, res) {
