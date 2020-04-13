@@ -14,6 +14,10 @@ router.get('/:id', passportMiddleware, function(req, res, next) {
     presJoyCtrl.getById(req, res, next);
 });
 
+router.get('/:user', passportMiddleware, function(req, res, next) {
+    presJoyCtrl.getByIdUser(req, res, next);
+});
+
 
 router.post('/', passportMiddleware, function(req, res, next) {
     presJoyCtrl.create(req, res, next);

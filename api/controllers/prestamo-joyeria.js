@@ -26,6 +26,15 @@ module.exports.getById = function(req, res, next) {
     });
 }
 
+module.exports.getByIdUser = function(req, res, next) {
+    PresJoy.getByIdUser(req.params.user, (err, data) => {
+        if (err) {
+            console.error("route Prestamo joyeria get:", err)
+            return res.status(500).json('Failed to get Prestamo joyeria')
+        }
+        res.status(200).json(data)
+    });
+}
 
 module.exports.create = function(req, res, next) {
     let errors = PresJoy.hasErrors(req.body);
@@ -41,7 +50,6 @@ module.exports.create = function(req, res, next) {
             //res.status(201).json('User registered')
     });
 }
-
 
 module.exports.update = function(req, res, next) {
     PresJoy.update(req.params.id, req.body, (err, user) => {

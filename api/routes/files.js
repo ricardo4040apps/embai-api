@@ -165,7 +165,7 @@ router.post('/ads-pictures', type, function(req, res) {
                                 DOCUMENTS
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
-router.get("/document/:name", function(req, res, next) {
+router.get("/document-profile/:name", function(req, res, next) {
     var src = './store/documents/' + req.params.name
 
     fs.readFile(src, "binary", function(err, data) {
@@ -180,6 +180,8 @@ router.get("/document/:name", function(req, res, next) {
         res.end();
     });
 });
+
+
 
 
 router.post('/document', type, function(req, res) {
