@@ -1,4 +1,5 @@
 var express = require('express');
+var exphbs = require('express-handlebars');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
@@ -68,6 +69,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb' }));
+app.engine('.hbs', exphbs({ extname: '.hbs' }));
+app.set('view engine', '.hbs');
 
 // passport middleware
 app.use(passport.initialize());
@@ -128,8 +131,8 @@ setInterval(function() { console.log("Tick! Tock!"); }, 60000)
 
 /*EMAIL*/
 const bodyParser = require('body-parser');
-const configMensaje = require('./configMensaje');
-const configReply = require('./configReply');
+const configMensaje = require('./api/controllers/configMensaje');
+const configReply = require('./api/controllers/configReply');
 
 
 app.use(bodyParser.json());

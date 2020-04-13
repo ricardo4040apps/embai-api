@@ -1,24 +1,23 @@
 {
-    "apps": [
-    {
-      "watch": ["api", "bin", "app.js"],
-      "ignore_watch" : ["store"],
-      "watch_options": {
-        "persistent": true,
-        "ignoreInitial": true
-      },
-      "script": "./bin/www",
-      "name": "alta-direccion",
-      "env": {
-        "PROD_ENV": true,
-        "PORT": 3000,
-        "DATABASE": "mongodb://localhost:27017/store-test",
-        "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test"
-      },
-      "env_local": {
-        "PROD_ENV": true,
-        "PORT": 3000,
-        "DATABASE": "mongodb://localhost:27017/store-test"
-      }
+    "apps": [{
+        "watch": ["api", "bin", "app.js", "views"],
+        "ignore_watch": ["store"],
+        "watch_options": {
+            "persistent": true,
+            "ignoreInitial": true
+        },
+        "script": "./bin/www",
+        "name": "alta-direccion",
+        "env": {
+            "PROD_ENV": true,
+            "PORT": 3000,
+            "DATABASE": "mongodb://localhost:27017/store-test",
+            "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test"
+        },
+        "env_local": {
+            "PROD_ENV": true,
+            "PORT": 3000,
+            "DATABASE": "mongodb://localhost:27017/store-test"
+        }
     }]
-  }
+}
