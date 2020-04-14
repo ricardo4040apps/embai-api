@@ -26,6 +26,17 @@ module.exports.getById = function(req, res, next) {
     });
 }
 
+module.exports.getByIdUser = function(req, res, next) {
+    req.query.user = req.params.id
+    Accounts.getAll(req.query, (err, data) => {
+        if (err) {
+            console.error("route Bank Accounts get:", err)
+            return res.status(500).json('Failed to get  Bank Accounts')
+        }
+        res.status(200).json(data)
+    });
+}
+
 
 module.exports.create = function(req, res, next) {
     let errors = Accounts.hasErrors(req.body);

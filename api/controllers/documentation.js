@@ -28,6 +28,18 @@ module.exports.getById = function(req, res, next) {
     });
 }
 
+module.exports.getByIdUser = function(req, res, next) {
+    // let query={user: req.params.id}
+    req.query.user = req.params.id
+    Documentation.getAll(req.query, (err, data) => {
+        if (err) {
+            console.error("route Documentation get:", err)
+            return res.status(500).json('Failed to get Documentation')
+        }
+        res.status(200).json(data)
+    });
+}
+
 
 module.exports.create = function(req, res, next) {
     let errors = Documentation.hasErrors(req.body);
