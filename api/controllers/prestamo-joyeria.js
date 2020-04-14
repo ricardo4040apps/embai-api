@@ -27,7 +27,9 @@ module.exports.getById = function(req, res, next) {
 }
 
 module.exports.getByIdUser = function(req, res, next) {
-    PresJoy.getByIdUser(req.params.user, (err, data) => {
+    // let query={user: req.params.id}
+    req.query.user = req.params.id
+    PresJoy.getAll(req.query, (err, data) => {
         if (err) {
             console.error("route Prestamo joyeria get:", err)
             return res.status(500).json('Failed to get Prestamo joyeria')

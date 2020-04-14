@@ -5,6 +5,10 @@ const AccountsCtrl = require('../controllers/bank-accounts');
 
 /* GET users listing. */
 
+router.get('/user/:id', function(req, res, next) { //Hasta arriba para no interferir
+    AccountsCtrl.getByIdUser(req, res, next);
+});
+
 router.get('/', passportMiddleware, function(req, res, next) {
     AccountsCtrl.get(req, res, next);
 });

@@ -6,6 +6,11 @@ const presJoyCtrl = require('../controllers/prestamo-joyeria');
 
 /* GET users listing. */
 
+
+router.get('/user/:id', function(req, res, next) { //Hasta arriba para no interferir
+    presJoyCtrl.getByIdUser(req, res, next);
+});
+
 router.get('/', passportMiddleware, function(req, res, next) {
     presJoyCtrl.get(req, res, next);
 });
@@ -13,11 +18,6 @@ router.get('/', passportMiddleware, function(req, res, next) {
 router.get('/:id', passportMiddleware, function(req, res, next) {
     presJoyCtrl.getById(req, res, next);
 });
-
-router.get('/:user', passportMiddleware, function(req, res, next) {
-    presJoyCtrl.getByIdUser(req, res, next);
-});
-
 
 router.post('/', passportMiddleware, function(req, res, next) {
     presJoyCtrl.create(req, res, next);

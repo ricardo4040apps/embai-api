@@ -9,11 +9,6 @@ const mySchema = Schema({
     user: { type: String },
     cutOffDate: { type: Date },
     esquema: { type: String },
-    prenda: { type: String },
-    metal: { type: String },
-    kilates: { type: String },
-    periodo: { type: String },
-    refrendo: { type: String },
     valued: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
@@ -57,9 +52,7 @@ module.exports.getById = function(id, callback, absolute = false) {
     CurrentModel.findById(id, callback);
 };
 
-module.exports.getByIdUser = function(user, callback, absolute = false) {
-    CurrentModel.findByIdUser(user, callback);
-};
+
 
 module.exports.add = function(data, callback) {
     let newUser = new CurrentModel(data);
@@ -112,11 +105,6 @@ let processQuery = function(filters, strQ = "") {
         $or: [
             // informacion prestamo joyeria
             { user: exp },
-            { prenda: exp },
-            { kilates: exp },
-            { periodo: exp },
-            { metal: exp },
-            { refrendo: exp },
             { cutOffDate: exp },
             { esquema: exp },
             { valued: exp },
