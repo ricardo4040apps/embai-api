@@ -35,6 +35,7 @@ var tiempoRouter = require('./api/routes/tiempo');
 var frequencyRouter = require('./api/routes/frequency');
 var plansRouter = require('./api/routes/plans');
 var contactRouter = require('./api/routes/contact');
+var replyRouter = require('./api/routes/reply');
 var interestsRouter = require('./api/routes/interests');
 var bankAccountsRouter = require('./api/routes/bank-accounts');
 var valuationRouter = require('./api/routes/valuation');
@@ -109,6 +110,8 @@ app.use('/pawn-object-purity', pawnObjectPurityRouter);
 app.use('/weight', weightRouter);
 
 app.use('/contact', contactRouter);
+app.use('/reply', replyRouter);
+
 app.use('/interests', interestsRouter);
 app.use('/bank-accounts', bankAccountsRouter);
 
