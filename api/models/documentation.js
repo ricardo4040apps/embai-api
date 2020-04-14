@@ -6,7 +6,7 @@ const queryHelper = require('../helpers/query');
 const Schema = mongoose.Schema
 
 const mySchema = Schema({
-    idUserSelect: { type: String },
+    user: { type: String },
     type: { type: String },
     description: String,
     document: { type: String },
@@ -105,7 +105,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // informacion prestamo joyeria
-            { idUserSelect: exp },
+            { user: exp },
             { item: exp },
             { value: exp },
             { loanDate: exp },

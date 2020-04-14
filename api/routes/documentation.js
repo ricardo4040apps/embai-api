@@ -6,6 +6,9 @@ const DocumentationCtrl = require('../controllers/documentation');
 
 /* GET ads listing. */
 
+router.get('/user/:id', function(req, res, next) { //Hasta arriba para no interferir
+    DocumentationCtrl.getByIdUser(req, res, next);
+});
 
 router.get('/', passportMiddleware, function(req, res, next) {
     DocumentationCtrl.get(req, res, next);
