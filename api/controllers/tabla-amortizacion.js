@@ -42,7 +42,6 @@ module.exports.get = function(req, res, next) {
             monto: monto,
             nperiodos: nperiodos,
             tipo: tipo,
-
             periodos: periodos
         }
     }
