@@ -1,0 +1,41 @@
+{{> header}}
+<br>
+<table style="margin-left: auto; margin-right: auto;" cellspacing="10">
+    <tbody>
+        <tr>
+            <td>
+                <h2>Hola! {{solicitudName}}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Muchas gracias por solicitar su Valuacion! Los datos de su prenda {{valuationItem}} fueron:</p>
+                <ul>
+                    <li>Material:{{valuationMaterial}}</li>
+                    <li>Peso: {{valuationWeight}}</li>
+                    <li>Condicion: {{valuationCondition}}</li>
+                    <li>Modalidad de Pago: </li>
+                    <li>Tiempo total para Pagar: </li>
+                </ul>
+                <p>La fecha de su Cita de tipo {{solicitudType}} es el {{solicitudAppointmentDate}} en la sucursal de la empresa. Se
+                    realizara una valuacion
+                    presencial, para poder determinar el valor real de la prenda y de ser aprobado se le realizara el
+                    prestamo a:</p>
+                <ul>
+                    <li>Nombre: {{solicitudName}}</li>
+                    <li>Apellidos: {{solicitudLastName}}</li>
+                    <li>Email: {{solicitudEmail}}</li>
+                    <li># de Tarjeta: {{solicitudCard}}</li>
+                    <li>Banco: {{solicitudBank}}</li>
+                    <li>CLABE: {{solicitudClabe}}</li>
+                    <li>Referencia Externa: {{solicitudRefExt}}</li>
+                </ul>
+                <p>Esperando que tenga un gran dia, me despido.</p>
+                <p>Saludos!</p>
+                <p>Atte. Gerencia Embai</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+{{> footer}}
