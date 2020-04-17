@@ -7,12 +7,13 @@ const passportMiddleware = require('../middlewares/passport');
 /* GET users listing. */
 
 module.exports.get = function(req, res, next) {
-    let plazo = req.body.plazo;
-    let monto = req.body.monto;
-    let nperiodos = req.body.nperiodos;
-    let tipo = req.body.tipo;
+    let plazo = req.params.plazo;
+    let monto = req.params.monto;
+    let nperiodos = req.params.nperiodos;
+    let tipo = req.params.tipo;
     let final = monto;
     let periodos = new Array();
+    let respuesta
 
     for (let i = 0; i < nperiodos; i++) {
         let inicial = final;
@@ -24,29 +25,31 @@ module.exports.get = function(req, res, next) {
         let amorti = PAI - interes;
         let IVA = interes * 0.16;
         let pagIvaInc = PAI + IVA;
-        let final = inicial - amorti;
+        final = inicial - amorti;
 
-        let respuesta = {
+        respuesta = {
             plazo: plazo,
             monto: monto,
             nperiodos: nperiodos,
             tipo: tipo,
-            periodos: [
-                [i],
-                {
-                    "inicial": inicial,
-                    "interes": interes,
-                    "amort": amorti,
-                    "pagoAntIva": PAI,
-                    "IVA": IVA,
-                    "pagoIva": pagIvaInc,
-                    "final": final
-                }
-            ]
+
+            periodos: [{
+                "inicial": inicial,
+                "interes": interes,
+                "amort": amorti,
+                "pagoAntIva": PAI,
+                "IVA": IVA,
+                "pagoIva": pagIvaInc,
+                "final": final
+            }]
+
 
         }
+    }
+    if (!respuesta) {
+        res.status(500).json("No se recibieron datos")
+    } else {
         res.status(200).json(respuesta)
     }
-
 
 }
