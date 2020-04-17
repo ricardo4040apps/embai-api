@@ -7,12 +7,12 @@ const passportMiddleware = require('../middlewares/passport');
 /* GET users listing. */
 
 module.exports.get = function(req, res, next) {
-    let plazo = req.params.plazo;
-    let monto = req.params.monto;
-    let nperiodos = req.params.nperiodos;
-    let tipo = req.params.tipo;
+    let plazo = req.body.plazo;
+    let monto = req.body.monto;
+    let nperiodos = req.body.nperiodos;
+    let tipo = req.body.tipo;
     let final = monto;
-    let periodos = new Array();
+    let periodos = [];
     let respuesta
 
     for (let i = 0; i < nperiodos; i++) {
@@ -27,23 +27,23 @@ module.exports.get = function(req, res, next) {
         let pagIvaInc = PAI + IVA;
         final = inicial - amorti;
 
+        periodos[i] = {
+            "inicial": inicial,
+            "interes": interes,
+            "amort": amorti,
+            "pagoAntIva": PAI,
+            "IVA": IVA,
+            "pagoIva": pagIvaInc,
+            "final": final
+        }
+
         respuesta = {
             plazo: plazo,
             monto: monto,
             nperiodos: nperiodos,
             tipo: tipo,
 
-            periodos: [{
-                "inicial": inicial,
-                "interes": interes,
-                "amort": amorti,
-                "pagoAntIva": PAI,
-                "IVA": IVA,
-                "pagoIva": pagIvaInc,
-                "final": final
-            }]
-
-
+            periodos: periodos
         }
     }
     if (!respuesta) {
