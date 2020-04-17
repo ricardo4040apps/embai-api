@@ -29,6 +29,7 @@ module.exports = (formulario) => {
     transporter.use('compile', hbs(handlebarOptions));
 
 
+
     const mailOptions = {
         from: `"Gerencia" <embai@gmail.com>`,
         to: `${formulario.email}`, // Cambia esta parte por el destinatario

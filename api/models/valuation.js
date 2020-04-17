@@ -15,6 +15,7 @@ const mySchema = Schema({
     condition: { type: String },
     description: { type: String },
 
+
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
@@ -25,8 +26,8 @@ const mySchema = Schema({
 mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model("valuation", mySchema);
-
-/*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
+module.exports = mongoose.model('valuation', mySchema)
+    /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;

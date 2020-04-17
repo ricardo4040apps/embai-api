@@ -44,6 +44,7 @@ var creditInformationRouter = require('./api/routes/credit-information');
 var termsRouter = require('./api/routes/terms-conditions');
 var noticeRouter = require('./api/routes/notice-privacy');
 var documentationRouter = require('./api/routes/documentation');
+var quotationRouter = require('./api/routes/quotation');
 
 
 console.log("Connecting to mongoDb ...")
@@ -122,6 +123,7 @@ app.use('/credit-information', creditInformationRouter);
 app.use('/notice-privacy', noticeRouter);
 app.use('/terms-conditions', termsRouter);
 app.use('/documentation', documentationRouter);
+app.use('/quotation', quotationRouter);
 
 
 module.exports = app;

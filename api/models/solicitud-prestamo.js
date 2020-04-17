@@ -12,10 +12,10 @@ const mySchema = Schema({
     pawnObjectTypeId: Schema.Types.ObjectId,
     pawnObjectPurityId: Schema.Types.ObjectId,
     pawnObjectWeight: Schema.Types.ObjectId,
-            metal: Schema.Types.ObjectId,
-            periodo: Schema.Types.ObjectId,
-            esquema: Schema.Types.ObjectId,
-            refrendo: Schema.Types.ObjectId,
+    metal: Schema.Types.ObjectId,
+    periodo: Schema.Types.ObjectId,
+    esquema: Schema.Types.ObjectId,
+    refrendo: Schema.Types.ObjectId,
 
     // user info
     name: { type: String },
@@ -27,9 +27,10 @@ const mySchema = Schema({
     refExt: { type: String },
     clabe: { type: String },
     authorization: { type: String },
+    valuationId: Schema.Types.ObjectId,
     userId: Schema.Types.ObjectId,
     paymentFrecuenty: Schema.Types.ObjectId,
-    
+
 
 
 
@@ -42,6 +43,7 @@ const mySchema = Schema({
 mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model("solicitud", mySchema);
+module.exports = mongoose.model('solicitud', mySchema)
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

@@ -78,7 +78,7 @@ module.exports.getValids = function(req, res, next) {
     let query = {
         valid: true
     }
-console.log(query)
+    console.log(query)
     ADS.getAll(query, (err, data) => {
 
 
@@ -89,28 +89,6 @@ console.log(query)
         res.status(200).json(data)
 
         return;
-        let fechaActual = new Date();
-        if (err) {
-            console.error("route ADS get:", err)
-            return res.status(500).json('Failed to get ADS')
-        }
-        for (let i in data) {
-            // console.log("Imprimiendo inicio", data[i].initDate);
-            // console.log("Imprimiendo final", data[i].finalDate);
 
-            console.log("FECHA ACTUAL", fechaActual)
-
-            if (moment().isBetween(moment(data[i].initDate), moment(data[i].finalDate))) {
-                console.log('la fecha de hoy esta en el rango')
-            } else {
-                console.log('la fecha actual no esta en el rango')
-            }
-            // if (fechaActual => initDate && fechaActual <= finalDate) {
-            //     console.log("DENTRO DEL RANGO")
-            // } else {
-            //     console.log("DESADENTRO DEL RANGO");
-            // }
-        }
-        //  res.status(200).json(data)
     });
 }
