@@ -6,19 +6,12 @@ const queryHelper = require("../helpers/query");
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-
-    nperiodos: { type: String },
-    periodo: { type: String },
-    periodos: { type: String },
-    inicial: { type: String },
-    interes: { type: String },
-    amort: { type: String },
-    pagAntIva: { type: String },
-    iva: { type: String },
-    pagIva: { type: String },
-    final: { type: String },
-    monto: { type: String },
     plazo: { type: String },
+    monto: { type: String },
+    nperiodos: { type: String },
+    tipo: { type: String },
+
+
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
@@ -109,18 +102,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { nperiodos: exp },
-            { periodo: exp },
-            { periodos: exp },
-            { inicial: exp },
-            { interes: exp },
-            { amort: exp },
-            { pagAntIva: exp },
-            { iva: exp },
-            { pagIva: exp },
-            { final: exp },
-            { monto: exp },
-            { plazo: exp },
+            // { name: exp },
         ]
     };
     query.$and.push(searchQuery);
