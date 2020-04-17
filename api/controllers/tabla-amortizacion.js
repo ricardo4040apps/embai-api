@@ -1,65 +1,52 @@
 var express = require('express');
 var router = express.Router();
-const Tabla = require('../models/tabla-amortizacion');
 const passportMiddleware = require('../middlewares/passport');
+
 
 
 /* GET users listing. */
 
 module.exports.get = function(req, res, next) {
-    Tabla.getAll(req.query, (err, data) => {
-        if (err) {
-            console.error("route Tabla get:", err)
-            return res.status(500).json('Failed to get Tabla')
+    let plazo = req.body.plazo;
+    let monto = req.body.monto;
+    let nperiodos = req.body.nperiodos;
+    let tipo = req.body.tipo;
+    let final = monto;
+    let periodos = new Array();
+
+    for (let i = 0; i < nperiodos; i++) {
+        let inicial = final;
+        let interes = (inicial * 4.25) / 100;
+        let divisor = ((monto) * (4.25 / 100)).toFixed(2)
+        let divPai = (1 + (4.25 / 100))
+        let elevar = Math.pow((divPai), (-nperiodos))
+        let PAI = (divisor / (1 - elevar));
+        let amorti = PAI - interes;
+        let IVA = interes * 0.16;
+        let pagIvaInc = PAI + IVA;
+        let final = inicial - amorti;
+
+        let respuesta = {
+            plazo: plazo,
+            monto: monto,
+            nperiodos: nperiodos,
+            tipo: tipo,
+            periodos: [
+                [i],
+                {
+                    "inicial": inicial,
+                    "interes": interes,
+                    "amort": amorti,
+                    "pagoAntIva": PAI,
+                    "IVA": IVA,
+                    "pagoIva": pagIvaInc,
+                    "final": final
+                }
+            ]
+
         }
-        res.status(200).json(data)
-    });
-}
-
-module.exports.getById = function(req, res, next) {
-    Tabla.getById(req.params.id, (err, data) => {
-        if (err) {
-            console.error("route Tabla get:", err)
-            return res.status(500).json('Failed to get Tabla')
-        }
-        res.status(200).json(data)
-    });
-}
+        res.status(200).json(respuesta)
+    }
 
 
-module.exports.create = function(req, res, next) {
-    let errors = Tabla.hasErrors(req.body);
-    console.log(errors)
-    if (errors) return res.status(400).json(errors.message)
-
-    Tabla.add(req.body, (err, data) => {
-        if (err) {
-            console.error("route Tabla post:", err)
-            return res.status(500).json('Failed to register new Tabla')
-        }
-        res.status(201).json(data)
-            //res.status(201).json('User registered')
-    });
-}
-
-
-module.exports.update = function(req, res, next) {
-    Tabla.update(req.params.id, req.body, (err, user) => {
-        if (err) {
-            console.error("route Tabla put:", err)
-            return res.status(500).json('Failed to update Tabla')
-        }
-        res.status(200).json(user)
-    });
-}
-
-
-module.exports.deleteById = function(req, res, next) {
-    Tabla.deleteById(req.params.id, (err, data) => {
-        if (err) {
-            console.error("route Tabla delete:", err)
-            return res.status(500).json('Failed to delete Tabla')
-        }
-        res.status(204).json(data)
-    });
 }
