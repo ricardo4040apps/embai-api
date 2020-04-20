@@ -18,6 +18,10 @@ module.exports.get = function(req, res, next) {
     let respuesta;
     let tasaInteres;
 
+    if (frecuencia == '') {
+        frecuencia = 'semanal'
+    }
+
     if (frecuencia == 'semanal') {
         console.log("Tasa de interes semanal")
         tasaInteres = 4.25;
