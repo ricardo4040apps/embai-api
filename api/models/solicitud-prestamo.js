@@ -25,6 +25,12 @@ const mySchema = Schema({
     appointmentDate: { type: Date },
     bank: { type: String },
     refExt: { type: String },
+    //
+    phone: { type: String },
+    social: { type: String },
+    loanRequested: { type: Number },
+    paymentPlan: { type: Number },
+    //
     clabe: { type: String },
     authorization: { type: String },
     valuationId: Schema.Types.ObjectId,

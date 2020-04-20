@@ -1,0 +1,35 @@
+{{> header}}
+<br>
+<table style="margin-left: auto; margin-right: auto;" cellspacing="10">
+    <tbody>
+        <tr>
+            <td>
+                <h2>Hola! {{solicitudName}}</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p>Muchas gracias por solicitar su Micro-Prestamo! Los datos de su solicitud fueron:</p>
+                <ul>
+                    <li>Cantidad Solicitada: ${{microLoanRequested}}</li>
+                    <li>A Pagar en: {{microPaymentPlan}} Meses</li>
+                    
+                </ul>
+                <p>Gerencia revizara su solicitud, de ser aprobado, se realizara una transferencia a su cuenta con los datos:</p>
+                <ul>
+                    <li>Nombre: {{solicitudName}}</li>
+                    <li>Apellidos: {{solicitudLastName}}</li>
+                    <li>Email: {{solicitudEmail}}</li>
+                    <li>Telefono: {{microPhone}}</li>
+                    <li>Banco: {{solicitudBank}}</li>
+                    <li>CLABE: {{solicitudClabe}}</li>
+                </ul>
+                <p>Esperando que tenga un gran dia, me despido.</p>
+                <p>Saludos!</p>
+                <p>Atte. Gerencia Embai</p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<br>
+{{> footer}}

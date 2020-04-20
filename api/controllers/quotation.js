@@ -7,7 +7,7 @@ const Valuation = require("../models/valuation");
 const passportMiddleware = require("../middlewares/passport");
 var moment = require("moment");
 require("moment-range");
-const mailCtrl = require('../controllers/configMensaje');
+const mailCtrl = require('../controllers/mail/solicitud-joya');
 
 
 module.exports.create = function(req, res, next) {
@@ -27,7 +27,7 @@ module.exports.create = function(req, res, next) {
         description: req.body.description,
     };
     let solicitudQuery = {
-        type: req.body.type,
+        type: 'Joyeria',
         name: req.body.name,
         lastName: req.body.lastName,
         email: req.body.email,
