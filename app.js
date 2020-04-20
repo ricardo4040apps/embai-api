@@ -45,6 +45,7 @@ var termsRouter = require('./api/routes/terms-conditions');
 var noticeRouter = require('./api/routes/notice-privacy');
 var documentationRouter = require('./api/routes/documentation');
 var quotationRouter = require('./api/routes/quotation');
+var microQuotationRouter = require('./api/routes/micro-quotation');
 var tablaRouter = require('./api/routes/tabla-amortizacion');
 
 
@@ -126,6 +127,7 @@ app.use('/notice-privacy', noticeRouter);
 app.use('/terms-conditions', termsRouter);
 app.use('/documentation', documentationRouter);
 app.use('/quotation', quotationRouter);
+app.use('/micro-quotation', microQuotationRouter);
 app.use('/tabla-amortizacion', tablaRouter);
 
 
@@ -140,15 +142,15 @@ setInterval(function() { console.log("Tick! Tock!"); }, 60000)
 
 /*EMAIL*/
 const bodyParser = require('body-parser');
-const configMensaje = require('./api/controllers/configMensaje');
-const configReply = require('./api/controllers/configReply');
+const massiveMail = require('./api/controllers/mail/massiveMail');
+const configReply = require('./api/controllers/mail/configReply');
 
 
 app.use(bodyParser.json());
 app.use(cors())
 
 app.post('/formulario', (req, res) => {
-    configMensaje(req.body);
+    massiveMail(req.body);
     res.status(200).send();
 })
 

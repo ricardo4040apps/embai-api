@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const User = require('../models/user');
 const passportMiddleware = require('../middlewares/passport');
-const mailCtrl = require('../controllers/configMensaje');
+const mailCtrl = require('../controllers/mail/registerUser');
 
 
 
@@ -39,8 +39,12 @@ module.exports.create = function(req, res, next) {
             console.error("route users post:", err)
             return res.status(500).json('Failed to register new User')
         }
+        let user = {
+            user: data,
+            template: 'newuser'
+        }
         res.status(201).json(data)
-            // mailCtrl(data)
+        mailCtrl(user)
 
         //res.status(201).json('User registered')
     });

@@ -29,21 +29,11 @@ module.exports = (formulario) => {
 
     const mailOptions = {
         from: `"Gerencia" <embai@gmail.com>`,
-        to: `${formulario.email || formulario.solicitud.email}`, // Cambia esta parte por el destinatario
-        subject: formulario.subject || formulario.solicitud.type,
+        to: `${ formulario.solicitud.email}`, // Cambia esta parte por el destinatario
+        subject: formulario.solicitud.type,
         template: formulario.template,
         context: {
-            username: formulario.email || formulario.solicitud.email,
-            message: formulario.message,
-            ///VALUATION
-            valuationItem: formulario.valuation.item,
-            valuationMaterial: formulario.valuation.material,
-            valuationWeight: formulario.valuation.weight,
-            valuationValue: formulario.valuation.value,
-            valuationLoanDate: formulario.valuation.loanDate,
-            valuationRecommendedLoan: formulario.valuation.recommendedLoan,
-            valuationCondition: formulario.valuation.condition,
-            valuationDescription: formulario.valuation.description,
+            username: formulario.solicitud.email,
             //SOLICITUD
             solicitudType: formulario.solicitud.type,
             solicitudName: formulario.solicitud.name,
@@ -55,12 +45,11 @@ module.exports = (formulario) => {
             solicitudClabe: formulario.solicitud.clabe,
             solicitudBank: formulario.solicitud.bank,
             solicitudAuthorization: formulario.solicitud.authorization,
-            /// NEW USER
-            newUserName: formulario.name,
-            newUserLastName: formulario.lastName,
-            newUser: formulario.username,
-            newUserPhone: formulario.name,
-            newUserMail: formulario.name,
+            //// MICRO
+            microPhone: formulario.solicitud.phone,
+            microSocial: formulario.solicitud.social,
+            microLoanRequested: formulario.solicitud.loanRequested,
+            microPaymentPlan: formulario.solicitud.paymentPlan,
 
         }
         // html: { path: './views/main.ejs' },
