@@ -35,6 +35,7 @@ module.exports.create = function(req, res, next) {
         appointmentDate: req.body.appointmentDate,
         bank: req.body.bank,
         refExt: req.body.refExt,
+        social: req.body.social,
         clabe: req.body.clabe,
         authorization: req.body.authorization,
     };
