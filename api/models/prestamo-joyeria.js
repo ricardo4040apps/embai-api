@@ -9,7 +9,7 @@ const mySchema = Schema({
     user: { type: String },
     cutOffDate: { type: Date },
     esquema: { type: String },
-    valued: { type: String },
+    value: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -107,7 +107,7 @@ let processQuery = function(filters, strQ = "") {
             { user: exp },
             { cutOffDate: exp },
             { esquema: exp },
-            { valued: exp },
+            { value: exp },
 
         ]
     };
