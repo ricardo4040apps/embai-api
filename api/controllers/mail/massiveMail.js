@@ -1,6 +1,6 @@
 const nodemailer = require('nodemailer');
 var hbs = require('nodemailer-express-handlebars')
-
+    // var environment = requiere('./environments/environment.js')
 
 module.exports = (formulario) => {
     var transporter = nodemailer.createTransport({
@@ -35,6 +35,7 @@ module.exports = (formulario) => {
         context: {
             username: formulario.email,
             message: formulario.message,
+            urlApi: environment.apiUrl
 
         }
         // html: { path: './views/main.ejs' },
