@@ -36,7 +36,6 @@ module.exports.create = function(req, res, next) {
         clabe: req.body.clabe,
         paymentPlan: req.body.paymentPlan,
         loanRequested: req.body.loanRequested,
-        social: req.body.social
     };
     // if (userAppointmentDate.getDay() == 6 || userAppointmentDate.getDay() == 7) {
     //     return res.status(500).json("Cita en dias no laborales");

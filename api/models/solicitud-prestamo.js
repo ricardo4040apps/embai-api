@@ -25,9 +25,9 @@ const mySchema = Schema({
     appointmentDate: { type: Date },
     bank: { type: String },
     refExt: { type: String },
+    social: { type: String },
     //
     phone: { type: String },
-    social: { type: String },
     loanRequested: { type: Number },
     paymentPlan: { type: Number },
     //
