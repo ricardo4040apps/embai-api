@@ -11,12 +11,20 @@
         "env": {
             "PROD_ENV": true,
             "PORT": 3000,
+            "fileRemplacement": [{
+                "replace": "./environments/environment.js",
+                "with": "./environments/environment.prod.js"
+            }],
             "DATABASE": "mongodb://localhost:27017/store-test",
             "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test"
         },
         "env_local": {
             "PROD_ENV": true,
             "PORT": 3000,
+            "fileRemplacement": [{
+                "replace": "./environments/environment.js",
+                "with": "./environments/environment.local.js"
+            }],
             "DATABASE": "mongodb://localhost:27017/store-test"
         }
     }]
