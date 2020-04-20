@@ -11,15 +11,34 @@ module.exports.get = function(req, res, next) {
     let monto = req.body.monto;
     let nperiodos = req.body.nperiodos;
     let tipo = req.body.tipo;
+    let esquema = req.body.esquema;
     let final = monto;
     let periodos = [];
-    let respuesta
+    let respuesta;
+    let tasaInteres;
+
+    if (esquema == 'semanal') {
+        console.log("Tasa de interes semanal")
+        tasaInteres = 4.25;
+    }
+
+
+    if (esquema == 'quincenal') {
+        console.log("Tasa de interes quincenal")
+        tasaInteres = 9;
+    }
+
+
+    if (esquema == 'mensual') {
+        console.log("Tasa de interes mensual")
+        tasaInteres = 20;
+    }
 
     for (let i = 0; i < nperiodos; i++) {
         let inicial = final;
-        let interes = (inicial * 4.25) / 100;
-        let divisor = ((monto) * (4.25 / 100)).toFixed(2)
-        let divPai = (1 + (4.25 / 100))
+        let interes = (inicial * tasaInteres) / 100;
+        let divisor = ((monto) * (tasaInteres / 100)).toFixed(2)
+        let divPai = (1 + (tasaInteres / 100))
         let elevar = Math.pow((divPai), (-nperiodos))
         let PAI = (divisor / (1 - elevar));
         let amorti = PAI - interes;
@@ -42,7 +61,9 @@ module.exports.get = function(req, res, next) {
             monto: monto,
             nperiodos: nperiodos,
             tipo: tipo,
+            esquema: esquema,
             periodos: periodos
+
         }
     }
     if (!respuesta) {

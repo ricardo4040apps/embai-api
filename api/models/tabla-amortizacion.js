@@ -10,6 +10,7 @@ const mySchema = Schema({
     monto: { type: String },
     nperiodos: { type: String },
     tipo: { type: String },
+    esquema: { type: String },
 
 
     updatedAt: { type: Date, default: Date.now },
