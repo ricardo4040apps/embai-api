@@ -7,7 +7,8 @@ const passportMiddleware = require('../middlewares/passport');
 /* GET users listing. */
 
 module.exports.get = function(req, res, next) {
-    let plazo = req.body.plazo;
+    let _id = req.body._id;
+    let frecuencia = req.body.frecuencia;
     let monto = req.body.monto;
     let nperiodos = req.body.nperiodos;
     let tipo = req.body.tipo;
@@ -17,19 +18,19 @@ module.exports.get = function(req, res, next) {
     let respuesta;
     let tasaInteres;
 
-    if (esquema == 'semanal') {
+    if (frecuencia == 'semanal') {
         console.log("Tasa de interes semanal")
         tasaInteres = 4.25;
     }
 
 
-    if (esquema == 'quincenal') {
+    if (frecuencia == 'quincenal') {
         console.log("Tasa de interes quincenal")
         tasaInteres = 9;
     }
 
 
-    if (esquema == 'mensual') {
+    if (frecuencia == 'mensual') {
         console.log("Tasa de interes mensual")
         tasaInteres = 20;
     }
@@ -57,13 +58,13 @@ module.exports.get = function(req, res, next) {
         }
 
         respuesta = {
-            plazo: plazo,
-            monto: monto,
-            nperiodos: nperiodos,
+            _id: _id,
             tipo: tipo,
+            monto: monto,
+            frecuencia: frecuencia,
             esquema: esquema,
+            nperiodos: nperiodos,
             periodos: periodos
-
         }
     }
     if (!respuesta) {
