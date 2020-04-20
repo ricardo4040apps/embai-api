@@ -5,6 +5,7 @@ const TablaCtrl = require('../controllers/tabla-amortizacion');
 
 /* GET users listing. */
 
+
 router.get('/', passportMiddleware, function(req, res, next) {
     TablaCtrl.get(req, res, next);
 });
