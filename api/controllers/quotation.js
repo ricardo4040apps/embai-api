@@ -45,28 +45,37 @@ module.exports.create = function(req, res, next) {
     if (userAppointmentDate.getDay() == 6 || userAppointmentDate.getDay() == 7) {
         return res.status(500).json("Cita en dias no laborales");
     } else {
-        Valuation.add(valuationQuery, (err, dataValuation) => {
-            if (err) {
-                console.error("route Solicitud post:", err);
-                return res.status(500).json("Failed to register new Solicitud");
-            }
-            // console.log(1, dataValuation);
-            solicitudQuery.valuationId = dataValuation._id;
-            Solicitud.add(solicitudQuery, (err, dataSolicitud) => {
-                if (err) {
-                    console.error("route valuation post:", err);
-                    return res.status(500).json("Failed to register new valuation");
-                }
+        if (valuationQuery.value == null) {
+            return res.status(500).json("No llenaste los campos de Valuacion");
+        } else {
+            if (solicitudQuery == null) {
+                return res.status(500).json("No llenaste los campos de Solicitud");
+            } else {
+                Valuation.add(valuationQuery, (err, dataValuation) => {
+                    if (err) {
+                        console.error("route Solicitud post:", err);
+                        return res.status(500).json("Failed to register new Solicitud");
+                    }
+                    // console.log(1, dataValuation);
+                    solicitudQuery.valuationId = dataValuation._id;
+                    Solicitud.add(solicitudQuery, (err, dataSolicitud) => {
+                        if (err) {
+                            console.error("route valuation post:", err);
+                            return res.status(500).json("Failed to register new valuation");
+                        }
 
-                let respuesta = {
-                    solicitud: dataSolicitud,
-                    valuation: dataValuation,
-                    template: 'quotation'
-                };
-                console.log(respuesta)
-                res.status(201).json(respuesta);
-                mailCtrl(respuesta)
-            });
-        });
+                        let respuesta = {
+                            solicitud: dataSolicitud,
+                            valuation: dataValuation,
+                            template: 'quotation'
+                        };
+                        console.log(respuesta)
+                        res.status(201).json(respuesta);
+                        mailCtrl(respuesta)
+                    });
+                });
+            }
+        }
+
     }
 };

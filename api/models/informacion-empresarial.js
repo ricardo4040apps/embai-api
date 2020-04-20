@@ -13,6 +13,8 @@ const mySchema = Schema({
     mision: { type: String },
     vision: { type: String },
     valores: { type: String },
+    horarioApertura: { type: Date },
+    horarioCierre: { type: Date },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -33,8 +35,8 @@ module.exports.get = function(callback) {
 
 module.exports.update = function(data, callback) {
     let opt = { new: true, upsert: true }
-    
-    CurrentModel.findOneAndUpdate({} , data, opt, callback);
+
+    CurrentModel.findOneAndUpdate({}, data, opt, callback);
 }
 
 /*  - - - - - - - - - - - -     E N D  C R U D     - - - - - - - - - - - - */
