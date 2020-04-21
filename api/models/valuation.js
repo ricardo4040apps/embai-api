@@ -7,7 +7,7 @@ const Schema = mongoose.Schema
 
 const mySchema = Schema({
     item: { type: String },
-    // material: { type: String },
+    material: { type: String },
     // weight: { type: String },
     // value: { type: String },
     loanDate: { type: Date },

@@ -30,6 +30,7 @@ module.exports.create = function(req, res, next) {
                 return res.status(500).json("Failed to get Material");
             }
             datosTipoMaterial = dataMaterial;
+
             ObjType.getById(tipoPrendaID, (err, dataObj) => {
                 if (err) {
                     console.error("route Obj get:", err);
