@@ -19,25 +19,27 @@ module.exports.create = function(req, res, next) {
     let valuationQuery = {
         item: req.body.item,
         material: req.body.material,
-        weight: req.body.weight,
-        value: req.body.value,
-        loanDate: req.body.loanDate,
-        recommendedLoan: req.body.recommendedLoan,
-        condition: req.body.condition,
-        description: req.body.description,
+        requestedLoan: req.body.requestedLoan
+            // weight: req.body.weight,
+            // value: req.body.value,
+            // loanDate: req.body.loanDate,
+            // recommendedLoan: req.body.recommendedLoan,
+            // condition: req.body.condition,
+            // description: req.body.description,
     };
     let solicitudQuery = {
         type: 'Joyeria',
         name: req.body.name,
         lastName: req.body.lastName,
         email: req.body.email,
-        card: req.body.card,
+        phone: req.body.phone,
+        // card: req.body.card,
         appointmentDate: req.body.appointmentDate,
-        bank: req.body.bank,
-        refExt: req.body.refExt,
+        // bank: req.body.bank,
+        // refExt: req.body.refExt,
         social: req.body.social,
-        clabe: req.body.clabe,
-        authorization: req.body.authorization,
+        // clabe: req.body.clabe,
+        // authorization: req.body.authorization,
     };
     // console.log(userAppointmentDate.getDay());
 
