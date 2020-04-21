@@ -5,7 +5,7 @@ const FrequencyCtrl = require('../controllers/frequency');
 
 /* GET frequency listing. */
 
-router.get('/', passportMiddleware, function(req, res, next) {
+router.get('/', function(req, res, next) {
     FrequencyCtrl.get(req, res, next);
 });
 

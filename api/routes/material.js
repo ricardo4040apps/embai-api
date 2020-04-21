@@ -6,7 +6,7 @@ const MaterialCtrl = require('../controllers/material');
 
 /* GET users listing. */
 
-router.get('/', passportMiddleware, function(req, res, next) {
+router.get('/', function(req, res, next) {
     MaterialCtrl.get(req, res, next);
 });
 

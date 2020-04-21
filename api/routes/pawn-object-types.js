@@ -5,7 +5,7 @@ const pawnObjectTypesCtrl = require('../controllers/pawn-object-types');
 
 /* GET users listing. */
 
-router.get('/', passportMiddleware, function(req, res, next) {
+router.get('/', function(req, res, next) {
     pawnObjectTypesCtrl.get(req, res, next);
 });
 
