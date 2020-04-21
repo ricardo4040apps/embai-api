@@ -7,14 +7,13 @@ const Schema = mongoose.Schema
 
 const mySchema = Schema({
     item: { type: String },
-    material: { type: String },
-    weight: { type: String },
-    value: { type: String },
+    // material: { type: String },
+    // weight: { type: String },
+    // value: { type: String },
     loanDate: { type: Date },
     recommendedLoan: { type: String },
     condition: { type: String },
     description: { type: String },
-
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -106,10 +105,17 @@ let processQuery = function(filters, strQ = "") {
 
     let searchQuery = {
         $or: [
-            // informacion prestamo joyeria
+            // informacion 
             { item: exp },
-            { value: exp },
+            // { value: exp },
             { loanDate: exp },
+            { item: exp },
+            // { material: exp },
+            // { weight: exp },
+            { recommendedLoan: exp },
+            { loanDate: exp },
+            { condition: exp },
+            { description: exp },
 
         ]
     };
