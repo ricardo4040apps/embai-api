@@ -26,6 +26,15 @@ module.exports.getById = function(req, res, next) {
     });
 }
 
+module.exports.getById2 = function(req, res, next) {
+    Frequency.getById(req.body.id, (err, data) => {
+        if (err) {
+            console.error("route Frequency get:", err)
+            return res.status(500).json('Failed to get Frequency')
+        }
+        res.status(200).json(data)
+    });
+}
 
 module.exports.create = function(req, res, next) {
     let errors = Frequency.hasErrors(req.body);

@@ -11,7 +11,7 @@ const mySchema = Schema({
     nperiodos: { type: String },
     tipo: { type: String },
     esquema: { type: String },
-
+    tasaInteres: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
