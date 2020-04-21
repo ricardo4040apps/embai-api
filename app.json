@@ -1,6 +1,6 @@
 {
     "apps": [{
-        "watch": ["api", "bin", "app.js", "views"],
+        "watch": ["app.json", "api", "bin", "app.js", "views"],
         "ignore_watch": ["store"],
         "watch_options": {
             "persistent": true,
@@ -11,21 +11,21 @@
         "env": {
             "PROD_ENV": true,
             "PORT": 3000,
-            "fileRemplacement": [{
-                "replace": "./environments/environment.js",
-                "with": "./environments/environment.prod.js"
-            }],
+            "PUBLIC_URL": "http://panel.embai.com.mx:3000",
             "DATABASE": "mongodb://localhost:27017/store-test",
-            "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test"
+                "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test",
+            "DATABASE_SECRET":  "yoursecret",
+            "EMAIL_SENDER": "ivleestradasa@ittepic.edu.mx",
+            "EMAIL_PASSWORD": "pjsklnlpr81"
         },
         "env_local": {
             "PROD_ENV": true,
             "PORT": 3000,
-            "fileRemplacement": [{
-                "replace": "./environments/environment.js",
-                "with": "./environments/environment.local.js"
-            }],
-            "DATABASE": "mongodb://localhost:27017/store-test"
+            "PUBLIC_URL": "localhost:3000", 
+            "DATABASE": "mongodb://localhost:27017/store-test",
+            "DATABASE_SECRET":  "yoursecret",
+            "EMAIL_SENDER": "ivleestradasa@ittepic.edu.mx",
+            "EMAIL_PASSWORD": "pjsklnlpr81"
         }
     }]
 }

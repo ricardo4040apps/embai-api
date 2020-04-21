@@ -6,8 +6,8 @@ module.exports = (formulario) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: 'ivleestradasa@ittepic.edu.mx', // Cambialo por tu email
-            pass: 'pjsklnlpr81' // Cambialo por tu password
+            user: process.env.EMAIL_SENDER, // Cambialo por tu email
+            pass: process.env.EMAIL_PASSWORD // Cambialo por tu password
         },
 
     });
@@ -68,7 +68,7 @@ module.exports = (formulario) => {
         // }]
 
     };
-    console.log(mailOptions)
+    // console.log(mailOptions)
     transporter.sendMail(mailOptions, function(err, info) {
         if (err)
             console.log(err)
