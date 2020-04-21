@@ -21,87 +21,92 @@ module.exports.create = function(req, res, next) {
     let datosTipoPrenda;
     let datosTipoMaterial;
 
-    Material.getById(tipoMateriallD, (err, dataMaterial) => {
-        if (err) {
-            console.error("route Material get:", err);
-            return res.status(500).json("Failed to get Material");
-        }
-        datosTipoMaterial = dataMaterial;
-        ObjType.getById(tipoPrendaID, (err, dataObj) => {
+    if (req.body.itemId == null || req.body.materialId == null) {
+        res.status(500).json("No Llenaste todos los campos de Valuacion");
+    } else {
+        Material.getById(tipoMateriallD, (err, dataMaterial) => {
             if (err) {
-                console.error("route Obj get:", err);
-                return res.status(500).json("Failed to get Obj");
+                console.error("route Material get:", err);
+                return res.status(500).json("Failed to get Material");
             }
-            datosTipoPrenda = dataObj;
+            datosTipoMaterial = dataMaterial;
+            ObjType.getById(tipoPrendaID, (err, dataObj) => {
+                if (err) {
+                    console.error("route Obj get:", err);
+                    return res.status(500).json("Failed to get Obj");
+                }
+                datosTipoPrenda = dataObj;
 
-            let valuationQuery = {
-                item: datosTipoPrenda.name,
-                material: datosTipoMaterial.name,
-                requestedLoan: req.body.requestedLoan,
-                // weight: req.body.weight,
-                // value: req.body.value,
-                // loanDate: req.body.loanDate,
-                // recommendedLoan: req.body.recommendedLoan,
-                // condition: req.body.condition,
-                // description: req.body.description,
-            };
-            let solicitudQuery = {
-                type: "Joyeria",
-                name: req.body.name,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                phone: req.body.phone,
-                appointmentDate: req.body.appointmentDate,
-                social: req.body.social,
-                // card: req.body.card,
-                // bank: req.body.bank,
-                // refExt: req.body.refExt,
-                // clabe: req.body.clabe,
-                // authorization: req.body.authorization,
-            };
-            // console.log(userAppointmentDate.getDay());
-
-            //comparar aqui
-            if (
-                userAppointmentDate.getDay() == 6 ||
-                userAppointmentDate.getDay() == 7
-            ) {
-                return res.status(500).json("Cita en dias no laborales");
-            } else {
-                if (valuationQuery.value == null) {
-                    return res.status(500).json("No llenaste los campos de Valuacion");
+                let valuationQuery = {
+                    item: datosTipoPrenda.name,
+                    material: datosTipoMaterial.name,
+                    requestedLoan: req.body.requestedLoan,
+                    // weight: req.body.weight,
+                    // value: req.body.value,
+                    // loanDate: req.body.loanDate,
+                    // recommendedLoan: req.body.recommendedLoan,
+                    // condition: req.body.condition,
+                    // description: req.body.description,
+                };
+                let solicitudQuery = {
+                    type: "Joyeria",
+                    name: req.body.name,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    phone: req.body.phone,
+                    appointmentDate: req.body.appointmentDate,
+                    social: req.body.social,
+                    // card: req.body.card,
+                    // bank: req.body.bank,
+                    // refExt: req.body.refExt,
+                    // clabe: req.body.clabe,
+                    // authorization: req.body.authorization,
+                };
+                // console.log(userAppointmentDate.getDay());
+                console.log("VALUACION: ", valuationQuery)
+                console.log("SOLICITUD: ", solicitudQuery)
+                    //comparar aqui
+                if (
+                    userAppointmentDate.getDay() == 6 ||
+                    userAppointmentDate.getDay() == 7
+                ) {
+                    return res.status(500).json("Cita en dias no laborales");
                 } else {
-                    if (solicitudQuery == null) {
-                        return res.status(500).json("No llenaste los campos de Solicitud");
+                    if (valuationQuery == null) {
+                        return res.status(500).json("No llenaste los campos de Valuacion");
                     } else {
-                        Valuation.add(valuationQuery, (err, dataValuation) => {
-                            if (err) {
-                                console.error("route Solicitud post:", err);
-                                return res.status(500).json("Failed to register new Solicitud");
-                            }
-                            // console.log(1, dataValuation);
-                            solicitudQuery.valuationId = dataValuation._id;
-                            Solicitud.add(solicitudQuery, (err, dataSolicitud) => {
+                        if (solicitudQuery == null) {
+                            return res.status(500).json("No llenaste los campos de Solicitud");
+                        } else {
+                            Valuation.add(valuationQuery, (err, dataValuation) => {
                                 if (err) {
-                                    console.error("route valuation post:", err);
-                                    return res
-                                        .status(500)
-                                        .json("Failed to register new valuation");
+                                    console.error("route Solicitud post:", err);
+                                    return res.status(500).json("Failed to register new Solicitud");
                                 }
+                                // console.log(1, dataValuation);
+                                solicitudQuery.valuationId = dataValuation._id;
+                                Solicitud.add(solicitudQuery, (err, dataSolicitud) => {
+                                    if (err) {
+                                        console.error("route valuation post:", err);
+                                        return res
+                                            .status(500)
+                                            .json("Failed to register new valuation");
+                                    }
 
-                                let respuesta = {
-                                    solicitud: dataSolicitud,
-                                    valuation: dataValuation,
-                                    template: "quotation",
-                                };
-                                console.log(respuesta);
-                                res.status(201).json(respuesta);
-                                mailCtrl(respuesta);
+                                    let respuesta = {
+                                        solicitud: dataSolicitud,
+                                        valuation: dataValuation,
+                                        template: "quotation",
+                                    };
+                                    console.log(respuesta);
+                                    res.status(201).json(respuesta);
+                                    mailCtrl(respuesta);
+                                });
                             });
-                        });
+                        }
                     }
                 }
-            }
+            });
         });
-    });
+    }
 };
