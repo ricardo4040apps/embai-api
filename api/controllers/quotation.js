@@ -26,6 +26,7 @@ module.exports.create = function(req, res, next) {
         // recommendedLoan: req.body.recommendedLoan,
         // condition: req.body.condition,
         // description: req.body.description,
+
     };
     let solicitudQuery = {
         type: 'Joyeria',
