@@ -101,10 +101,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { name: exp },
-            { lastName: exp },
-            { email: exp },
-            { message: exp },
+            { replyMessage: exp },
         ]
     };
     query.$and.push(searchQuery);
