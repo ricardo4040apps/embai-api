@@ -25,7 +25,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-
+const CurrentModel = mongoose.model("valuation", mySchema);
 module.exports = mongoose.model('valuation', mySchema)
     /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

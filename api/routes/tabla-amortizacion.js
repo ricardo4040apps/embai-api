@@ -5,7 +5,7 @@ const TablaCtrl = require('../controllers/tabla-amortizacion');
 
 /* GET users listing. */
 
-router.get('/', function(req, res, next) {
+router.post('/', function(req, res, next) {
     TablaCtrl.get(req, res, next);
 });
 
