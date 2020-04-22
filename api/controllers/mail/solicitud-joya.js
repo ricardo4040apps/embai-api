@@ -104,6 +104,24 @@ module.exports = (formulario) => {
 
 
         }
+        // ,
+        // attachments: [{
+        //         filename: 'twitter.png',
+        //         path: './public/img/',
+        //         cid: 'twitter' //same cid value as in the html img src
+        //     }, {
+        //         filename: 'facebook.png',
+        //         path: './public/img/',
+        //         cid: 'facebook' //same cid value as in the html img src
+        //     }, {
+        //         filename: 'gmail.png',
+        //         path: './public/img/',
+        //         cid: 'gmail' //same cid value as in the html img src
+        //     }, {
+        //         filename: 'logo.jfif',
+        //         path: './public/img/',
+        //         cid: 'logo' //same cid value as in the html img src
+        //     }, ]
         // html: { path: './views/main.ejs' },
 
         // { path: './public/mail-templates/header.ejs' },

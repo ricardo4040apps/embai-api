@@ -42,6 +42,9 @@ router.get('/is-cellphone-bussy/:value', function(req, res, next) {
 router.get('/is-username-bussy/:value', function(req, res, next) {
     userCtrl.isUsernameBussy(req, res, next);
 });
+router.get('/searchUsers/:value', function(req, res, next) {
+    userCtrl.searchUsers(req, res, next);
+});
 
 
 
