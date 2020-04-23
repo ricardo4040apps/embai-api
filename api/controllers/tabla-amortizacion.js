@@ -7,7 +7,7 @@ const frecuencyModel = require('../models/frequency');
 /* GET users listing. */
 
 module.exports.get = function(req, res, next) {
-    let id = req.body._id;
+    let frecuenciaId = req.body.frecuenciaId;
     let monto = req.body.monto;
     let nperiodos = req.body.nperiodos;
     let tipo = req.body.tipo;
@@ -18,7 +18,7 @@ module.exports.get = function(req, res, next) {
     let tasaInteres;
     let datos;
 
-    frecuencyModel.getById(id, (err, data) => {
+    frecuencyModel.getById(frecuenciaId, (err, data) => {
         if (err) {
             console.error("route id get:", err)
             return res.status(500).json('Failed to get id')
@@ -55,7 +55,7 @@ module.exports.get = function(req, res, next) {
             }
 
             respuesta = {
-                id: id,
+                id: frecuenciaId,
                 tipo: tipo,
                 monto: monto,
                 frecuencia: frecuencia,
