@@ -112,7 +112,18 @@ router.post('/picture-profile', typePictureProfile, function(req, res) {
 
 
 
-
+var updateUserPicture = function(userId = null, pictureName) {
+    const data = { "picture": pictureName };
+    if (userId) {
+        User.update(userId, data, (err, data) => {
+            if (err) {
+                console.error("route users put:", err)
+                return;
+            }
+            console.log("Picture Updated!")
+        });
+    }
+}
 
 
 
@@ -229,18 +240,7 @@ var getAvailableName = function(src) {
 }
 
 
-var updateUserPicture = function(iserId = null, pictureName) {
-    const data = { "picture": pictureName };
-    if (iserId) {
-        User.update(iserId, data, (err, data) => {
-            if (err) {
-                console.error("route users put:", err)
-                return;
-            }
-            console.log("Picture Updated!")
-        });
-    }
-}
+
 var updateADSPicture = function(ADSId = null, ADSName) {
     const data = { "picture": ADSName };
     if (ADSId) {
