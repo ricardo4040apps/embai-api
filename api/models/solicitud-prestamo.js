@@ -26,6 +26,7 @@ const mySchema = Schema({
     bank: { type: String },
     refExt: { type: String },
     social: { type: String },
+    months: { type: String },
     //
     phone: { type: String },
     loanRequested: { type: Number },

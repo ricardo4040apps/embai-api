@@ -64,9 +64,9 @@ module.exports.create = function(req, res, next) {
                     // authorization: req.body.authorization,
                 };
                 // console.log(userAppointmentDate.getDay());
-                console.log("VALUACION: ", valuationQuery)
-                console.log("SOLICITUD: ", solicitudQuery)
-                    //comparar aqui
+                // console.log("VALUACION: ", valuationQuery)
+                // console.log("SOLICITUD: ", solicitudQuery)
+                //comparar aqui
                 if (
                     userAppointmentDate.getDay() == 6 ||
                     userAppointmentDate.getDay() == 7
