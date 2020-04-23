@@ -50,6 +50,7 @@ module.exports = (formulario) => {
             microSocial: formulario.solicitud.social,
             microLoanRequested: formulario.solicitud.loanRequested,
             microPaymentPlan: formulario.solicitud.paymentPlan,
+            microMonths: formulario.solicitud.months,
 
         }
         // html: { path: './views/main.ejs' },
