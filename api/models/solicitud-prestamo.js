@@ -26,11 +26,11 @@ const mySchema = Schema({
     bank: { type: String },
     refExt: { type: String },
     social: { type: String },
-    months: { type: String },
+    months: { type: Number },
     //
     phone: { type: String },
     loanRequested: { type: Number },
-    paymentPlan: { type: Number },
+    paymentPlan: { type: String },
     //
     clabe: { type: String },
     authorization: { type: String },
