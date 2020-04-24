@@ -134,7 +134,7 @@ module.exports.isUsernameBussy = function(req, res, next) {
         }
         res.status(200).json(data.length > 0)
     });
-<<<<<<< HEAD
+
 }
 module.exports.searchUsers = function(req, res, next) {
     let query = { username: req.params.value }
@@ -161,6 +161,4 @@ module.exports.searchUsers = function(req, res, next) {
         console.log("RESPUESTA", respuesta)
         res.status(200).json(respuesta)
     });
-=======
->>>>>>> 03bba3f2abcca7c0fc2ea27e4592271bcb9ce6b4
 }
