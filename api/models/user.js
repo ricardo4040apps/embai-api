@@ -55,7 +55,7 @@ const mySchema = Schema({
 mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model('User', mySchema);
-
+module.exports = mongoose.model('User', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -67,7 +67,6 @@ module.exports.getAll = function(params, callback) {
         this.getAllPagginated(params, callback);
     }
 }
-
 
 
 module.exports.getAllPagginated = function(params, callback) {

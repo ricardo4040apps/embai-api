@@ -95,6 +95,8 @@ module.exports.isCellPhoneBussy = function(req, res, next) {
     });
 }
 
+
+
 module.exports.isUsernameBussy = function(req, res, next) {
     let query = { username: req.params.value }
     User.getAll(query, (err, data) => {
@@ -129,7 +131,5 @@ module.exports.searchUsers = function(req, res, next) {
         }
         console.log("RESPUESTA", respuesta)
         res.status(200).json(respuesta)
-
-
     });
 }

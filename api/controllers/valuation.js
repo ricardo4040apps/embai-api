@@ -57,8 +57,8 @@ module.exports.update = function(req, res, next) {
 module.exports.deleteById = function(req, res, next) {
     Valuation.deleteById(req.params.id, (err, data) => {
         if (err) {
-            console.error("route Valuation delete:", err)
-            return res.status(500).json('Failed to delete Valuation')
+            console.error("route Valuacion delete:", err)
+            return res.status(500).json('Failed to delete Valuacion')
         }
         res.status(204).json(data)
     });

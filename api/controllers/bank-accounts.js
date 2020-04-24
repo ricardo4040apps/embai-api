@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 const Accounts = require('../models/bank-accounts');
 const passportMiddleware = require('../middlewares/passport');
-
+const User = require('../models/user');
 
 /* GET users listing. */
 
@@ -23,6 +23,16 @@ module.exports.getById = function(req, res, next) {
             return res.status(500).json('Failed to get  Accounts')
         }
         res.status(200).json(data)
+    });
+}
+
+module.exports.getInfoUser = function(req, res, next) {
+    Accounts.getAll(req.query, function(err, dataBanco) {
+        User.populate(dataBanco, { path: "user" }, function(err, dataBanco) {
+            res.status(200).send(dataBanco)
+            console.log("Data banco", dataBanco)
+
+        });
     });
 }
 

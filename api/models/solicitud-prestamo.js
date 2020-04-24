@@ -38,8 +38,6 @@ const mySchema = Schema({
     paymentFrecuenty: Schema.Types.ObjectId,
 
 
-
-
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },

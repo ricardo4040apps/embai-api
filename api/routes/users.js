@@ -7,6 +7,7 @@ const userCtrl = require('../controllers/user');
 
 /* GET users listing. */
 
+
 router.get('/', passportMiddleware, function(req, res, next) {
     userCtrl.get(req, res, next);
 });
