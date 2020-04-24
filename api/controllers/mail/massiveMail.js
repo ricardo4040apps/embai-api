@@ -2,7 +2,7 @@ const nodemailer = require('nodemailer');
 var hbs = require('nodemailer-express-handlebars')
 
 module.exports = (formulario) => {
-    
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -11,8 +11,8 @@ module.exports = (formulario) => {
         },
 
     });
-    
-    console.log(process.env.EMAIL_SENDER, process.env.EMAIL_PASSWORD)
+
+    // console.log(process.env.EMAIL_SENDER, process.env.EMAIL_PASSWORD)
     const handlebarOptions = {
         viewEngine: {
             extName: '.hbs',
@@ -26,6 +26,12 @@ module.exports = (formulario) => {
 
     transporter.use('compile', hbs(handlebarOptions));
 
+    // var mensajeRecibido = formulario.message;
+    // var mensajeFinal;
+    // mensajeFinal.insertAdjacentHTML('afterend', formulario.message);
+    // console.log("MENSAJE DE FORMULARIO", mensajeFinal)
+
+
     const mailOptions = {
         from: `"Gerencia" <embai@gmail.com>`,
         to: `${formulario.email}`, // Cambia esta parte por el destinatario
@@ -36,10 +42,10 @@ module.exports = (formulario) => {
             message: formulario.message,
             urlApi: process.env.PUBLIC_URL
         }
-    
+
     };
     // console.log(mailOptions)
-    transporter.sendMail(mailOptions, function (err, info) {
+    transporter.sendMail(mailOptions, function(err, info) {
         if (err) {
             console.error(err)
             return;

@@ -47,6 +47,8 @@ var documentationRouter = require('./api/routes/documentation');
 var quotationRouter = require('./api/routes/quotation');
 var microQuotationRouter = require('./api/routes/micro-quotation');
 var tablaRouter = require('./api/routes/tabla-amortizacion');
+var pawnObjectTypesRouter = require('./api/routes/pawn-object-types');
+var banksRouter = require('./api/routes/banks');
 
 
 
@@ -129,6 +131,7 @@ app.use('/documentation', documentationRouter);
 app.use('/quotation', quotationRouter);
 app.use('/micro-quotation', microQuotationRouter);
 app.use('/tabla-amortizacion', tablaRouter);
+app.use('/bank', banksRouter);
 
 
 

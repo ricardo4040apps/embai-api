@@ -4,7 +4,35 @@ const User = require('../models/user');
 const passportMiddleware = require('../middlewares/passport');
 const mailCtrl = require('../controllers/mail/registerUser');
 
+/////////////CUSTOM
+module.exports.searchUsers = function(req, res, next) {
+    let query = { username: req.params.value }
+    console.log(req.params.value)
+    User.getAll(query, (err, data) => {
+        if (err) {
+            console.error("route users get:", err)
+            return res.status(500).json('Failed to get users')
+        }
+        console.log("DATA", data)
+        if (data.length === 0) {
+            console.log("VACIO")
+            return
 
+        }
+        console.log("ENCONTRADO!")
+        var respuesta = {
+            id: data[0]._id,
+            name: data[0].name,
+            lastName: data[0].lastName,
+            userName: data[0].username,
+            email: data[0].email,
+        }
+        console.log("RESPUESTA", respuesta)
+        res.status(200).json(respuesta)
+
+
+    });
+}
 
 /* GET users listing. */
 
@@ -106,6 +134,7 @@ module.exports.isUsernameBussy = function(req, res, next) {
         }
         res.status(200).json(data.length > 0)
     });
+<<<<<<< HEAD
 }
 module.exports.searchUsers = function(req, res, next) {
     let query = { username: req.params.value }
@@ -132,4 +161,6 @@ module.exports.searchUsers = function(req, res, next) {
         console.log("RESPUESTA", respuesta)
         res.status(200).json(respuesta)
     });
+=======
+>>>>>>> 03bba3f2abcca7c0fc2ea27e4592271bcb9ce6b4
 }

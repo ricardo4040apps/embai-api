@@ -15,7 +15,7 @@ router.get('/:id', passportMiddleware, function(req, res, next) {
 });
 
 
-router.post('/', passportMiddleware, function(req, res, next) {
+router.post('/', function(req, res, next) {
     microQuotationCtrl.create(req, res, next);
 });
 

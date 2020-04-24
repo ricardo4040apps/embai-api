@@ -7,36 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    type: { type: String },
-    // object
-    pawnObjectTypeId: Schema.Types.ObjectId,
-    pawnObjectPurityId: Schema.Types.ObjectId,
-    pawnObjectWeight: Schema.Types.ObjectId,
-    metal: Schema.Types.ObjectId,
-    periodo: Schema.Types.ObjectId,
-    esquema: Schema.Types.ObjectId,
-    refrendo: Schema.Types.ObjectId,
-
-    // user info
     name: { type: String },
-    lastName: { type: String },
-    email: { type: String },
-    card: { type: String },
-    appointmentDate: { type: Date },
-    bank: { type: String },
-    refExt: { type: String },
-    social: { type: String },
-    months: { type: Number },
-    //
-    phone: { type: String },
-    loanRequested: { type: Number },
-    paymentPlan: { type: String },
-    //
-    clabe: { type: String },
-    authorization: { type: String },
-    valuationId: Schema.Types.ObjectId,
-    userId: Schema.Types.ObjectId,
-    paymentFrecuenty: Schema.Types.ObjectId,
 
 
     updatedAt: { type: Date, default: Date.now },
@@ -47,8 +18,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("solicitud", mySchema);
-module.exports = mongoose.model('solicitud', mySchema)
+const CurrentModel = mongoose.model('Bank', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -130,16 +100,8 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { type: exp },
             { name: exp },
-            { LastName: exp },
-            { email: exp },
-            { card: exp },
-            { appointmentDate: exp },
-            { bank: exp },
-            { refExt: exp },
-            { clabe: exp },
-            { authorization: exp },
+
         ]
     };
     query.$and.push(searchQuery);
