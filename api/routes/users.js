@@ -11,6 +11,7 @@ router.post('/client', function(req, res, next) {
 
 /* GET users listing. */
 
+
 router.get('/', passportMiddleware, function(req, res, next) {
     userCtrl.get(req, res, next);
 });

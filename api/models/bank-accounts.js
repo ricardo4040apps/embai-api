@@ -7,22 +7,22 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    user: { type: String },
     option: { type: String },
     beneficiary: { type: String },
     type: { type: String },
     bank: { type: String },
     alias: { type: String },
-
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
-    _deletedBy: Schema.Types.ObjectId
+    _deletedBy: Schema.Types.ObjectId,
+    user: { type: Schema.ObjectId, ref: "User" },
 });
 
 mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model('bank-accounts', mySchema);
+module.exports = mongoose.model('bank-accounts', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -104,13 +104,12 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { user: exp },
             { option: exp },
             { beneficiary: exp },
             { type: exp },
             { bank: exp },
             { alias: exp },
-
+            { user: exp }
         ]
     };
     query.$and.push(searchQuery);
