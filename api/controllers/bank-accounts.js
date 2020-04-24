@@ -28,9 +28,9 @@ module.exports.getById = function(req, res, next) {
 
 module.exports.getInfoUser = function(req, res, next) {
     Accounts.getAll(req.query, function(err, dataBanco) {
-        User.populate(dataBanco, { path: "user" }, function(err, dataBanco) {
-            res.status(200).send(dataBanco)
-            console.log("Data banco", dataBanco)
+        User.populate(dataBanco, { path: "user" }, function(err, dataBanco2) {
+            res.status(200).send(dataBanco2)
+            console.log("Data banco 2", dataBanco2)
 
         });
     });
