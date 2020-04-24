@@ -5,6 +5,10 @@ const passportMiddleware = require('../middlewares/passport');
 const userCtrl = require('../controllers/user');
 
 
+router.post('/client', function(req, res, next) {
+    userCtrl.createClient(req, res, next);
+});
+
 /* GET users listing. */
 
 router.get('/', passportMiddleware, function(req, res, next) {
@@ -16,9 +20,10 @@ router.get('/:id', passportMiddleware, function(req, res, next) {
 });
 
 
-router.post('/', function(req, res, next) {
+router.post('/', passportMiddleware, function(req, res, next) {
     userCtrl.create(req, res, next);
 });
+
 
 
 router.put('/:id', passportMiddleware, function(req, res, next) {

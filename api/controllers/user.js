@@ -34,6 +34,35 @@ module.exports.searchUsers = function(req, res, next) {
     });
 }
 
+
+module.exports.createClient = function(req, res, next) {
+    let errors = User.hasErrors(req.body);
+    console.log(errors)
+    if (errors) return res.status(400).json(errors.message)
+
+
+    /// AAAAAAqui va restriccicon de campos para luis
+
+    User.add(req.body, (err, data) => {
+        if (err) {
+            console.error("route users post:", err)
+            return res.status(500).json('Failed to register new User')
+        }
+        let user = {
+            user: data,
+            template: 'newuser'
+        }
+        res.status(201).json(data)
+        mailCtrl(user)
+
+        //res.status(201).json('User registered')
+    });
+}
+
+//////////
+
+
+
 /* GET users listing. */
 
 module.exports.get = function(req, res, next) {
