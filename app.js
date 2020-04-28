@@ -49,6 +49,7 @@ var microQuotationRouter = require('./api/routes/micro-quotation');
 var tablaRouter = require('./api/routes/tabla-amortizacion');
 var pawnObjectTypesRouter = require('./api/routes/pawn-object-types');
 var banksRouter = require('./api/routes/banks');
+var phoneVerificationRouter = require('./api/routes/phone-verification');
 
 
 
@@ -132,6 +133,7 @@ app.use('/quotation', quotationRouter);
 app.use('/micro-quotation', microQuotationRouter);
 app.use('/tabla-amortizacion', tablaRouter);
 app.use('/bank', banksRouter);
+app.use('/phone-verification', phoneVerificationRouter);
 
 
 

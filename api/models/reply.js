@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    contactId: { type: String },
+    contactId: {type: Schema.Types.ObjectId, ref: "User"},
     replyed: { type: Boolean },
     replyMessage: { type: String },
 
@@ -26,7 +26,7 @@ const CurrentModel = mongoose.model("reply", mySchema);
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;
     if (!params.page) {
-        CurrentModel.find(params, callback);
+        CurrentModel.find(params).populate('contactId').exec(callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
     }

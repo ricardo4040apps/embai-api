@@ -6,7 +6,7 @@ const replyCtrl = require('../controllers/reply');
 
 /* GET users listing. */
 
-router.get('/', passportMiddleware, function(req, res, next) {
+router.get('/', function(req, res, next) {
     replyCtrl.get(req, res, next);
 });
 
