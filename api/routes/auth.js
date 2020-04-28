@@ -11,7 +11,7 @@ router.post('/', function(req, res, next) {
 });
 
 router.post('/client', function(req, res, next) {
-    authCtrl.auth(req, res, next)
+    authCtrl.authClient(req, res, next)
 });
 
 
