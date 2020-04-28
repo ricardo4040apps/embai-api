@@ -42,3 +42,41 @@ module.exports.auth = function(req, res, next) {
     })
 
 }
+
+module.exports.authClient = function(req, res, next) {
+    const cellPhone = req.body.cellPhone;
+    const password = req.body.password;
+
+    User.getByCellPhone(cellPhone, (err, user) => {        
+        if (err) {
+            console.error("route users get:", err)
+            return res.status(500).json('Failed to get users')
+        }
+
+        if (!user) return res.status(404).json('User not found')
+
+        User.comparePassword(password, user.password, (err, isMatch) => {
+            if (err) throw err;
+            if (isMatch) {
+                const token = jwt.sign(user.toJSON(), config.database.secret, {
+                    expiresIn: 24 * 60 * 60
+                })
+
+                res.status(200).json({
+                    token: `JWT ${token}`,
+                    user: {
+                        id: user._id,
+                        name: user.name,
+                        username: user.username,
+                        email: user.email,
+
+                        //// continue...
+                    }
+                })
+            } else {
+                return res.status(401).json('Wrong password')
+            }
+        })
+    })
+
+}
