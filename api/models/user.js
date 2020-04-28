@@ -8,7 +8,7 @@ const Schema = mongoose.Schema
 const mySchema = Schema({
     name: { type: String },
     lastName: { type: String },
-    username: { type: String, required: true, unique: true },
+    username: { type: String, required: true },
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     CURP: { type: String },

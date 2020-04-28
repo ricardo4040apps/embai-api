@@ -11,9 +11,7 @@ Configuracion por defecto
 --------
 # Run enviroment
     pm2 start app.json                          for production
-            pm2 start bin/www --watch                   for local tester   deprecated
     pm2 start app.json --env local              for local tester
-    pm2 start app.json
 
 
 

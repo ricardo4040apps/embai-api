@@ -28,7 +28,7 @@ module.exports.generatePhoneCode = function (req, res, next) {
         }
         client.messages
             .create({
-                body: `El odigo de seguridad para EMBAI es ${dataCode.code}`,
+                body: `El codigo de seguridad para EMBAI es ${dataCode.code}`,
                 from: process.env.TWILIO_PHONE,
                 to: dataCode.cellPhone
                 // to: '+523781116165'
