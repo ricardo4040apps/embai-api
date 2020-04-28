@@ -25,10 +25,10 @@ module.exports = (formulario) => {
 
     transporter.use('compile', hbs(handlebarOptions));
 
-    // var fechaRecibida = new Date(formulario.solicitud.appointmentDate);
-    // var dia = fechaRecibida.getDate();
-    // var mes = fechaRecibida.getMonth();
-    // var año = fechaRecibida.getFullYear();
+    var fechaRecibida = new Date(formulario.solicitud.appointmentDate);
+    var dia = fechaRecibida.getDate();
+    var mes = fechaRecibida.getMonth();
+    var año = fechaRecibida.getFullYear();
 
     if (mes == 0) {
         mes = "Enero"
@@ -68,10 +68,10 @@ module.exports = (formulario) => {
     }
 
     var fechaFinal = (dia + " de " + mes + " del " + año)
-    console.log("FECHA FINAL", fechaFinal)
-    console.log("DIA", dia)
-    console.log("MES", mes)
-    console.log("AÑO", año)
+        // console.log("FECHA FINAL", fechaFinal)
+        // console.log("DIA", dia)
+        // console.log("MES", mes)
+        // console.log("AÑO", año)
         // var fechaFinal = new Date(año, mes, dia)
 
 
