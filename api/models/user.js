@@ -194,10 +194,10 @@ let processQuery = function(filters, strQ = '') {
                     { username: exp },
                     { email: exp },
                     { cellPhone: exp },
-
                     { gender: exp },
-                    { status: exp },
-                    { status: exp },
+                    { CURP: exp },
+                    { RFC: exp },
+                    { status: exp }
                 ]
             }
         ]

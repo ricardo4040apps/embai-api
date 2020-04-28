@@ -27,12 +27,19 @@ module.exports.getById = function(req, res, next) {
 }
 
 module.exports.getInfoUser = function(req, res, next) {
-    Accounts.getAll(req.query, function(err, dataBanco) {
-        User.populate(dataBanco, { path: "user" }, function(err, dataBanco2) {
-            res.status(200).send(dataBanco2)
-            console.log("Data banco 2", dataBanco2)
-
-        });
+    Accounts.getAll(req.query, function(err, data) {
+        if (err) {
+            console.error("route  Accounts get:", err)
+            return res.status(500).json('Failed to get  Accounts')
+        }
+        User.populate(data, { path: "user" }, (err, data) => {
+                if (err) {
+                    console.error("CANNOT POPULATE:", err)
+                    return res.status(500).json('CANNOT POPULATE:')
+                }
+                console.log("data populada", data.docs)
+            })
+            // res.status(200).json(data)
     });
 }
 
