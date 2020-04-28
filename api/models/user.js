@@ -8,7 +8,7 @@ const Schema = mongoose.Schema
 const mySchema = Schema({
     name: { type: String },
     lastName: { type: String },
-    username: { type: String, required: true },
+    username: { type: String },
     password: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     CURP: { type: String },
@@ -151,6 +151,11 @@ module.exports.hasErrors = function(data) {
 
 module.exports.getByUsername = function(username, callback) {
     const query = { username: username }
+    CurrentModel.findOne(query, callback);
+}
+
+module.exports.getByCellPhone = function(cellPhone, callback) {
+    const query = { cellPhone: cellPhone }
     CurrentModel.findOne(query, callback);
 }
 
