@@ -40,7 +40,8 @@ paginate
     https://github.com/aravindnc/mongoose-paginate-v2
 
 
-
+twillio 
+    https://www.twilio.com/docs/usage/tutorials/how-to-use-your-free-trial-account#verify-your-personal-phone-number
 
 
 on my mac

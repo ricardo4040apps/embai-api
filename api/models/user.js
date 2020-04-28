@@ -14,6 +14,7 @@ const mySchema = Schema({
     CURP: { type: String },
     RFC: { type: String },
     emailVerified: { type: Boolean, default: false },
+    countryCode: { type: String },
     cellPhone: { type: String, unique: true },
     cellPhoneVerified: { type: Boolean, default: false },
 

@@ -16,7 +16,10 @@
                 "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test",
             "DATABASE_SECRET":  "yoursecret",
             "EMAIL_SENDER": "ivleestradasa@ittepic.edu.mx",
-            "EMAIL_PASSWORD": "pjsklnlpr81"
+            "EMAIL_PASSWORD": "pjsklnlpr81",
+            "TWILIO_PHONE": "+15097742212",
+            "TWILIO_ACCOUNT_SSID": "AC0ff3bbea668437882ce4878c36165172",
+            "TWILIO_AUTH_TOKEN": "910f6513d3703ffea56cd0d64cba19c4"
         },
         "env_local": {
             "PROD_ENV": true,
@@ -25,7 +28,10 @@
             "DATABASE": "mongodb://localhost:27017/store-test",
             "DATABASE_SECRET":  "yoursecret",
             "EMAIL_SENDER": "ivleestradasa@ittepic.edu.mx",
-            "EMAIL_PASSWORD": "pjsklnlpr81"
+            "EMAIL_PASSWORD": "pjsklnlpr81",
+            "TWILIO_PHONE": "+15097742212",
+            "TWILIO_ACCOUNT_SSID": "AC0ff3bbea668437882ce4878c36165172",
+            "TWILIO_AUTH_TOKEN": "910f6513d3703ffea56cd0d64cba19c4"
         }
     }]
 }

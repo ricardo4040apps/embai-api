@@ -165,6 +165,7 @@ module.exports.isUsernameBussy = function(req, res, next) {
     });
 
 }
+
 module.exports.searchUsers = function(req, res, next) {
     let query = { username: req.params.value }
     console.log(req.params.value)
