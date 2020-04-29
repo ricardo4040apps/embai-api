@@ -34,7 +34,6 @@ const mySchema = Schema({
     //
     clabe: { type: String },
     authorization: { type: String },
-    valuationId: Schema.Types.ObjectId,
     userId: Schema.Types.ObjectId,
     paymentFrecuenty: Schema.Types.ObjectId,
 
