@@ -6,6 +6,7 @@ const mailCtrl = require('../controllers/mail/registerUser');
 
 /////////////CUSTOM
 module.exports.searchUsers = function(req, res, next) {
+    
     let query = { username: req.params.value }
     console.log(req.params.value)
     User.getAll(query, (err, data) => {
@@ -37,7 +38,6 @@ module.exports.searchUsers = function(req, res, next) {
 
 module.exports.createClient = function(req, res, next) {
     let errors = User.hasErrors(req.body);
-    console.log(errors)
     if (errors) return res.status(400).json(errors.message)
 
 
