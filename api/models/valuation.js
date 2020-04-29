@@ -109,12 +109,12 @@ let processQuery = function(filters, strQ = "") {
             // informacion 
             { item: exp },
             // { value: exp },
-            { loanDate: exp },
+            // { loanDate: exp },
             { item: exp },
             // { material: exp },
             // { weight: exp },
             { recommendedLoan: exp },
-            { loanDate: exp },
+            // { loanDate: exp },
             { condition: exp },
             { description: exp },
 

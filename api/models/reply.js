@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    contactId: {type: Schema.Types.ObjectId, ref: "User"},
+    contactId: { type: Schema.Types.ObjectId, ref: "User" },
     replyed: { type: Boolean },
     replyMessage: { type: String },
 
@@ -101,6 +101,8 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
+            // { contactId: exp },
+            // { replyed: exp },
             { replyMessage: exp },
         ]
     };

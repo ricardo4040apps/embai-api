@@ -99,9 +99,8 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { moratorium: exp },
-            { certification: exp },
-            { homeAppraisal: exp },
+            { value: exp },
+
         ]
     };
     query.$and.push(searchQuery);

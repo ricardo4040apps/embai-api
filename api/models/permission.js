@@ -9,7 +9,7 @@ const mySchema = Schema({
     tagName: { type: String, unique: true, required: true },
     name: { type: String, required: true },
     value: String,
-    
+
 
     deleted: { type: Boolean, default: false },
     _deletedBy: Schema.Types.ObjectId,
@@ -39,7 +39,7 @@ module.exports.getAll = function(params, callback) {
 
 
 module.exports.getAllPagginated = function(params, callback) {
-    const {page, limit, sort, q, ...filters} = params
+    const { page, limit, sort, q, ...filters } = params
     const options = {
         page: page || 1,
         limit: limit || 10,
@@ -63,7 +63,7 @@ module.exports.add = function(data, callback) {
 
 module.exports.update = function(id, data, callback) {
     let opt = { new: true }
-    CurrentModel.findOneAndUpdate({_id: id}, data, opt, callback);
+    CurrentModel.findOneAndUpdate({ _id: id }, data, opt, callback);
 }
 
 module.exports.absoluteDeleteById = function(id, callback) {
@@ -104,14 +104,15 @@ let processQuery = function(filters, strQ = '') {
     if (!strQ) return null;
     let exp = new RegExp(strQ.toLowerCase(), 'i');
 
-    return { 
-        $and:
-        [ 
+    return {
+        $and: [
             filters,
-            { $or:
-                [
+            {
+                $or: [
                     // strings
                     { name: exp },
+                    { tagName: exp },
+                    { value: exp },
                 ]
             }
         ]
@@ -121,16 +122,13 @@ let processQuery = function(filters, strQ = '') {
 /*  - - - - - - - - - - - -     E N D  P R I V A T E     - - - - - - - - - - - - */
 
 
-var updateDate = function(next, done){
-    this.update({},{ $set: { updatedAt: moment() } });
-   next()
-  };
+var updateDate = function(next, done) {
+    this.update({}, { $set: { updatedAt: moment() } });
+    next()
+};
 
-mySchema.pre('save', updateDate)  // ??? it works
-    .pre('update', updateDate)  // ??? it works
-    .pre('findOneAndUpdate', updateDate)  // ok
+mySchema.pre('save', updateDate) // ??? it works
+    .pre('update', updateDate) // ??? it works
+    .pre('findOneAndUpdate', updateDate) // ok
     .pre('findByIdAndUpdate', updateDate) // ok
-    .pre('aggregate', updateDate);  // ??? it works
-
-
-
+    .pre('aggregate', updateDate); // ??? it works

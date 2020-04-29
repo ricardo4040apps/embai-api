@@ -63,7 +63,9 @@ let processQuery = function(filters, strQ = "") {
             { telefono: exp },
             { vision: exp },
             { mision: exp },
-            { valores: exp }
+            { valores: exp },
+            { horarioApertura: exp },
+            { horarioCierre: exp },
         ]
     };
     query.$and.push(searchQuery);

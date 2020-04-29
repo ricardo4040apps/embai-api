@@ -101,7 +101,7 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { name: exp },
+            { value: exp },
 
         ]
     };
