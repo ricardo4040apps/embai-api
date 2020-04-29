@@ -13,7 +13,7 @@
             "PORT": 3000,
             "PUBLIC_URL": "http://panel.embai.com.mx:3000",
             "DATABASE": "mongodb://localhost:27017/store-test",
-                "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/store-test",
+                "DATABASE2": "mongodb://myTester:Entrar@localhost:27017/embai-production",
             "DATABASE_SECRET":  "yoursecret",
             "EMAIL_SENDER": "ivleestradasa@ittepic.edu.mx",
             "EMAIL_PASSWORD": "pjsklnlpr81",

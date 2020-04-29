@@ -10,7 +10,8 @@ const mySchema = Schema({
     name: { type: String, required: true },
     value: String,
     
-
+    canDelete: { type: Boolean, default: false },
+    
     deleted: { type: Boolean, default: false },
     _deletedBy: Schema.Types.ObjectId,
     updatedAt: { type: Date, default: Date.now },

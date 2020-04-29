@@ -12,6 +12,8 @@ const mySchema = Schema({
 
     permissions: [{ type: Schema.Types.ObjectId, ref: "Permission" }],
 
+    canDelete: { type: Boolean, default: true },
+    
     deleted: { type: Boolean, default: false },
     _deletedBy: Schema.Types.ObjectId,
     updatedAt: { type: Date, default: Date.now },
