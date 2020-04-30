@@ -228,6 +228,61 @@ var deleteFile = function(src) {
 }
 
 
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                TICKETS
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+router.get("/tickets-valuate/:name", function(req, res, next) {
+    var src = './store/tickets/' + req.params.name
+
+    fs.readFile(src, "binary", function(err, data) {
+        if (err) {
+            console.error(err)
+            res.status(404).send('invalid map file');
+            return
+        }
+
+        res.writeHead(200);
+        res.write(data, 'binary');
+        res.end();
+    });
+});
+
+
+router.post('/ticket', type, function(req, res) {
+    const tmp_path = req.file.path;
+    const hashName = getAvailableName(req.file.originalname);
+    var target_path = './store/tickets/' + hashName;
+
+    var src = fs.createReadStream(tmp_path);
+    var dest = fs.createWriteStream(target_path);
+    src.pipe(dest);
+
+    src.on('end', function() {
+        deleteTicket(tmp_path);
+        //updateUserPicture(req.header('userId'), hashName);
+        updateTicket(req.header('ticketId'), hashName);
+        console.log(hashName)
+        res.status(200).send({ fileName: hashName })
+    });
+    src.on('error', function(err) { res.status(500).send(err) });
+});
+
+
+router.delete("/:name", function(req, res, next) {
+    //fileCtrl.deleteById(req, res, next);
+});
+
+
+var deleteTicket = function(src) {
+    fs.unlink(src, function(err) {
+        if (err) throw err;
+        // console.log('File deleted!');
+    });
+}
+
+//NOMBRE
+
 // ???? is correct
 
 var getAvailableName = function(src) {
@@ -262,6 +317,19 @@ var updateDocument = function(DocumentId = null, DocumentName) {
                 return;
             }
             console.log("Document Updated!")
+        });
+    }
+}
+
+var updateTicket = function(TicketId = null, TicketName) {
+    const data = { "ticket": TicketName };
+    if (TicketId) {
+        Document.update(TicketId, data, (err, data) => {
+            if (err) {
+                console.error("route Ticket put:", err)
+                return;
+            }
+            console.log("Document Ticket!")
         });
     }
 }

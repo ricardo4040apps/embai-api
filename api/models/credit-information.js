@@ -12,8 +12,6 @@ const mySchema = Schema({
     creditHistory: { type: String },
     creditCard: { type: String },
     digitsCreditCard: { type: String },
-    avisoBancaria: { type: String },
-    terminosBancaria: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
