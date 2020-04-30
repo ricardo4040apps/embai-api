@@ -39,6 +39,7 @@ const mySchema = Schema({
     familySalary: { type: String },
     numberOfDependents: { type: String },
 
+
     avisoPersonal: { type: String },
 
     roleId: { type: Schema.Types.ObjectId, ref: 'Role' },
