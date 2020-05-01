@@ -64,8 +64,15 @@ module.exports.deleteById = function(req, res, next) {
       console.error("route permissions delete:", err)
       return res.status(500).json('Failed to delete permission')
     }
-    res.status(204).json(data)
-  });
+    console.log(123, data)
+    if (data) {
+      return res.status(204).json(data);   
+    }
+    res.status(404).json("Dosent exist!");
+});
+
+
+
 }
 
 

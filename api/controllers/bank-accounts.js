@@ -25,7 +25,7 @@ module.exports.getById = function(req, res, next) {
         res.status(200).json(data)
     });
 }
-
+/*
 module.exports.getInfoUser = function(req, res, next) {
     Accounts.getAll(req.query, function(err, data) {
         if (err) {
@@ -42,7 +42,7 @@ module.exports.getInfoUser = function(req, res, next) {
             // res.status(200).json(data)
     });
 }
-
+*/
 module.exports.getByIdUser = function(req, res, next) {
     req.query.user = req.params.id
     Accounts.getAll(req.query, (err, data) => {

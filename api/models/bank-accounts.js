@@ -22,11 +22,11 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('bank-accounts', mySchema);
-module.exports = mongoose.model('bank-accounts', mySchema);
+const CurrentModel = mongoose.model('BankAccount', mySchema, 'bank-accounts');
+//////// super error para buscar porque ??? module.exports = mongoose.model('BankAccount', mySchema, 'bank-accounts');
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
-
+/*
 module.exports.getInfoUser = function(params, callback) {
     // console.log("PARAMS", params)
     // User.populate(mySchema, { path: "user" }, (err, data) => {
@@ -41,7 +41,7 @@ module.exports.getInfoUser = function(params, callback) {
     //     console.log(user)
     // })
 }
-
+*/
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;
     if (!params.page) {

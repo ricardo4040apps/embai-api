@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    contactId: {type: Schema.Types.ObjectId, ref: "User"},
+    contactId: {type: mongoose.Types.ObjectId, ref: "Contact"},
     replyed: { type: Boolean },
     replyMessage: { type: String },
 
@@ -19,22 +19,24 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("reply", mySchema);
+const CurrentModel = mongoose.model("Reply", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
+    
+    
     if (!absolute) params.deleted = false;
     if (!params.page) {
-        CurrentModel.find(params).populate('contactId').exec(callback);
+        CurrentModel.find(params)
+        .populate('contactId')
+        .exec(callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
     }
 };
 
 module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
-
     const { page, limit, sort, q, ...filters } = params;
     const options = {
         page: page || 1,

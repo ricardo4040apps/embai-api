@@ -25,8 +25,8 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("valuation", mySchema);
-module.exports = mongoose.model('valuation', mySchema)
+const CurrentModel = mongoose.model("Valuation", mySchema);
+module.exports = mongoose.model('Valuation', mySchema)
     /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {

@@ -20,7 +20,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('phone-code', mySchema);
+const CurrentModel = mongoose.model('PhoneCode', mySchema);
 
 
 

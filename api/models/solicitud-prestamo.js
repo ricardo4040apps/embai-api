@@ -47,8 +47,8 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("solicitud", mySchema);
-module.exports = mongoose.model('solicitud', mySchema)
+const CurrentModel = mongoose.model("Solicitud", mySchema);
+module.exports = mongoose.model('Solicitud', mySchema)
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

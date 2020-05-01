@@ -20,7 +20,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('credit-information', mySchema);
+const CurrentModel = mongoose.model('CreditInformation', mySchema, 'credit-informations');
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

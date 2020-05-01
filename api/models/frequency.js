@@ -18,7 +18,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('frequency', mySchema);
+const CurrentModel = mongoose.model('Frequency', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -31,8 +31,7 @@ module.exports.getAll = function(params, callback, absolute = false) {
     }
 };
 
-module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
+module.exports.getAllPagginated = function(params, callback) {
 
     const { page, limit, sort, q, ...filters } = params;
     const options = {

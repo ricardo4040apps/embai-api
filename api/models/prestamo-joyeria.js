@@ -20,7 +20,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("prestamo-joyeria", mySchema);
+const CurrentModel = mongoose.model("PrestamoJoyeria", mySchema, "prestamo-joyerias");
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

@@ -177,38 +177,28 @@ module.exports.comparePassword = function(candidatePassword, hash, callback) {
 /*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
 
 let processQuery = function(filters, strQ = '') {
-    if (!strQ) return null;
-    // date
-    //'birthDate', 'updatedAt', 'createdAt',
-    // ObjectId
-    //'_roleId', '_deletedBy',
-    // boolean
-    //'emailVerified', 'cellPhoneVerified', 'deleted'
+    let query = { $and: [filters] };
 
-    // var booleanValue = (strQ == 'true')? true: (strQ == 'false')? false: null; OK
-    // { deleted: booleanValue}
+    if (!strQ) return query;
+    let exp = new RegExp(strQ.toLowerCase(), "i");
 
-    let exp = new RegExp(strQ.toLowerCase(), 'i');
-
-    return {
-        $and: [
-            filters,
-            {
-                $or: [
-                    // strings
-                    { name: exp },
-                    { lastName: exp },
-                    { username: exp },
-                    { email: exp },
-                    { cellPhone: exp },
-                    { gender: exp },
-                    { CURP: exp },
-                    { RFC: exp },
-                    { status: exp }
-                ]
-            }
+    let searchQuery = {
+        $or: [
+            { name: exp },
+            { lastName: exp },
+            { username: exp },
+            { email: exp },
+            { cellPhone: exp },
+            { gender: exp },
+            { CURP: exp },
+            { RFC: exp },
+            { status: exp }
         ]
-    }
+    };
+    query.$and.push(searchQuery);
+    // console.log('query', require('util').inspect(query, {depth:null}))
+
+    return query;
 }
 
 //http://localhost:3000/users?limit=5&page=1&sort=deleted -createdAt&deleted=false&name=jose11111&q=tru

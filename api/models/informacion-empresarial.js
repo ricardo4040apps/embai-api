@@ -24,7 +24,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("informacion-empresarial", mySchema);
+const CurrentModel = mongoose.model("InformacionEmpresarial", mySchema, "informacion-empresarials");
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
