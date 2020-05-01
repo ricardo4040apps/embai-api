@@ -126,7 +126,7 @@ let processQuery = function(filters, strQ = "") {
             { type: exp },
             { bank: exp },
             { alias: exp },
-            { user: exp }
+            // { user: exp }
         ]
     };
     query.$and.push(searchQuery);

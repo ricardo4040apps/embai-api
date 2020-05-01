@@ -7,10 +7,11 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
     clientId: { type: String },
-    card: { type: String },
-    digits: { type: String },
-    automotiveCredit: { type: String },
+    digitsAutoCredit: { type: String },
+    autoCredit: { type: String },
     creditHistory: { type: String },
+    creditCard: { type: String },
+    digitsCreditCard: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },

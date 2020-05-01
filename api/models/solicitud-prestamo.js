@@ -34,7 +34,6 @@ const mySchema = Schema({
     //
     clabe: { type: String },
     authorization: { type: String },
-    valuationId: Schema.Types.ObjectId,
     userId: Schema.Types.ObjectId,
     paymentFrecuenty: Schema.Types.ObjectId,
 
@@ -132,14 +131,22 @@ let processQuery = function(filters, strQ = "") {
             // strings
             { type: exp },
             { name: exp },
-            { LastName: exp },
+            { lastName: exp },
             { email: exp },
             { card: exp },
-            { appointmentDate: exp },
+            // { appointmentDate: exp },
             { bank: exp },
             { refExt: exp },
             { clabe: exp },
-            { authorization: exp },
+            // { authorization: exp },
+            { social: exp },
+            // { months: exp },
+            // { phone: exp },
+            // { loanRequested: exp },
+            { paymentPlan: exp },
+            // { valuationId: exp },
+            // { userId: exp },
+            // { paymentFrecuenty: exp },
         ]
     };
     query.$and.push(searchQuery);

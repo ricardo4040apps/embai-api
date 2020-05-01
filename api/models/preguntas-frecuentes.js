@@ -106,10 +106,12 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // informacion preguntas-frecuentes
-            { titulo: exp },
-            { descripcion: exp },
-            { orden: exp },
-            { principal: exp }
+            { title: exp },
+            { descriptionMin: exp },
+            { descriptionMax: exp },
+            // { orden: exp },
+            // { main: exp },
+            { extInfo: exp },
         ]
     };
     query.$and.push(searchQuery);

@@ -5,11 +5,13 @@ const Schema = mongoose.Schema
 
 const mySchema = Schema({
     clientId: { type: String },
-    cardNumber: { type: String },
+    // cardNumber: { type: String },
     CLABE: { type: String },
     nameHolder: { type: String },
     bank: { type: String },
     time: { type: String },
+    avisoBancaria: { type: String },
+    terminosBancaria: { type: String },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -102,10 +104,12 @@ let processQuery = function(filters, strQ = "") {
         $or: [
             // strings
             { clientId: exp },
-            { cardNumber: exp },
             { CLABE: exp },
             { nameHolder: exp },
-            { time: exp }
+            { bank: exp },
+            { time: exp },
+            { avisoBancaria: exp },
+            { terminosBancaria: exp }
 
         ]
     };

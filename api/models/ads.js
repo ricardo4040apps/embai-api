@@ -112,9 +112,12 @@ let processQuery = function(filters, strQ = "") {
             { picture: exp },
             { title: exp },
             { description: exp },
-            { status: exp },
-            { validity: exp },
-            { style: exp },
+            // { status: exp },
+            // { initDate: exp },
+            // { finalDate: exp },
+            { styleBack: exp },
+            { styleFont: exp },
+            // { valid: exp },
         ]
     };
     query.$and.push(searchQuery);
