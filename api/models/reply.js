@@ -25,11 +25,12 @@ const CurrentModel = mongoose.model("Reply", mySchema);
 
 module.exports.getAll = function(params, callback, absolute = false) {
     
-    
     if (!absolute) params.deleted = false;
     if (!params.page) {
+        let populate = params.populate
+        delete params.populate
         CurrentModel.find(params)
-        .populate('contactId')
+        .populate(populate)
         .exec(callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
@@ -37,20 +38,25 @@ module.exports.getAll = function(params, callback, absolute = false) {
 };
 
 module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    const { page, limit, sort, q, ...filters } = params;
+    const { page, limit, sort, q, populate, ...filters } = params;
     const options = {
         page: page || 1,
         limit: limit || 10,
-        sort: sort
+        sort: sort,
+        populate
     };
 
     let query = processQuery(filters, q);
-
+    
+    
     CurrentModel.paginate(query, options, callback);
 };
 
 module.exports.getById = function(id, callback, absolute = false) {
-    CurrentModel.findById(id, callback);
+    let populate = params.populate
+    delete params.populate
+
+    CurrentModel.findById(id).populate(populate).exec(callback);
 };
 
 module.exports.add = function(data, callback) {

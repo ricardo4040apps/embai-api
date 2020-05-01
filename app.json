@@ -19,7 +19,7 @@
             "EMAIL_PASSWORD": "pjsklnlpr81",
             "TWILIO_PHONE": "+15097742212",
             "TWILIO_ACCOUNT_SSID": "AC0ff3bbea668437882ce4878c36165172",
-            "TWILIO_AUTH_TOKEN": "9b3a345c28a6beeb10e9a5fd790c487a"
+            "TWILIO_AUTH_TOKEN": "952ab74264af2c8d461e1277c30e06b7"
         },
         "env_local": {
             "PROD_ENV": true,
@@ -31,7 +31,7 @@
             "EMAIL_PASSWORD": "pjsklnlpr81",
             "TWILIO_PHONE": "+15097742212",
             "TWILIO_ACCOUNT_SSID": "AC0ff3bbea668437882ce4878c36165172",
-            "TWILIO_AUTH_TOKEN": "9b3a345c28a6beeb10e9a5fd790c487a"
+            "TWILIO_AUTH_TOKEN": "952ab74264af2c8d461e1277c30e06b7"
         }
     }]
 }
