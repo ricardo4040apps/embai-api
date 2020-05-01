@@ -1,6 +1,7 @@
 var express = require('express');
 const jwt = require('jsonwebtoken')
 const User = require('../models/user');
+const AuthToken = require('../models/auth-token');
 const config = require('../config/app');
 
 
@@ -20,21 +21,8 @@ module.exports.auth = function(req, res, next) {
         User.comparePassword(password, user.password, (err, isMatch) => {
             if (err) throw err;
             if (isMatch) {
-                const token = jwt.sign(user.toJSON(), config.database.secret, {
-                    expiresIn: 24 * 60 * 60
-                })
-
-                res.status(200).json({
-                    token: `JWT ${token}`,
-                    user: {
-                        id: user._id,
-                        name: user.name,
-                        username: user.username,
-                        email: user.email,
-
-                        //// continue...
-                    }
-                })
+                let respToken = generateToken(user);
+                res.status(200).json(respToken)
             } else {
                 return res.status(401).json('Wrong password')
             }
@@ -58,21 +46,8 @@ module.exports.authClient = function(req, res, next) {
         User.comparePassword(password, user.password, (err, isMatch) => {
             if (err) throw err;
             if (isMatch) {
-                const token = jwt.sign(user.toJSON(), config.database.secret, {
-                    expiresIn: 24 * 60 * 60
-                })
-
-                res.status(200).json({
-                    token: `JWT ${token}`,
-                    user: {
-                        id: user._id,
-                        name: user.name,
-                        username: user.username,
-                        email: user.email,
-
-                        //// continue...
-                    }
-                })
+                let respToken = generateToken(user);
+                res.status(200).json(respToken)
             } else {
                 return res.status(401).json('Wrong password')
             }
@@ -80,3 +55,36 @@ module.exports.authClient = function(req, res, next) {
     })
 
 }
+
+
+
+function generateToken(user) {
+    let expiration = 24 * 60 * 60;
+    //let expiration = 60;
+    const token = jwt.sign(user.toJSON(), config.database.secret, {
+        expiresIn: expiration
+    })
+
+    let data = {
+        token: token,
+        user: user._id,
+        // expiration
+    }
+    AuthToken.add(data,  () => {}) // not necesary the action
+
+    return {
+        token: `JWT ${token}`,
+        user: {
+            id: user._id,
+            name: user.name,
+            username: user.username,
+            email: user.email,
+            picture: user.picture,
+
+            //// continue...
+        }
+    }
+}
+
+
+module.exports.generateToken = generateToken
