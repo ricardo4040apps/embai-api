@@ -12,45 +12,6 @@ const passport = require('passport');
 
 const config = require('./api/config/app');
 
-var indexRouter = require('./api/routes/index');
-var authRouter = require('./api/routes/auth');
-var companiesRouter = require('./api/routes/companies');
-var corporationsRouter = require('./api/routes/corporations');
-var notificationsRouter = require('./api/routes/notifications');
-var permissionsRouter = require('./api/routes/permissions');
-var rolesRouter = require('./api/routes/roles');
-var usersRouter = require('./api/routes/users');
-var filesRouter = require('./api/routes/files');
-var adsRouter = require('./api/routes/ads');
-var preguntasRouter = require('./api/routes/preguntas-frecuentes');
-var solicitudRouter = require('./api/routes/solicitud-prestamo');
-var infoEmpRouter = require('./api/routes/informacion-empresarial');
-var microPrestRouter = require('./api/routes/micro-prestamo');
-var presJoyRouter = require('./api/routes/prestamo-joyeria');
-var pawnObjectTypesRouter = require('./api/routes/pawn-object-types');
-var pawnObjectPurityRouter = require('./api/routes/pawn-object-purity');
-var weightRouter = require('./api/routes/weights');
-var materialRouter = require('./api/routes/material');
-var tiempoRouter = require('./api/routes/tiempo');
-var frequencyRouter = require('./api/routes/frequency');
-var plansRouter = require('./api/routes/plans');
-var contactRouter = require('./api/routes/contact');
-var replyRouter = require('./api/routes/reply');
-var interestsRouter = require('./api/routes/interests');
-var bankAccountsRouter = require('./api/routes/bank-accounts');
-var valuationRouter = require('./api/routes/valuation');
-var bankInformationRouter = require('./api/routes/bank-information');
-var creditInformationRouter = require('./api/routes/credit-information');
-var termsRouter = require('./api/routes/terms-conditions');
-var noticeRouter = require('./api/routes/notice-privacy');
-var documentationRouter = require('./api/routes/documentation');
-var quotationRouter = require('./api/routes/quotation');
-var microQuotationRouter = require('./api/routes/micro-quotation');
-var tablaRouter = require('./api/routes/tabla-amortizacion');
-var pawnObjectTypesRouter = require('./api/routes/pawn-object-types');
-var banksRouter = require('./api/routes/banks');
-var phoneVerificationRouter = require('./api/routes/phone-verification');
-
 
 
 console.log("Connecting to mongoDb ...")
@@ -60,7 +21,7 @@ mongoose.connect(process.env.DATABASE || config.database.database, { useNewUrlPa
 
 mongoose.connection.on('connected', () => {
     console.log(`Connected to mongo database!!!`)
-        //console.log(`Connected to mongo database ${config.database.database}`)
+    //console.log(`Connected to mongo database ${config.database.database}`)
 });
 
 mongoose.connection.on('error', (err) => {
@@ -84,63 +45,130 @@ app.set('view engine', '.hbs');
 app.use(passport.initialize());
 app.use(passport.session());
 
-/////require('./api/middlewares/passport')(passport);
+
 
 //app.use(upload.array());
 //app.use(express.static('public'));
 //app.use('/files', express.static('files'));
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                R O U T E R
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
+
+var indexRouter = require('./api/routes/index');
+
+var adsRouter = require('./api/routes/ads');
+var authRouter = require('./api/routes/auth');
+var bankAccountsRouter = require('./api/routes/bank-accounts');
+var bankInformationRouter = require('./api/routes/bank-information');
+var banksRouter = require('./api/routes/banks');
+var companiesRouter = require('./api/routes/companies');
+var contactRouter = require('./api/routes/contact');
+var corporationsRouter = require('./api/routes/corporations');
+var creditInformationRouter = require('./api/routes/credit-information');
+var documentationRouter = require('./api/routes/documentation');
+var filesRouter = require('./api/routes/files');
+var frequencyRouter = require('./api/routes/frequency');
+var infoEmpRouter = require('./api/routes/informacion-empresarial');
+var interestsRouter = require('./api/routes/interests');
+var materialRouter = require('./api/routes/material');
+var mailSenderRouter = require('./api/routes/mail-sender');
+var microPrestRouter = require('./api/routes/micro-prestamo');
+var microQuotationRouter = require('./api/routes/micro-quotation');
+var noticeRouter = require('./api/routes/notice-privacy');
+var notificationsRouter = require('./api/routes/notifications');
+var paymentsRouter = require('./api/routes/payments');
+var pawnObjectTypesRouter = require('./api/routes/pawn-object-types');
+var pawnObjectPurityRouter = require('./api/routes/pawn-object-purity');
+var permissionsRouter = require('./api/routes/permissions');
+var phoneVerificationRouter = require('./api/routes/phone-verification');
+var plansRouter = require('./api/routes/plans');
+var presJoyRouter = require('./api/routes/prestamo-joyeria');
+var preguntasRouter = require('./api/routes/preguntas-frecuentes');
+var quotationRouter = require('./api/routes/quotation');
+var replyRouter = require('./api/routes/reply');
+var rolesRouter = require('./api/routes/roles');
+var solicitudRouter = require('./api/routes/solicitud-prestamo');
+var tablaRouter = require('./api/routes/tabla-amortizacion');
+var termsRouter = require('./api/routes/terms-conditions');
+var tiempoRouter = require('./api/routes/tiempo');
+var usersRouter = require('./api/routes/users');
+var valuationRouter = require('./api/routes/valuation');
+var weightRouter = require('./api/routes/weights');
+
+
+
 app.use('/', indexRouter);
-app.use('/auth', authRouter);
-app.use('/companies', companiesRouter);
-app.use('/corporations', corporationsRouter);
-app.use('/notifications', notificationsRouter);
-app.use('/permissions', permissionsRouter);
-app.use('/roles', rolesRouter);
-app.use('/users', usersRouter);
-app.use('/files', filesRouter);
 app.use('/ads', adsRouter);
-app.use('/preguntas', preguntasRouter);
-app.use('/solicitud', solicitudRouter);
-app.use('/informacion-empresarial', infoEmpRouter);
-app.use('/micro-prestamo', microPrestRouter);
-app.use('/micro-prestamo', microPrestRouter);
-app.use('/prestamo-joyeria', presJoyRouter);
-app.use('/material', materialRouter)
-app.use('/tiempo', tiempoRouter);
-app.use('/plans', plansRouter);
-app.use('/frequency', frequencyRouter);
-
-app.use('/pawn-object-types', pawnObjectTypesRouter);
-app.use('/pawn-object-purity', pawnObjectPurityRouter);
-app.use('/weight', weightRouter);
-
-app.use('/contact', contactRouter);
-app.use('/reply', replyRouter);
-
-app.use('/interests', interestsRouter);
+app.use('/auth', authRouter);
+app.use('/bank', banksRouter);
 app.use('/bank-accounts', bankAccountsRouter);
-
-app.use('/valuation', valuationRouter);
 app.use('/bank-information', bankInformationRouter);
 app.use('/credit-information', creditInformationRouter);
-
-app.use('/notice-privacy', noticeRouter);
-app.use('/terms-conditions', termsRouter);
+app.use('/companies', companiesRouter);
+app.use('/contact', contactRouter);
+app.use('/corporations', corporationsRouter);
 app.use('/documentation', documentationRouter);
-app.use('/quotation', quotationRouter);
+app.use('/files', filesRouter);
+app.use('/frequency', frequencyRouter);
+app.use('/informacion-empresarial', infoEmpRouter);
+app.use('/interests', interestsRouter);
+app.use('/mail-sender', mailSenderRouter)
+app.use('/material', materialRouter)
+app.use('/micro-prestamo', microPrestRouter);
 app.use('/micro-quotation', microQuotationRouter);
-app.use('/tabla-amortizacion', tablaRouter);
-app.use('/bank', banksRouter);
+app.use('/notice-privacy', noticeRouter);
+app.use('/notifications', notificationsRouter);
+app.use('/pawn-object-types', pawnObjectTypesRouter);
+app.use('/pawn-object-purity', pawnObjectPurityRouter);
+app.use('/payments', paymentsRouter);
+app.use('/permissions', permissionsRouter);
 app.use('/phone-verification', phoneVerificationRouter);
+app.use('/plans', plansRouter);
+app.use('/preguntas', preguntasRouter);
+app.use('/prestamo-joyeria', presJoyRouter);
+app.use('/quotation', quotationRouter);
+app.use('/reply', replyRouter);
+app.use('/roles', rolesRouter);
+app.use('/solicitud', solicitudRouter);
+app.use('/tabla-amortizacion', tablaRouter);
+app.use('/terms-conditions', termsRouter);
+app.use('/tiempo', tiempoRouter);
+app.use('/users', usersRouter);
+app.use('/valuation', valuationRouter);
+app.use('/weight', weightRouter);
 
+
+/* - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+                                F I N  R O U T E R
+ - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 
 module.exports = app;
 
 /************** precent close terminal **************/
 setInterval(function() { console.log("Tick! Tock!"); }, 60000)
+
+
+
+
+
+
+
 
 
 
@@ -152,7 +180,7 @@ const configReply = require('./api/controllers/mail/configReply');
 
 
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 
 app.post('/formulario', (req, res) => {
     massiveMail(req.body);

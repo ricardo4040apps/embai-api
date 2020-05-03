@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 const User = require("../models/user")
 
 const Schema = mongoose.Schema;
@@ -23,25 +23,9 @@ const mySchema = Schema({
 mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model('BankAccount', mySchema, 'bank-accounts');
-//////// super error para buscar porque ??? module.exports = mongoose.model('BankAccount', mySchema, 'bank-accounts');
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
-/*
-module.exports.getInfoUser = function(params, callback) {
-    // console.log("PARAMS", params)
-    // User.populate(mySchema, { path: "user" }, (err, data) => {
-    //         if (err) {
-    //             console.log(err)
-    //         }
-    //         // console.log("SI LLEGO", data)
-    //         return data
-    //     })
-    // this.getAllPagginated(params, callback);
-    // return User.findOne('username').populate('user').exec((err, user) => {
-    //     console.log(user)
-    // })
-}
-*/
+
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;
     if (!params.page) {

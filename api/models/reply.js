@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    contactId: {type: mongoose.Types.ObjectId, ref: "Contact"},
+    contactId: { type: Schema.Types.ObjectId, ref: "Contact" },
     replyed: { type: Boolean },
     replyMessage: { type: String },
 
@@ -52,10 +52,7 @@ module.exports.getAllPagginated = function(params, callback, absolute = false) {
     CurrentModel.paginate(query, options, callback);
 };
 
-module.exports.getById = function(id, callback, absolute = false) {
-    let populate = params.populate
-    delete params.populate
-
+module.exports.getById = function(id, callback, populate = '', absolute = false) {
     CurrentModel.findById(id).populate(populate).exec(callback);
 };
 

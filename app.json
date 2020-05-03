@@ -1,6 +1,6 @@
 {
     "apps": [{
-        "watch": ["app.json", "api", "bin", "app.js", "views"],
+        "watch": ["app.json", "api", "bin", "app.js"],
         "ignore_watch": ["store"],
         "watch_options": {
             "persistent": true,
@@ -27,8 +27,10 @@
             "PUBLIC_URL": "localhost:3000", 
             "DATABASE": "mongodb://localhost:27017/store-test",
             "DATABASE_SECRET":  "yoursecret",
-            "EMAIL_SENDER": "ivleestradasa@ittepic.edu.mx",
-            "EMAIL_PASSWORD": "pjsklnlpr81",
+            "EMAIL_SENDER": "ricardo@4040apps.com",
+            "EMAIL_PASSWORD": "Entrar4040",
+            "EMAIL_SENDER2": "ivleestradasa@ittepic.edu.mx",
+            "EMAIL_PASSWORD2": "pjsklnlpr81",
             "TWILIO_PHONE": "+15097742212",
             "TWILIO_ACCOUNT_SSID": "AC0ff3bbea668437882ce4878c36165172",
             "TWILIO_AUTH_TOKEN": "952ab74264af2c8d461e1277c30e06b7"

@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-
     value: { type: String },
-    tasaInteres: { type: String },
+    tag: { type: String, default: '' }, // weekly, biweekly, monthly 
+    tasaInteres: { type: Number },
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },

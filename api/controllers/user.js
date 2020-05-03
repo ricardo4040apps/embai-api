@@ -40,7 +40,7 @@ module.exports.createClient = function(req, res, next) {
     let errors = User.hasErrors(req.body);
     if (errors) return res.status(400).json(errors.message)
 
-    var authenticate = req.body._authenticate | false;
+    var authenticate = req.body._authenticate || false;
     delete req.body._authenticate 
     
 

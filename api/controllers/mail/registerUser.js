@@ -15,17 +15,15 @@ module.exports = (formulario) => {
     const handlebarOptions = {
         viewEngine: {
             extName: '.hbs',
-            partialsDir: './views/partials/',
-            layoutsDir: './views/',
+            partialsDir: './api/templates/emails/partials/',
+            layoutsDir: './api/templates/emails/',
             defaultLayout: formulario.template,
         },
-        viewPath: './views/',
+        viewPath: './api/templates/emails/',
         extName: '.hbs',
     };
 
     transporter.use('compile', hbs(handlebarOptions));
-
-
 
     const mailOptions = {
         from: `"Gerencia" <embai@gmail.com>`,
@@ -41,18 +39,9 @@ module.exports = (formulario) => {
             newUserMail: formulario.user.email,
 
         }
-        // html: { path: './views/main.ejs' },
-
-        // { path: './public/mail-templates/header.ejs' },
-        // { path: './public/mail-templates/footer.ejs' },,
-        // attachments: [{
-        //     filename: 'header.html',
-        //     path: './public/mail-templates/header.html'
-
-        // }]
 
     };
-    // console.log(mailOptions)
+
     transporter.sendMail(mailOptions, function(err, info) {
         if (err)
             console.log(err)

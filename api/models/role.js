@@ -1,13 +1,15 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 const PermissionModel = require("./permission").model;
 
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
     name: { type: String, required: true },
+    tag: { type: String },
+
     enabled: { type: Boolean, default: true },
 
     permissions: [{ type: Schema.Types.ObjectId, ref: "Permission" }],

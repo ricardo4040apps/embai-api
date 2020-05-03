@@ -12,21 +12,6 @@ require("moment-range");
 const mailCtrl = require("../controllers/mail/solicitud-micro");
 
 module.exports.create = function(req, res, next) {
-    // let errors = Quotation.hasErrors(req.body);
-    // console.log(errors)
-    // if (errors) return res.status(400).json(errors.message)
-    // let userAppointmentDate = new Date(req.body.appointmentDate);
-
-    // let valuationQuery = {
-    //     item: req.body.item,
-    //     material: req.body.material,
-    //     weight: req.body.weight,
-    //     value: req.body.value,
-    //     loanDate: req.body.loanDate,
-    //     recommendedLoan: req.body.recommendedLoan,
-    //     condition: req.body.condition,
-    //     description: req.body.description,
-    // };
 
     let datosFrecuencia;
     let datosBanco;

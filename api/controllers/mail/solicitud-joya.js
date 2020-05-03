@@ -15,11 +15,11 @@ module.exports = (formulario) => {
     const handlebarOptions = {
         viewEngine: {
             extName: '.hbs',
-            partialsDir: './views/partials/',
-            layoutsDir: './views/',
+            partialsDir: './api/templates/emails/partials/',
+            layoutsDir: './api/templates/emails/',
             defaultLayout: formulario.template,
         },
-        viewPath: './views/',
+        viewPath: './api/templates/emails/',
         extName: '.hbs',
     };
 
@@ -68,11 +68,6 @@ module.exports = (formulario) => {
     }
 
     var fechaFinal = (dia + " de " + mes + " del " + año)
-        // console.log("FECHA FINAL", fechaFinal)
-        // console.log("DIA", dia)
-        // console.log("MES", mes)
-        // console.log("AÑO", año)
-        // var fechaFinal = new Date(año, mes, dia)
 
 
     const mailOptions = {
@@ -90,54 +85,15 @@ module.exports = (formulario) => {
             solicitudAppointmentDate: fechaFinal,
             solicitudPhone: formulario.solicitud.phone,
             solicitudSocial: formulario.solicitud.social,
-            // solicitudCard: formulario.solicitud.card,
-            // solicitudRefExt: formulario.solicitud.refExt,
-            // solicitudClabe: formulario.solicitud.clabe,
-            // solicitudBank: formulario.solicitud.bank,
-            // solicitudAuthorization: formulario.solicitud.authorization,
             ///VALUATION
             valuationItem: formulario.valuation.item,
             valuationMaterial: formulario.valuation.material,
             valuationRequestedLoan: formulario.valuation.requestedLoan,
-            // valuationWeight: formulario.valuation.weight,
-            // valuationValue: formulario.valuation.value,
-            // valuationLoanDate: formulario.valuation.loanDate,
-            // valuationRecommendedLoan: formulario.valuation.recommendedLoan,
-            // valuationCondition: formulario.valuation.condition,
-            // valuationDescription: formulario.valuation.description,
-
 
         }
-        // ,
-        // attachments: [{
-        //         filename: 'twitter.png',
-        //         path: './public/img/',
-        //         cid: 'twitter' //same cid value as in the html img src
-        //     }, {
-        //         filename: 'facebook.png',
-        //         path: './public/img/',
-        //         cid: 'facebook' //same cid value as in the html img src
-        //     }, {
-        //         filename: 'gmail.png',
-        //         path: './public/img/',
-        //         cid: 'gmail' //same cid value as in the html img src
-        //     }, {
-        //         filename: 'logo.jfif',
-        //         path: './public/img/',
-        //         cid: 'logo' //same cid value as in the html img src
-        //     }, ]
-        // html: { path: './views/main.ejs' },
-
-        // { path: './public/mail-templates/header.ejs' },
-        // { path: './public/mail-templates/footer.ejs' },,
-        // attachments: [{
-        //     filename: 'header.html',
-        //     path: './public/mail-templates/header.html'
-
-        // }]
 
     };
-    // console.log(mailOptions)
+
     transporter.sendMail(mailOptions, function(err, info) {
         if (err)
             console.log(err)
