@@ -50,6 +50,7 @@ module.exports.create = function(req, res, next) {
             };
             let solicitudQuery = {
                 type: "Joyeria",
+                user: req.body.user,
                 name: req.body.name,
                 lastName: req.body.lastName,
                 email: req.body.email,
