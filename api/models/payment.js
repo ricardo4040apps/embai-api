@@ -26,8 +26,6 @@ const mySchema = Schema({
     // periodo: ,
     // meses: ,
 
-    // micro-prestamo o prestamo-joyeria ??? borrar otro
-
 
 
     //// prestamo cual es ???? preguntar a leo

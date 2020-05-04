@@ -32,7 +32,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("PrestamoJoyeria", mySchema, "prestamo-joyerias");
+const CurrentModel = mongoose.model("Prestamo", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
