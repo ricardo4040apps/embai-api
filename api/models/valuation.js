@@ -12,7 +12,7 @@ const mySchema = Schema({
     // value: { type: String },
     loanDate: { type: Date },
     requestedLoan: { type: String },
-    // recommendedLoan: { type: String },
+    recommendedLoan: { type: String },
     condition: { type: String },
     description: { type: String },
     valuatorComments: { type: String },
