@@ -26,6 +26,17 @@ module.exports.getById = function(req, res, next) {
     });
 }
 
+module.exports.getByIdUser = function(req, res, next) {
+    req.query.valuatorId = req.params.id //ReceiverId es el nombre del campo por el que buscaras
+    Valuation.getAll(req.query, (err, data) => {
+        if (err) {
+            console.error("route Valuation get:", err)
+            return res.status(500).json('Failed to get  Valuation')
+        }
+        res.status(200).json(data)
+    });
+}
+
 
 module.exports.create = function(req, res, next) {
     let errors = Valuation.hasErrors(req.body);
