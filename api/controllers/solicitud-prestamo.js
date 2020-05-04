@@ -27,7 +27,7 @@ module.exports.getById = function(req, res, next) {
 }
 
 module.exports.getByIdUser = function(req, res, next) {
-    req.query.user = req.params.id
+    req.query._id = req.params.id
     Solicitud.getAll(req.query, (err, data) => {
         if (err) {
             console.error("route Solicitud get:", err)
