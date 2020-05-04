@@ -1,17 +1,21 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 const PermissionModel = require("./permission").model;
 
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-    name: { type: String, unique: true, required: true },
+    name: { type: String, required: true },
+    tag: { type: String },
+
     enabled: { type: Boolean, default: true },
 
     permissions: [{ type: Schema.Types.ObjectId, ref: "Permission" }],
 
+    canDelete: { type: Boolean, default: true },
+    
     deleted: { type: Boolean, default: false },
     _deletedBy: Schema.Types.ObjectId,
     updatedAt: { type: Date, default: Date.now },
@@ -26,7 +30,9 @@ module.exports.model = CurrentModel;
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
-module.exports.getAll = function(params, callback) {
+module.exports.getAll = function(params, callback, absolute = false) {
+    if (!absolute) params.deleted = false;
+
     if (!params.page) {
         CurrentModel.find(params, callback);
     } else {
@@ -65,11 +71,12 @@ module.exports.absoluteDeleteById = function(id, callback) {
 };
 
 module.exports.deleteById = function(id, callback) {
-    let query = { _id: id };
-    let options = {};
+    let query = { _id: id, canDelete: true, deleted: false };
+    let options = { upsert: false };
     let data = { deleted: true };
 
-    CurrentModel.update(query, data, options, callback);
+    CurrentModel.findOneAndUpdate(query, data, options, callback);
+    //CurrentModel.update(query, data, options, callback);
 };
 
 /*  - - - - - - - - - - - -     E N D  C R U D     - - - - - - - - - - - - */
@@ -114,20 +121,21 @@ module.exports.getPermissions = function(id, callback) {
 /*  - - - - - - - - - - - -     P R I V A T E     - - - - - - - - - - - - */
 
 let processQuery = function(filters, strQ = "") {
-    if (!strQ) return null;
+    let query = { $and: [filters] };
+
+    if (!strQ) return query;
     let exp = new RegExp(strQ.toLowerCase(), "i");
 
-    return {
-        $and: [
-            filters,
-            {
-                $or: [
-                    // strings
-                    { name: exp }
-                ]
-            }
+    let searchQuery = {
+        $or: [
+            // informacion prestamo joyeria
+            { nale: exp }
         ]
     };
+    query.$and.push(searchQuery);
+    // console.log('query', require('util').inspect(query, {depth:null}))
+
+    return query;
 };
 
 /*  - - - - - - - - - - - -     E N D  P R I V A T E     - - - - - - - - - - - - */

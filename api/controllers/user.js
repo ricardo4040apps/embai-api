@@ -3,6 +3,8 @@ var router = express.Router();
 const User = require('../models/user');
 const passportMiddleware = require('../middlewares/passport');
 const mailCtrl = require('../controllers/mail/registerUser');
+const authCtrl = require('../controllers/auth');
+
 
 /////////////CUSTOM
 module.exports.searchUsers = function(req, res, next) {
@@ -14,12 +16,12 @@ module.exports.searchUsers = function(req, res, next) {
             console.error("route users get:", err)
             return res.status(500).json('Failed to get users')
         }
-        console.log("DATA", data)
         if (data.length === 0) {
             console.log("VACIO")
+            res.status(404).json(respuesta)
             return
-
         }
+
         console.log("ENCONTRADO!")
         var respuesta = {
             id: data[0]._id,
@@ -30,8 +32,6 @@ module.exports.searchUsers = function(req, res, next) {
         }
         console.log("RESPUESTA", respuesta)
         res.status(200).json(respuesta)
-
-
     });
 }
 
@@ -40,22 +40,32 @@ module.exports.createClient = function(req, res, next) {
     let errors = User.hasErrors(req.body);
     if (errors) return res.status(400).json(errors.message)
 
+    var authenticate = req.body._authenticate || false;
+    delete req.body._authenticate 
+    
 
-    /// AAAAAAqui va restriccicon de campos para luis
+    /// AAAAAAqui va restriccion de campos para luis
 
     User.add(req.body, (err, data) => {
+
+
         if (err) {
             console.error("route users post:", err)
             return res.status(500).json('Failed to register new User')
         }
-        let user = {
+
+        let mailPayload = {
             user: data,
             template: 'newuser'
         }
-        res.status(201).json(data)
-        mailCtrl(user)
+        mailCtrl(mailPayload)
 
-        //res.status(201).json('User registered')
+        if (authenticate){
+            let respToken = authCtrl.generateToken(data);
+            res.status(200).json(respToken)    
+        } else {
+            res.status(201).json(data)
+        }
     });
 }
 
@@ -165,3 +175,4 @@ module.exports.isUsernameBussy = function(req, res, next) {
     });
 
 }
+

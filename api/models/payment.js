@@ -1,17 +1,38 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-    plazo: { type: String },
-    monto: { type: String },
-    nperiodos: { type: String },
-    tipo: { type: String },
-    esquema: { type: String },
-    tasaInteres: { type: String },
+    // cliente
+    // prestamo
+    // fecha
+    // amount
+    // interest
+    // interes moratorio
+    // total
+    // origen
+    // referencia
+
+    // micro-prestamo o prestamo-joyeria ??? borrar otro
+    // esto es para el ganador
+    client: [{ type: Schema.Types.ObjectId, ref: "User" }],
+    interesRate: { type: Number, required: true },
+    amount: { type: Number, required: true },
+    valuation: { type: Schema.Types.ObjectId, ref: "Valuation" },
+    type: { type: String, required:true }, // microprestamo, prestamoprenda
+    //periodo: ,
+    //meses: ,
+
+
+
+
+    //// prestamo cual es ???? preguntar a leo
+        // a prestmo poner el tipo ??? 
+        // a solicitud poner el tipo
+
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -21,7 +42,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('tabla-amortizacion', mySchema);
+const CurrentModel = mongoose.model('Payment', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
@@ -103,7 +124,8 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            // { name: exp },
+            { value: exp },
+
         ]
     };
     query.$and.push(searchQuery);

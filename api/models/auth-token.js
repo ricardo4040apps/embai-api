@@ -1,32 +1,35 @@
-const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
-const mongoosePaginate = require('mongoose-paginate-v2');
+const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
+const mongoosePaginate = require("mongoose-paginate-v2");
 
 
-const Schema = mongoose.Schema
+const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-    user: { type: String },
-    cutOffDate: { type: Date },
-    esquema: { type: String },
-    value: { type: String },
+
+    token: String,
+    user: { type: Schema.ObjectId, ref: "User" },
+    expirtion: { type: Date },
+    status: { type: String, default: 'active' }, // active, closed, expired
+
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
     deleted: { type: Boolean, default: false },
     _deletedBy: Schema.Types.ObjectId
-
-})
+});
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("PrestamoJoyeria", mySchema, "prestamo-joyerias");
+const CurrentModel = mongoose.model('AuthToken', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;
     if (!params.page) {
+        console.log(1)
+
         CurrentModel.find(params, callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
@@ -51,8 +54,6 @@ module.exports.getAllPagginated = function(params, callback, absolute = false) {
 module.exports.getById = function(id, callback, absolute = false) {
     CurrentModel.findById(id, callback);
 };
-
-
 
 module.exports.add = function(data, callback) {
     let newUser = new CurrentModel(data);
@@ -103,12 +104,16 @@ let processQuery = function(filters, strQ = "") {
 
     let searchQuery = {
         $or: [
-            // informacion prestamo joyeria
-            { user: exp },
-            { cutOffDate: exp },
-            { esquema: exp },
-            { value: exp },
-
+            // strings
+            { picture: exp },
+            { title: exp },
+            { description: exp },
+            // { status: exp },
+            // { initDate: exp },
+            // { finalDate: exp },
+            { styleBack: exp },
+            { styleFont: exp },
+            // { valid: exp },
         ]
     };
     query.$and.push(searchQuery);

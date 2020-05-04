@@ -9,35 +9,43 @@ const frecuencyModel = require('../models/frequency');
 module.exports.get = function(req, res, next) {
     let frecuenciaId = req.body.frecuenciaId;
     let monto = req.body.monto;
-    let nperiodos = req.body.nperiodos;
+    console.log()
+    let nMeses = req.body.nmeses;
     let tipo = req.body.tipo;
     let esquema = req.body.esquema;
     let final = monto;
     let periodos = [];
+    var nPer = 0;
     let respuesta;
-    let tasaInteres;
-    let datos;
+    var tasaInteresPeriodo = 0;
 
     frecuencyModel.getById(frecuenciaId, (err, data) => {
         if (err) {
             console.error("route id get:", err)
             return res.status(500).json('Failed to get id')
         }
-        datos = data;
 
-        console.log("DATOS", datos)
-        let frecuencia = datos.value;
-
-        if (frecuencia == '') {
-            tasaInteres = '4.25'
+        console.log("DATOS:: ", data)
+        
+        if (data.tag == 'weekly') {
+            tasaInteresPeriodo = data.tasaInteres / 4; 
+            nPer = nMeses * 4;
+        } else if (data.tag == 'biweekly') {
+            tasaInteresPeriodo = data.tasaInteres / 2;
+            nPer = nMeses * 2;
+        } else if (data.tag == 'monthly') {
+            tasaInteresPeriodo = data.tasaInteres;
+            nPer = nMeses;
         }
 
-        for (let i = 0; i < nperiodos; i++) {
+        let frecuencia = data.value;
+
+        for (let i = 0; i < nPer; i++) {
             let inicial = final;
-            let interes = (inicial * datos.tasaInteres) / 100;
-            let divisor = ((monto) * (datos.tasaInteres / 100)).toFixed(2)
-            let divPai = (1 + (datos.tasaInteres / 100))
-            let elevar = Math.pow((divPai), (-nperiodos))
+            let interes = (inicial * tasaInteresPeriodo) / 100;
+            let divisor = ((monto) * (tasaInteresPeriodo / 100)).toFixed(2)
+            let divPai = (1 + (tasaInteresPeriodo / 100))
+            let elevar = Math.pow((divPai), (-nPer))
             let PAI = (divisor / (1 - elevar));
             let amorti = PAI - interes;
             let IVA = interes * 0.16;
@@ -60,7 +68,8 @@ module.exports.get = function(req, res, next) {
                 monto: monto,
                 frecuencia: frecuencia,
                 esquema: esquema,
-                nperiodos: nperiodos,
+                nmeses: nMeses,
+                nPeriodos: nPer,
                 periodos: periodos
             }
         }

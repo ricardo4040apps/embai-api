@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 
 const Schema = mongoose.Schema;
 
@@ -25,15 +25,13 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('ads', mySchema);
+const CurrentModel = mongoose.model('Ads', mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
     if (!absolute) params.deleted = false;
     if (!params.page) {
-        console.log(1)
-
         CurrentModel.find(params, callback);
     } else {
         this.getAllPagginated(params, callback, absolute);

@@ -21,7 +21,7 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model('bank-information', mySchema);
+const CurrentModel = mongoose.model('BankInformation', mySchema, 'bank-informations');
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 

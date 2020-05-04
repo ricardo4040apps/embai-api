@@ -13,8 +13,7 @@ router.get('/user/:id', function(req, res, next) { //Hasta arriba para no interf
 // });
 
 router.get('/', passportMiddleware, function(req, res, next) {
-    AccountsCtrl.getInfoUser(req, res, next);
-    // AccountsCtrl.get(req, res, next);
+    AccountsCtrl.get(req, res, next);
 });
 
 router.get('/:id', passportMiddleware, function(req, res, next) {

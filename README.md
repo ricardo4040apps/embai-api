@@ -49,25 +49,23 @@ on my mac
 
 
 Mongo permisos
-	https://www.youtube.com/watch?v=SY_9zwb29LA
+	https://ianlondon.github.io/blog/mongodb-auth/
 	https://docs.mongodb.com/manual/tutorial/enable-authentication/
     
     commands
         use admin   show users  show roles   db.getUsers()
         db.auth("root", "TXEA2wd2PEDM")
 
+        db.auth("myTester", "Entrar")
+        Mongo user store-test
+	        myTester
+	        Entrar
 
-
-db.auth("myTester", "Entrar")
-Mongo user store-test
-	myTester
-	Entrar
-
-mongo -u root -p TXEA2wd2PEDM
-db.auth("root", "TXEA2wd2PEDM")
-Mongo user admin
-	root
-	TXEA2wd2PEDM
+        mongo -u root -p TXEA2wd2PEDM
+        db.auth("root", "TXEA2wd2PEDM")
+            Mongo user admin
+	        root
+	        TXEA2wd2PEDM
 
 
 

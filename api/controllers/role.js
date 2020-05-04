@@ -30,7 +30,7 @@ module.exports.getById = function(req, res, next) {
 module.exports.create = function(req, res, next) {
     let errors = Role.hasErrors(req.body);
     console.log(errors);
-    if (errors) return res.status(400).json(errors.message);
+    //if (errors) return res.status(400).json(errors.message);
 
     Role.add(req.body, (err, data) => {
         if (err) {
@@ -58,7 +58,11 @@ module.exports.deleteById = function(req, res, next) {
             console.error("route roles delete:", err);
             return res.status(500).json("Failed to delete role");
         }
-        res.status(204).json(data);
+        if (data) {
+            return res.status(204).json(data);   
+        }
+
+        res.status(404).json("Dosent exist!");
     });
 }
 

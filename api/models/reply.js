@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const mongoosePaginate = require("mongoose-paginate-v2");
-const queryHelper = require("../helpers/query");
+
 
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    contactId: { type: Schema.Types.ObjectId, ref: "User" },
+    contactId: { type: Schema.Types.ObjectId, ref: "Contact" },
     replyed: { type: Boolean },
     replyMessage: { type: String },
 
@@ -19,36 +19,41 @@ const mySchema = Schema({
 
 mySchema.plugin(mongoosePaginate);
 
-const CurrentModel = mongoose.model("reply", mySchema);
+const CurrentModel = mongoose.model("Reply", mySchema);
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
+    
     if (!absolute) params.deleted = false;
     if (!params.page) {
-        CurrentModel.find(params).populate('contactId').exec(callback);
+        let populate = params.populate
+        delete params.populate
+        CurrentModel.find(params)
+        .populate(populate)
+        .exec(callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
     }
 };
 
 module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
-
-    const { page, limit, sort, q, ...filters } = params;
+    const { page, limit, sort, q, populate, ...filters } = params;
     const options = {
         page: page || 1,
         limit: limit || 10,
-        sort: sort
+        sort: sort,
+        populate
     };
 
     let query = processQuery(filters, q);
-
+    
+    
     CurrentModel.paginate(query, options, callback);
 };
 
-module.exports.getById = function(id, callback, absolute = false) {
-    CurrentModel.findById(id, callback);
+module.exports.getById = function(id, callback, populate = '', absolute = false) {
+    CurrentModel.findById(id).populate(populate).exec(callback);
 };
 
 module.exports.add = function(data, callback) {
@@ -101,8 +106,6 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            // { contactId: exp },
-            // { replyed: exp },
             { replyMessage: exp },
         ]
     };
