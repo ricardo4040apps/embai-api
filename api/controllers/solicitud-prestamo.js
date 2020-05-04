@@ -26,6 +26,17 @@ module.exports.getById = function(req, res, next) {
     });
 }
 
+module.exports.getByIdUser = function(req, res, next) {
+    req.query.user = req.params.id
+    Solicitud.getAll(req.query, (err, data) => {
+        if (err) {
+            console.error("route Solicitud get:", err)
+            return res.status(500).json('Failed to get  Solicitud')
+        }
+        res.status(200).json(data)
+    });
+}
+
 
 module.exports.create = function(req, res, next) {
     let errors = Solicitud.hasErrors(req.body);
