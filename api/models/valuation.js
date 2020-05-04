@@ -23,7 +23,7 @@ const mySchema = Schema({
     ticketNum: { type: String },
     ticket: { type: String },
     receiverId: { type: Schema.ObjectId, ref: "User" },
-    status: { type: String, default: 'created' },
+    status: { type: String, default: 'created' }, // created, ...
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },

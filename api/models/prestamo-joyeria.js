@@ -8,8 +8,20 @@ const Schema = mongoose.Schema
 const mySchema = Schema({
     user: { type: String },
     cutOffDate: { type: Date },
-    esquema: { type: String },
     value: { type: String },
+
+
+
+    type: { type: String },  // Micro-Prestamo, Joyeria
+    solicitudId: { type: Schema.ObjectId, ref: "solicitud" },
+    valuationId: { type: Schema.ObjectId, ref: "Valuation" },
+
+
+    esquema: { type: String }, // que es????
+    paymentFrecuenty: { type: Schema.ObjectId, ref: "Frequency" },
+    tazaInteres: Number,
+    plazo: Number,
+
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },

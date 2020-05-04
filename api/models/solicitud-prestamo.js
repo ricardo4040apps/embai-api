@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    type: { type: String },
+    type: { type: String },  // Micro-Prestamo, Joyeria
     // object
     pawnObjectTypeId: Schema.Types.ObjectId,
     pawnObjectPurityId: Schema.Types.ObjectId,

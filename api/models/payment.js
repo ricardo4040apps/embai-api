@@ -6,6 +6,7 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
+
     // cliente
     // prestamo
     // fecha
@@ -13,19 +14,19 @@ const mySchema = Schema({
     // interest
     // interes moratorio
     // total
-    // origen
+    // origen // targeta, local, transferencia, oxxo etc
     // referencia
 
-    // micro-prestamo o prestamo-joyeria ??? borrar otro
     // esto es para el ganador
     client: [{ type: Schema.Types.ObjectId, ref: "User" }],
     interesRate: { type: Number, required: true },
     amount: { type: Number, required: true },
     valuation: { type: Schema.Types.ObjectId, ref: "Valuation" },
-    type: { type: String, required:true }, // microprestamo, prestamoprenda
-    //periodo: ,
-    //meses: ,
+    type: { type: String, required:true }, // Micro-Prestamo, Joyeria
+    // periodo: ,
+    // meses: ,
 
+    // micro-prestamo o prestamo-joyeria ??? borrar otro
 
 
 
