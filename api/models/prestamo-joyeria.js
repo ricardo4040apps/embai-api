@@ -57,7 +57,7 @@ module.exports.getAllPagginated = function(params, callback, absolute = false) {
         page: page || 1,
         limit: limit || 10,
         sort: sort,
-        populate: populate,
+        populate
     };
 
     let query = processQuery(filters, q);

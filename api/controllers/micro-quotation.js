@@ -30,7 +30,7 @@ module.exports.create = function(req, res, next) {
             datosFrecuencia = dataFrequency;
             let solicitudQuery = {
                 type: "Micro-Prestamo",
-                user: req.body.user,
+                userId: req.body.userId,
                 name: req.body.name,
                 lastName: req.body.lastName,
                 email: req.body.email,

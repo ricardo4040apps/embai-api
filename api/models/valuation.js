@@ -19,6 +19,7 @@ const mySchema = Schema({
     actualValue: { type: String },
     solicitudId: { type: Schema.ObjectId, ref: "solicitud" },
     valuatorId: { type: Schema.ObjectId, ref: "User" },
+    userId: { type: Schema.ObjectId, ref: "User" },
     receptionDate: { type: Date },
     ticketNum: { type: String },
     ticket: { type: String },
