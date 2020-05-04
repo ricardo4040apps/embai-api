@@ -233,7 +233,7 @@ var deleteFile = function(src) {
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - */
 
 router.get("/tickets-valuate/:name", function(req, res, next) {
-    var src = './store/tickets/' + req.params.name
+    var src = './store/tickets/' + req.params.name;
 
     fs.readFile(src, "binary", function(err, data) {
         if (err) {

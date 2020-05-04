@@ -6,6 +6,11 @@ const solicitudCtrl = require('../controllers/solicitud-prestamo');
 
 /* GET users listing. */
 
+router.get('/user/:id', function(req, res, next) { //Hasta arriba para no interferir
+    solicitudCtrl.getByIdUser(req, res, next);
+});
+
+
 router.get('/', passportMiddleware, function(req, res, next) {
     solicitudCtrl.get(req, res, next);
 });

@@ -6,6 +6,10 @@ const valuationCtrl = require('../controllers/valuation');
 
 /* GET users listing. */
 
+router.get('/user/:id', function(req, res, next) { //Hasta arriba para no interferir
+    valuationCtrl.getByIdUser(req, res, next);
+});
+
 router.get('/', passportMiddleware, function(req, res, next) {
     valuationCtrl.get(req, res, next);
 });

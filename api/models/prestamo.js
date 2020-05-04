@@ -6,13 +6,13 @@ const mongoosePaginate = require('mongoose-paginate-v2');
 const Schema = mongoose.Schema
 
 const mySchema = Schema({
-    user: { type: String },
+    user: { type: Schema.ObjectId, ref: "User" },
     cutOffDate: { type: Date },
     value: { type: String },
 
 
 
-    type: { type: String },  // Micro-Prestamo, Joyeria
+    type: { type: String }, // Micro-Prestamo, Joyeria
     solicitudId: { type: Schema.ObjectId, ref: "solicitud" },
     valuationId: { type: Schema.ObjectId, ref: "Valuation" },
 
@@ -37,31 +37,37 @@ const CurrentModel = mongoose.model("Prestamo", mySchema);
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
+
     if (!absolute) params.deleted = false;
     if (!params.page) {
-        CurrentModel.find(params, callback);
+        let populate = params.populate
+        delete params.populate
+        CurrentModel.find(params)
+            .populate(populate)
+            .exec(callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
     }
 };
 
 module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
-
-    const { page, limit, sort, q, ...filters } = params;
+    console.log("PARAMETROS", params)
+    const { page, limit, sort, q, populate, ...filters } = params;
     const options = {
         page: page || 1,
         limit: limit || 10,
-        sort: sort
+        sort: sort,
+        populate: populate,
     };
 
     let query = processQuery(filters, q);
 
+
     CurrentModel.paginate(query, options, callback);
 };
 
-module.exports.getById = function(id, callback, absolute = false) {
-    CurrentModel.findById(id, callback);
+module.exports.getById = function(id, callback, populate = '', absolute = false) {
+    CurrentModel.findById(id).populate(populate).exec(callback);
 };
 
 

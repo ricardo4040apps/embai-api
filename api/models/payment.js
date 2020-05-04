@@ -22,15 +22,15 @@ const mySchema = Schema({
     interesRate: { type: Number, required: true },
     amount: { type: Number, required: true },
     valuation: { type: Schema.Types.ObjectId, ref: "Valuation" },
-    type: { type: String, required:true }, // Micro-Prestamo, Joyeria
+    type: { type: String, required: true }, // Micro-Prestamo, Joyeria
     // periodo: ,
     // meses: ,
 
 
 
     //// prestamo cual es ???? preguntar a leo
-        // a prestmo poner el tipo ??? 
-        // a solicitud poner el tipo
+    // a prestmo poner el tipo ??? 
+    // a solicitud poner el tipo
 
 
     updatedAt: { type: Date, default: Date.now },
@@ -46,31 +46,36 @@ const CurrentModel = mongoose.model('Payment', mySchema);
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
+
     if (!absolute) params.deleted = false;
     if (!params.page) {
-        CurrentModel.find(params, callback);
+        let populate = params.populate
+        delete params.populate
+        CurrentModel.find(params)
+            .populate(populate)
+            .exec(callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
     }
 };
 
 module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
-
-    const { page, limit, sort, q, ...filters } = params;
+    const { page, limit, sort, q, populate, ...filters } = params;
     const options = {
         page: page || 1,
         limit: limit || 10,
-        sort: sort
+        sort: sort,
+        populate
     };
 
     let query = processQuery(filters, q);
 
+
     CurrentModel.paginate(query, options, callback);
 };
 
-module.exports.getById = function(id, callback, absolute = false) {
-    CurrentModel.findById(id, callback);
+module.exports.getById = function(id, callback, populate = '', absolute = false) {
+    CurrentModel.findById(id).populate(populate).exec(callback);
 };
 
 module.exports.add = function(data, callback) {

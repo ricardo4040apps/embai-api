@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const mySchema = Schema({
 
-    type: { type: String },  // Micro-Prestamo, Joyeria
+    type: { type: String }, // Micro-Prestamo, Joyeria
     // object
     pawnObjectTypeId: Schema.Types.ObjectId,
     pawnObjectPurityId: Schema.Types.ObjectId,
@@ -18,6 +18,7 @@ const mySchema = Schema({
     refrendo: Schema.Types.ObjectId,
 
     // user info
+    user: { type: Schema.ObjectId, ref: "User" },
     name: { type: String },
     lastName: { type: String },
     email: { type: String },
@@ -52,31 +53,36 @@ module.exports = mongoose.model('Solicitud', mySchema)
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
 module.exports.getAll = function(params, callback, absolute = false) {
+
     if (!absolute) params.deleted = false;
     if (!params.page) {
-        CurrentModel.find(params, callback);
+        let populate = params.populate
+        delete params.populate
+        CurrentModel.find(params)
+            .populate(populate)
+            .exec(callback);
     } else {
         this.getAllPagginated(params, callback, absolute);
     }
 };
 
 module.exports.getAllPagginated = function(params, callback, absolute = false) {
-    //if (!absolute) params.deleted = false;
-
-    const { page, limit, sort, q, ...filters } = params;
+    const { page, limit, sort, q, populate, ...filters } = params;
     const options = {
         page: page || 1,
         limit: limit || 10,
-        sort: sort
+        sort: sort,
+        populate
     };
 
     let query = processQuery(filters, q);
 
+
     CurrentModel.paginate(query, options, callback);
 };
 
-module.exports.getById = function(id, callback, absolute = false) {
-    CurrentModel.findById(id, callback);
+module.exports.getById = function(id, callback, populate = '', absolute = false) {
+    CurrentModel.findById(id).populate(populate).exec(callback);
 };
 
 module.exports.add = function(data, callback) {
