@@ -18,7 +18,7 @@ const mySchema = Schema({
     refrendo: Schema.Types.ObjectId,
 
     // user info
-    user: { type: Schema.ObjectId, ref: "User" },
+    userId: { type: Schema.ObjectId, ref: "User" },
     name: { type: String },
     lastName: { type: String },
     email: { type: String },
@@ -35,7 +35,6 @@ const mySchema = Schema({
     //
     clabe: { type: String },
     authorization: { type: String },
-    userId: Schema.Types.ObjectId,
     paymentFrecuenty: Schema.Types.ObjectId,
 
 

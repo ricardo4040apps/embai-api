@@ -38,6 +38,7 @@ module.exports.create = function(req, res, next) {
             datosTipoPrenda = dataObj;
 
             let valuationQuery = {
+                userId: req.body.userId,
                 item: datosTipoPrenda.name,
                 description: req.body.description,
                 requestedLoan: req.body.requestedLoan,
@@ -50,7 +51,7 @@ module.exports.create = function(req, res, next) {
             };
             let solicitudQuery = {
                 type: "Joyeria",
-                user: req.body.user,
+                userId: req.body.userId,
                 name: req.body.name,
                 lastName: req.body.lastName,
                 email: req.body.email,
