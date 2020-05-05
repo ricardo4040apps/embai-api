@@ -125,7 +125,6 @@ let processQuery = function(filters, strQ = "") {
             { item: exp },
             // { value: exp },
             // { loanDate: exp },
-            { item: exp },
             // { material: exp },
             // { weight: exp },
             { recommendedLoan: exp },
