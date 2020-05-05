@@ -27,7 +27,7 @@ module.exports.getById = function(req, res, next) {
 }
 
 module.exports.getByIdUser = function(req, res, next) {
-    req.query.valuatorId = req.params.id //ReceiverId es el nombre del campo por el que buscaras
+    req.query.userId = req.params.id //userId es el nombre del campo por el que buscaras
     Valuation.getAll(req.query, (err, data) => {
         if (err) {
             console.error("route Valuation get:", err)
