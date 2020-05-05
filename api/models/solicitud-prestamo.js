@@ -19,6 +19,7 @@ const mySchema = Schema({
 
     // user info
     userId: { type: Schema.ObjectId, ref: "User" },
+    valuationId: { type: Schema.ObjectId, ref: "Valuation" },
     name: { type: String },
     lastName: { type: String },
     email: { type: String },

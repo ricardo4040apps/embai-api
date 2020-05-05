@@ -52,6 +52,7 @@ module.exports.create = function(req, res, next) {
             let solicitudQuery = {
                 type: "Joyeria",
                 userId: req.body.userId,
+                valuationId: null,
                 name: req.body.name,
                 lastName: req.body.lastName,
                 email: req.body.email,
@@ -94,15 +95,25 @@ module.exports.create = function(req, res, next) {
                                         .status(500)
                                         .json("Failed to register new valuation");
                                 }
+                                solicitudQuery.valuationId = dataValuation._id;
+                                Solicitud.update(dataSolicitud._id, solicitudQuery, (err, dataUpdateSolicitud) => {
+                                    if (err) {
+                                        console.error("route Solicitud post:", err);
+                                        return res
+                                            .status(500)
+                                            .json("Failed to Update Solicitud");
+                                    }
+                                    console.log("SE ACTUALIZO EL ID DE SOLICITUD")
+                                    let respuesta = {
+                                        solicitud: dataUpdateSolicitud,
+                                        valuation: dataValuation,
+                                        template: "quotation",
+                                    };
+                                    console.log(respuesta);
+                                    res.status(201).json(respuesta);
+                                    mailCtrl(respuesta);
+                                })
 
-                                let respuesta = {
-                                    solicitud: dataSolicitud,
-                                    valuation: dataValuation,
-                                    template: "quotation",
-                                };
-                                console.log(respuesta);
-                                res.status(201).json(respuesta);
-                                mailCtrl(respuesta);
                             });
                         });
                     }
