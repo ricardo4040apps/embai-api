@@ -94,6 +94,16 @@ module.exports.create = function(req, res, next) {
                                         .status(500)
                                         .json("Failed to register new valuation");
                                 }
+                                solicitudQuery.valuationdId = dataValuation._id;
+                                Solicitud.update(solicitudQuery, (err, dataUpdateSolicitud) => {
+                                    if (err) {
+                                        console.error("route Solicitud post:", err);
+                                        return res
+                                            .status(500)
+                                            .json("Failed to Update Solicitud");
+                                    }
+                                    console.log("SE ACTUALIZO EL ID DE SOLICITUD")
+                                })
 
                                 let respuesta = {
                                     solicitud: dataSolicitud,
