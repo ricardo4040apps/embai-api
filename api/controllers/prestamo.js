@@ -1,6 +1,4 @@
-var express = require('express');
 const Prestamo = require('../models/prestamo');
-const passportMiddleware = require('../middlewares/passport');
 
 
 /* GET users listing. */

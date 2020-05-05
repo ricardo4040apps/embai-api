@@ -81,6 +81,11 @@ module.exports.processMasiveMails = function(data) {
 
 
 
+
+
+
+
+
 function sendEmail(mailOptions) {
     transporter.sendMail(mailOptions, function(err, info) {
         if (err) {

@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcryptjs');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 
@@ -11,7 +10,6 @@ const mySchema = Schema({
     value: { type: String },
 
 
-
     type: { type: String }, // Micro-Prestamo, Joyeria
     solicitudId: { type: Schema.ObjectId, ref: "solicitud" },
     valuationId: { type: Schema.ObjectId, ref: "Valuation" },
@@ -21,7 +19,8 @@ const mySchema = Schema({
     paymentFrecuenty: { type: Schema.ObjectId, ref: "Frequency" },
     tazaInteres: Number,
     plazo: Number,
-
+    status: {type: String, default: 'active' }, // active, delayed, paid, expired 
+    
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
