@@ -6,32 +6,18 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
-
-    // cliente
-    // prestamo
-    // fecha
-    // amount
-    // interest
-    // interes moratorio
-    // total
-    // origen // targeta, local, transferencia, oxxo etc
-    // referencia
-
-    // esto es para el ganador
-    client: [{ type: Schema.Types.ObjectId, ref: "User" }],
+ 
+    type: { type: String, required: true }, // local, tranference, bank-card, oxxo, ...
+    client: { type: Schema.Types.ObjectId, ref: "User" },
+    loan: { type: Schema.Types.ObjectId, ref: "Prestamo" },
     interesRate: { type: Number, required: true },
     amount: { type: Number, required: true },
-    valuation: { type: Schema.Types.ObjectId, ref: "Valuation" },
-    type: { type: String, required: true }, // Micro-Prestamo, Joyeria
-    // periodo: ,
-    // meses: ,
-
-
-
-    //// prestamo cual es ???? preguntar a leo
-    // a prestmo poner el tipo ??? 
-    // a solicitud poner el tipo
-
+    interest: { type: Number }, // interes prestamo
+    statutoryInterest: { type: Number }, // interes moratorio
+    total: { type: Number, required: true },
+    paymentDate: { type: Date},
+    reference:  { type: String },
+    
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
