@@ -11,11 +11,22 @@ const mySchema = Schema({
     type: { type: String }, // Micro-Prestamo, Joyeria
     solicitudId: { type: Schema.ObjectId, ref: "solicitud" },
     valuationId: { type: Schema.ObjectId, ref: "Valuation" },
+<<<<<<< HEAD
     esquema: { type: String }, // que es????
     paymentFrecuenty: { type: Schema.ObjectId, ref: "Frequency" },
     tazaInteres: Number,
     plazo: Number,
     status: { type: String, default: 'active' }, // active, delayed, paid, expired 
+=======
+
+
+    paymentPlan: { type: Schema.ObjectId, ref: "Tiempo" }, // FRECUENCIA DE PAGO
+    // paymentFrecuenty: { type: Schema.ObjectId, ref: "Frequency" },
+    tazaInteres: Number,
+    plazo: Number,
+    status: { type: String, default: 'active' }, // active, delayed, paid, expired 
+
+>>>>>>> 54c571380d8adef0dfea835aa2715c07ede2b6b4
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
