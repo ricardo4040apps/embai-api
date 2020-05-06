@@ -9,7 +9,8 @@ const mySchema = Schema({
 
     type: { type: String, required: true }, // local, tranference, bank-card, oxxo, ...
     client: { type: Schema.Types.ObjectId, ref: "User" },
-    loan: { type: Schema.Types.ObjectId, ref: "Prestamo" },
+    // loan: { type: Schema.Types.ObjectId, ref: "Prestamo" },
+    loan: { type: String, required: true },
     interesRate: { type: Number, required: true },
     amount: { type: Number, required: true },
     interest: { type: Number }, // interes prestamo
@@ -17,7 +18,6 @@ const mySchema = Schema({
     total: { type: Number, required: true },
     paymentDate: { type: Date },
     reference: { type: String },
-
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },

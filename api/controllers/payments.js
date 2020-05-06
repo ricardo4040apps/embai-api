@@ -27,7 +27,7 @@ module.exports.getById = function(req, res, next) {
 }
 
 module.exports.getByIdUser = function(req, res, next) {
-    req.query.userId = req.params.id //userId es el nombre del campo por el que buscaras
+    req.query.client = req.params.id //userId es el nombre del campo por el que buscaras
     Payment.getAll(req.query, (err, data) => {
         if (err) {
             console.error("route Payment get:", err)
