@@ -3,6 +3,9 @@ var router = express.Router();
 const passportMiddleware = require('../middlewares/passport');
 const PaymentsCtrl = require('../controllers/payments');
 
+router.get('/user/:id', function(req, res, next) { //Hasta arriba para no interferir
+    PaymentsCtrl.getByIdUser(req, res, next);
+});
 router.get('/', passportMiddleware, function(req, res, next) {
     PaymentsCtrl.get(req, res, next);
 });

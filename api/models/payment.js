@@ -6,7 +6,7 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const Schema = mongoose.Schema;
 
 const mySchema = Schema({
- 
+
     type: { type: String, required: true }, // local, tranference, bank-card, oxxo, ...
     client: { type: Schema.Types.ObjectId, ref: "User" },
     loan: { type: Schema.Types.ObjectId, ref: "Prestamo" },
@@ -15,9 +15,9 @@ const mySchema = Schema({
     interest: { type: Number }, // interes prestamo
     statutoryInterest: { type: Number }, // interes moratorio
     total: { type: Number, required: true },
-    paymentDate: { type: Date},
-    reference:  { type: String },
-    
+    paymentDate: { type: Date },
+    reference: { type: String },
+
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },
@@ -114,7 +114,16 @@ let processQuery = function(filters, strQ = "") {
     let searchQuery = {
         $or: [
             // strings
-            { value: exp },
+            { type: exp },
+            { client: exp },
+            { loan: exp },
+            { interesRate: exp },
+            { amount: exp },
+            { interest: exp },
+            { statutoryInterest: exp },
+            { total: exp },
+            { paymentDate: exp },
+            { reference: exp }
 
         ]
     };
