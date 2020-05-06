@@ -7,16 +7,18 @@ const Schema = mongoose.Schema
 
 const mySchema = Schema({
     item: { type: String },
+    loanDate: { type: Date },
     // material: { type: String },
     // weight: { type: String },
     // value: { type: String },
-    loanDate: { type: Date },
-    requestedLoan: { type: String },
-    recommendedLoan: { type: String },
+    requestedValue: { type: Number },
+    recommendedLoan: { type: Number },
+    actualValue: { type: Number },
+    cutOffDate: { type: Date },
+
     condition: { type: String },
     description: { type: String },
     valuatorComments: { type: String },
-    actualValue: { type: String },
     solicitudId: { type: Schema.ObjectId, ref: "solicitud" },
     valuatorId: { type: Schema.ObjectId, ref: "User" },
     userId: { type: Schema.ObjectId, ref: "User" },

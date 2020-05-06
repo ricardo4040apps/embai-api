@@ -31,12 +31,15 @@ const mySchema = Schema({
     months: { type: Number },
     //
     phone: { type: String },
-    loanRequested: { type: Number },
-    paymentPlan: { type: String },
+    cutOffDate: { type: Date },
+    recommendedLoan: { type: Number },
+    actualValue: { type: Number },
+    requestedValue: { type: Number }, //CANTIDAD SOLICITADA
+    paymentPlan: { type: Schema.ObjectId, ref: "Tiempo" }, // FRECUENCIA DE PAGO
     //
     clabe: { type: String },
     authorization: { type: String },
-    paymentFrecuenty: Schema.Types.ObjectId,
+    // paymentFrecuenty: Schema.Types.ObjectId,
 
 
     updatedAt: { type: Date, default: Date.now },

@@ -15,12 +15,12 @@ const mySchema = Schema({
     valuationId: { type: Schema.ObjectId, ref: "Valuation" },
 
 
-    esquema: { type: String }, // que es????
-    paymentFrecuenty: { type: Schema.ObjectId, ref: "Frequency" },
+    paymentPlan: { type: Schema.ObjectId, ref: "Tiempo" }, // FRECUENCIA DE PAGO
+    // paymentFrecuenty: { type: Schema.ObjectId, ref: "Frequency" },
     tazaInteres: Number,
     plazo: Number,
-    status: {type: String, default: 'active' }, // active, delayed, paid, expired 
-    
+    status: { type: String, default: 'active' }, // active, delayed, paid, expired 
+
 
     updatedAt: { type: Date, default: Date.now },
     createdAt: { type: Date, default: Date.now },

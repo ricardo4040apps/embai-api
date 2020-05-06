@@ -17,6 +17,7 @@ const mySchema = Schema({
 mySchema.plugin(mongoosePaginate);
 
 const CurrentModel = mongoose.model('Tiempo', mySchema);
+module.exports = mongoose.model('Tiempo', mySchema)
 
 /*  - - - - - - - - - - - -     C R U D     - - - - - - - - - - - - */
 
